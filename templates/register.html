@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body bgcolor="gold" font-color="red">
+<div id="login-page">
+    <div class="container">
+
+        <form class="form-login" method="post" action="{% url 'register' %}">
+            <h2 class="form-login-heading">Registration Form</h2>
+            <div class="login-wrap">
+                {% csrf_token %}
+                <h5>Register yourself to use Jathub!</h5>
+                <input type="text" class="form-control" placeholder="Username" name="username" value="{{ username }}" autofocus>
+
+                <input type="password" class="form-control" name="password1" placeholder="Password" value="{{ password1 }}">
+
+                <input type="password" class="form-control" name="password2" placeholder="Confirm Password" value="{{ password2 }}">
+                <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-lock"></i> Register</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
