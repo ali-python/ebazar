@@ -28,6 +28,7 @@ class RegisterView(FormView):
             user = form.save()
 
             if user.user_profile:
+                # user.user_profile.type == user.user_profile.USER_TYPE_MERCHANT
                 user.user_profile.phone = self.request.POST.get(
                     'phone')
                 user.user_profile.save()
@@ -40,11 +41,6 @@ class RegisterView(FormView):
         return HttpResponseRedirect(reverse('home'))
 
     def form_invalid(self, form):
-        print (form.errors)
-        print ("____________________________")
-        print ("____________________________")
-        print ("____________________________")
-        print ("____________________________")
         return super(RegisterView, self).form_invalid(form)
 
     def get_context_data(self, **kwargs):

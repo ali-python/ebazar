@@ -8,11 +8,13 @@ class UserProfile(models.Model):
     USER_TYPE_COMPANY = 'Company'
     USER_TYPE_CLIENT = 'client'
     USER_TYPE_CORPORATE = 'Corporate'
+    USER_TYPE_MERCHANT = 'Merchant'
 
     USER_TYPES = (
         (USER_TYPE_COMPANY, 'Company'),
         (USER_TYPE_CLIENT, 'Client'),
         (USER_TYPE_CORPORATE, 'Corporate'),
+        (USER_TYPE_MERCHANT, 'Merchant'),
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
