@@ -15,7 +15,7 @@ class UserProfile(models.Model):
         (USER_TYPE_CORPORATE, 'Corporate'),
     )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
     facebook_id = models.BigIntegerField(blank=True, unique=True, null=True)
     access_token = models.TextField(blank=True, null=True)
     google_access_token = models.TextField(blank=True, null=True)

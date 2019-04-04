@@ -24,16 +24,27 @@ class RegisterView(FormView):
 
     def form_valid(self, form):
         # register new user in the system
-        user = form.save()
+        with transaction.atomic():
+            user = form.save()
 
-        username = form.cleaned_data.get('username')
-        raw_password = form.cleaned_data.get('password1')
-        auth_user = authenticate(username=username, password=raw_password)
-        auth_login(self.request, auth_user)
+            if user.user_profile:
+                user.user_profile.phone = self.request.POST.get(
+                    'phone')
+                user.user_profile.save()
+
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            auth_user = authenticate(username=username,password=raw_password)
+            auth_login(self.request, auth_user)
 
         return HttpResponseRedirect(reverse('home'))
 
     def form_invalid(self, form):
+        print (form.errors)
+        print ("____________________________")
+        print ("____________________________")
+        print ("____________________________")
+        print ("____________________________")
         return super(RegisterView, self).form_invalid(form)
 
     def get_context_data(self, **kwargs):
@@ -41,6 +52,7 @@ class RegisterView(FormView):
         if self.request.POST:
             context.update({
                 'username': self.request.POST.get('username'),
+                'phone': self.request.POST.get('phone'),
                 'password1': self.request.POST.get('password1'),
                 'password2': self.request.POST.get('password2')
             })
@@ -59,8 +71,8 @@ class LoginView (FormView):
 
         if self.request.user.is_authenticated:
             if (
-                    self.request.user.userprofile.USER_TYPES ==
-                    self.request.user.userprofile.USER_TYPE_COMPANY
+                    self.request.user.user_profile.USER_TYPES ==
+                    self.request.user.user_profile.USER_TYPE_COMPANY
             ):
                 return HttpResponseRedirect(
                     reverse('home'))
