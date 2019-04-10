@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>{{ request.user.user_merchant.merchant.name }}</h2>
+    <div> {{sales_sum.total_price}} </div>
+ <a href="{% url 'merchant:create_record' pk=request.user.user_merchant.merchant.id %}" ><input type="button" value="Add Items" title="Add Items"></input></a>
+ <a href="{% url 'merchant:records_view' %}" ><input type="button" value="View History" title="View History"></a>
+ <a href="{% url 'merchant:sales_records_view' %}" ><input type="button" value=" Sales View History" title="View History"></a>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<h1>Merchant Daily Records</h1>
+<h2>{{ request.user.user_merchant.merchant.name }}</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.image_1}}<br>
+  {{form.image_2}}<br>
+  {{form.image_3}}<br>
+  {{form.image_4}}<br>
+  {{form.video}}<br>
+  <h4>item quantity</h4>{{form.item_quantity}}<br>
+  <h4>item price</h4>{{form.item_price}}<br>
+
+  <button type="submit">Submit</button>
+</form>
