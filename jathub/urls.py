@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from common import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('common.urls')),
+    path('common/', include(('common.urls', 'common'), namespace="common")),
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path('social-auth/', include('social_django.urls', namespace="social")),

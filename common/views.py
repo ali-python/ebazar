@@ -8,7 +8,6 @@ from django.db import transaction
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-
 from common.form import UserProfileForm
 from common.models import UserProfile
 
@@ -23,12 +22,10 @@ class RegisterView(FormView):
         return super(RegisterView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        # register new user in the system
         with transaction.atomic():
             user = form.save()
 
             if user.user_profile:
-                # user.user_profile.type == user.user_profile.USER_TYPE_MERCHANT
                 user.user_profile.phone = self.request.POST.get(
                     'phone')
                 user.user_profile.save()
@@ -55,10 +52,6 @@ class RegisterView(FormView):
 
         return context
 
-
-# def login(request):
-#     return render(request, 'login.html')
-
 class LoginView (FormView):
     template_name = 'login.html'
     form_class = auth_forms.AuthenticationForm
@@ -84,10 +77,6 @@ class LoginView (FormView):
 
     def form_invalid(self, form):
         return super(LoginView, self).form_invalid(form)
-
-
-
-
 
 def home(request):
     return render(request, 'index.html')
