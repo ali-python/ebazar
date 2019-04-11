@@ -4,7 +4,7 @@ from .models import Merchant, MerchantDailyRecord, MerchantSalesRecords, Merchan
 
 class MerchantAdmin(admin.ModelAdmin):
     list_display = (
-         'name', 'phone', 'address',
+         'name', 'phone', 'city', 'address',
         'status'
     )
 
@@ -14,7 +14,7 @@ class MerchantAdmin(admin.ModelAdmin):
 
 class MerchantUserAdmin(admin.ModelAdmin):
     list_display = (
-         '__unicode__','name', 'user',
+         'name', 'user',
     )
 
     @staticmethod
@@ -31,27 +31,26 @@ class MerchantUserAdmin(admin.ModelAdmin):
 
 class MerchantDailyRecordAdmin(admin.ModelAdmin):
     list_display = (
-         'merchant', 'upload_time','image_1','image_2','image_3',
+        'merchant', 'upload_time','image_1','image_2','image_3',
         'image_4','video','item_quantity', 'item_price' , 'expiry'
     )
 
     @staticmethod
-    def merchant(obj):
+    def name(obj):
         return obj.merchant.name
 
     search_fields = (
-        'merchant',
+        'merchant__name',
     )
 
 class MerchantSalesRecordAdmin(admin.ModelAdmin):
     list_display = (
-        '__unicode__', 'name', 'added_date','purchased_quantity','purchased_price'
+     '__str__', 'added_date','purchased_quantity','purchased_price'
     )
-
 
     @staticmethod
     def name(obj):
-        return obj.merchant_daily_record.merchant.name
+        return obj.merchant_daily_record.merchant
 
     search_fields = (
         'merchant_daily_record__merchant__name',

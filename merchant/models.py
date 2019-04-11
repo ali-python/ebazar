@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from common.models import Country, City
 class Merchant(models.Model):
     name = models.CharField(max_length=256, blank=True, null=True)
     phone = models.CharField(max_length=200, blank=True, null=True)
+    city=models.ForeignKey(City, on_delete=models.CASCADE, related_name='city',
+                           null=True, blank=True)
     address = models.CharField(max_length=300, blank=True, null=True)
     status = models.BooleanField(default=True)
 
@@ -18,8 +20,8 @@ class MerchantUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,
                                 related_name='user_merchant')
 
-    def __unicode__(self):
-        return self.merchant.name
+    def __str__(self):
+        return self.merchant.name if self.merchant else ''
 
 class MerchantDailyRecord(models.Model):
     merchant = models.ForeignKey(Merchant, on_delete=models.CASCADE, related_name='merchant_record',
@@ -34,8 +36,8 @@ class MerchantDailyRecord(models.Model):
     item_price = models.CharField(max_length=200, null=True, blank=True)
     expiry = models.BooleanField(default=True)
 
-    def __unicode__(self):
-        return self.merchant.name
+    def __str__(self):
+        return self.merchant.name if self.merchant else ''
 
 
 class MerchantSalesRecords(models.Model):
@@ -54,5 +56,5 @@ class MerchantSalesRecords(models.Model):
         blank=True, null=True,
     )
 
-    def __unicode__(self):
-        return self.merchant_daily_record.merchant.name
+    def __str__(self):
+        return self.merchant_daily_record.merchant.name if self.merchant_daily_record.merchant else ''

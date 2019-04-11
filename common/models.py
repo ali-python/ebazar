@@ -39,6 +39,23 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+class Country(models.Model):
+    country_name=models.CharField(max_length=200, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.country_name
+
+class City(models.Model):
+    country=models.ForeignKey(Country, on_delete=models.CASCADE,
+                              related_name='country', null=True, blank=True)
+    city_name=models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.country.name
+
+
+
+
 # Signal Functions
 def create_profile(sender, instance, created, **kwargs):
     """
