@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from django.views.generic import ListView, CreateView, TemplateView,UpdateView, FormView
 from django.urls import reverse_lazy, reverse
 from django.http import Http404
@@ -7,7 +6,6 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.db.models import Sum
 from merchant.forms import MerchantDailyRecordForm
 from merchant.models import MerchantDailyRecord, MerchantSalesRecords, Merchant
-
 
 class DashboardView(TemplateView):
     template_name = 'merchant/dashboard.html'
@@ -35,7 +33,8 @@ class DashboardView(TemplateView):
 
         context.update({
             'purchased_price': purchased_price,
-            'purchased_quantity':purchased_quantity
+            'purchased_quantity':purchased_quantity,
+            'merchant':merchant
         })
         return context
 
