@@ -1,0 +1,16 @@
+.phone:before{
+    content: '';
+    display: inline-block;
+    height: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 2px solid #ccc;
+}
+i{
+    color: #fff;
+    display:inline-block;
+}
+.nav-link{
+    color:#fff;
+    }
