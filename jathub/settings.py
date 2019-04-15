@@ -57,6 +57,9 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.linkedin.LinkedinOAuth2',
     'social_core.backends.instagram.InstagramOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
+    'social_core.backends.google.GoogleOpenId',  # for Google authentication
+    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -92,9 +95,6 @@ TEMPLATES = [
     },
 ]
 
-
-
-
 SOCIAL_AUTH_FACEBOOK_KEY = '326856704685471'        # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '62a42fb43a77538eecef23d0e8151fee'  # App Secret
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
@@ -108,6 +108,12 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
     ('picture', 'picture'),
     ('link', 'profile_url'),
 ]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='274683868075-ju816gi0coid4p3s02l2h8dj2puiltbg.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='Kd8fx83G5YSP7SGEYNfZ3wAh'
+
+SOCIAL_AUTH__KEY='ID'
+SOCIAL_AUTH__SECRET='SECRET'
 
 WSGI_APPLICATION = 'jathub.wsgi.application'
 

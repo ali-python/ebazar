@@ -20,7 +20,16 @@ class CityAdmin(admin.ModelAdmin):
         'city_name',
     )
 
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        '__unicode__', 'user', 'type', 'phone'
+    )
 
-admin.site.register(UserProfile)
+    search_fields = (
+        'user__username', 'user_type', 'phone',
+    )
+
+
+admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Country,CountryAdmin)
 admin.site.register(City,CityAdmin)
