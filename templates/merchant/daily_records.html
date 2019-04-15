@@ -1,0 +1,22 @@
+<ul>
+    <h1>Merchant Daily records</h1>
+    <h2>{{ request.user.user_merchant.merchant.name }}</h2>
+    {% if object_list %}
+      {% for post in object_list %}
+        <h2>Quantity {{ post.item_quantity }}</h2>
+        <h2>Item Price {{ post.item_price }}</h2>
+        <h2>Upload Time and Date {{ post.upload_time }}</h2>
+        images
+        <img src="{{ post.image_1.url}}"  alt="{{ post.image_1 }}" height="200" width="200">
+        <img src="{{ post.image_2.url}}" alt="{{ post.image_2 }}" height="200" width="200">
+        <img src="{{ post.image_3.url}}" alt="{{ post.image_3 }}" height="200" width="200">
+        <img src="{{ post.image_4.url}}" alt="{{ post.image_4 }}" height="200" width="200"><br>
+        video
+        <video width="320" height="240" controls>
+            <source src="{{ post.video.url}}" alt="{{ post.video }}" type="video/mp4">
+        </video>
+
+         <a href="{% url 'merchant:update_record' pk=post.id %}" ><input type="button" value="Update" title="View History"></a>
+      {% endfor %}
+    {% endif %}
+</ul>

@@ -1,0 +1,12 @@
+<ul>
+    <h1>Merchant Daily records</h1>
+    <h2>{{ request.user.user_merchant.merchant.name }}</h2>
+    {% if object_list %}
+        <h2>{{merchant.name}}</h2>
+      {% for post in object_list %}
+        <h2>Added Date : {{ post.added_date }}</h2>
+        <h2>quantity: {{ post.purchased_quantity }}</h2>
+        <h2>price:{{ post.purchased_price }}</h2>
+      {% endfor %}
+    {% endif %}
+</ul>
