@@ -10,6 +10,11 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from common.form import UserProfileForm
 from common.models import UserProfile
+from django.contrib.auth.models import User
+from django.http import Http404
+from merchant.models import MerchantDailyRecord
+
+
 
 class RegisterView(FormView):
     form_class = auth_forms.UserCreationForm
@@ -73,10 +78,49 @@ class LoginView (FormView):
     def form_valid(self, form):
         user = form.get_user()
         auth_login(self.request, user)
-        return HttpResponseRedirect(reverse('home'))
+        return HttpResponseRedirect(reverse('login'))
 
     def form_invalid(self, form):
         return super(LoginView, self).form_invalid(form)
 
-def home(request):
-    return render(request, 'index.html')
+class HomeView(TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        merchant_daily_records=MerchantDailyRecord.objects.all()
+        context.update({
+            'merchant_daily_records': merchant_daily_records
+        })
+
+        return context
+class UpdateProfile(UpdateView):
+    form_class = UserProfileForm
+    template_name = 'update_profile.html'
+    model = UserProfile
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.user = User.objects.get(username=self.request.POST.get('username'))
+        obj.user.save()
+        obj.save()
+        return HttpResponseRedirect(reverse('home'))
+
+    def form_invalid(self, form):
+        return super(UpdateProfile, self).form_invalid(form)
+
+class UserProfileInfo(TemplateView):
+    template_name = 'user_profile_info.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(
+            UserProfileInfo, self).get_context_data(**kwargs)
+
+        try:
+            user_profile = UserProfile.objects.get(id=self.kwargs.get('pk'))
+        except UserProfile.DoesNotExist:
+            return Http404('User does not exists')
+        context.update({
+            'user_profile': user_profile
+        })
+
+        return context

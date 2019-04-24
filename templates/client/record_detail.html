@@ -1,0 +1,18 @@
+<ul>
+    <h1>For Client Merchant Detail</h1>
+    <h2>merchantid:{{ request.user.user_merchant.merchant.id }}</h2>
+    <h2>userid:{{ request.user.user_profile.id }}</h2>
+    {% if merchant %}
+    item quantity:{{merchant.item_quantity}}<br>
+    item price:{{merchant.item_price}} <br>
+        <img src="{{ merchant.image_1.url}}"  alt="{{ post.image_1 }}" height="200" width="200">
+        <img src="{{ merchant.image_2.url}}"  alt="{{ post.image_1 }}" height="200" width="200"><br>
+        <img src="{{ merchant.image_3.url}}"  alt="{{ post.image_1 }}" height="200" width="200">
+        <img src="{{ merchant.image_4.url}}"  alt="{{ post.image_1 }}" height="200" width="200"><br>
+        <video width="320" height="240" controls>
+            <source src="{{ merchant.video.url}}" alt="{{ post.video }}" type="video/mp4">
+        </video>
+    {% endif %}
+
+             <a href="{% url 'client:client_order_item' pk=merchant.id  %}" ><input type="button" value="continue order" title="continue order"></a>
+</ul>

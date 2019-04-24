@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>client : {{request.user.username}}</h1>
+
+<div>
+phone :{{invoice.order.customer_phone}}<br>
+date:{{invoice.order.date_created}}<br>
+reciept no:{{invoice.receipt_no}}<br>
+state:{{invoice.state}}<br>
+amount:{{invoice.amount}}<br>
+{% for item in order_items %}
+quantity:{{ item.item_price }} price:-- {{ item.item_quantity }} <br>
+{% endfor %}
+</div>
+</body>
+</html>
