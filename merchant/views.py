@@ -29,8 +29,6 @@ class DashboardView(TemplateView):
         purchased_quantity=sales.aggregate(Sum('purchased_quantity'))
         purchased_quantity=purchased_quantity.get('purchased_quantity__sum')
 
-        print(purchased_price)
-
         context.update({
             'purchased_price': purchased_price,
             'purchased_quantity':purchased_quantity,

@@ -36,7 +36,7 @@ class UserProfile(models.Model):
     hometown = models.CharField(max_length=256, blank=True, null=True)
     company_name = models.CharField(max_length=256, blank=True, null=True)
     location = models.CharField(max_length=256, blank=True, null=True)
-
+    address=models.CharField(max_length=256, blank=True, null=True)
     def __unicode__(self):
         return self.user.username
 
