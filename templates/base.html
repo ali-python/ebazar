@@ -3,54 +3,84 @@
 {% load static %}
 {% load staticfiles %}
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
     <!--        Bootstrap css file - -->
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css" rel="stylesheet">-->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/js/mdb.min.js"></script>-->
 
+
+    <style>
+        .logo_jathub{
+    width: 27%;
+    display: inline-block;
+    position: absolute;
+    top: -16px;
+    left: 4%;
+    z-index:1;
+}
+.bg_img{
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+.bg_button{
+    position: absolute;
+    bottom: 6%;
+    left: 0%;
+    width: 100%;
+}
+.bank_card{
+    width:25%;
+    float:left;
+    height: 35px;
+    padding: 2px;
+}
+    </style>
     <!-- bootstrap css file ---->
     <title>Jathub home page</title>
 </head>
 <body>
 <div class="row" style="margin:0px">
     <div class="col-lg-4 text-right">
-        <h5 style="padding-top:20px">Your Online Mall For Cammels</h5>
+        <h5 style="padding-top:20px">Your Online Mall For Camels</h5>
+    </div>
+    <div class="col-lg-4" style="padding-top:10px">
+        <p class="col-lg-3" style="float:left;line-height: 17px;">Secure Payments</p>
+        <img class="col-lg-2 bank_card" src="{% static 'img/visa.png' %}">
+        <img class="col-lg-2 bank_card" src="{% static 'img/mastercd.png' %}">
+        <img class="col-lg-2 bank_card" src="{% static 'img/paypal.png' %}" >
+        <img class="col-lg-2 bank_card" src="{% static 'img/visa.png' %}">
     </div>
     <div class="col-lg-4">
-        <p class="col-lg-3" style="float:left;line-height: 17px; text-align: right;padding-top:10px">Secure Payments</p>
-        <img class="col-lg-2" src="{% static 'img/visa.png' %}" style="padding:0px">
-        <img class="col-lg-2" src="{% static 'img/visa.png' %}" style="padding:0px">
-        <img class="col-lg-2" src="{% static 'img/visa.png' %}" style="padding:0px">
-        <img class="col-lg-2" src="{% static 'img/visa.png' %}" style="padding:0px">
-    </div>
-    <div class="col-lg-4">
-        <h6 class="col-lg-5 pull-left phone" style="padding:20px 0 0 0" ><i class="fa fa-phone"></i> +92111111 </h6>
+        <h6 class="col-lg-5 pull-left phone" style="padding:20px 0 0 0"><i class="fa fa-phone"></i> +92111111 </h6>
         <h6 class="col-lg-7 pull-right phone" style="padding:0px;padding-top:20px"><i class="fa fa-envelope-o"></i> info@solutionspartum.com </h6>
     </div>
 </div>
 <div class="row" style="margin:0px">
-    <div class="col-lg-12" style="background:#6dad29">
+    <div class="col-lg-12" style="background:#6dad29;position:relative">
         <div class="container">
-            <span class="col-lg-6">PARTUM solutions</span>
-            <div class="pull-right btn btn-default" data-toggle="modal" data-target="#signModal" style="color:#fff; font-size:25px;cursor: pointer;"><i class="fa fa-user"></i> Login  </div>
+            <span class="col-lg-6 logo_jathub"><img src="{% static 'img/logo.png' %}" style="width:24%; border-radius:50%"/></span>
+            <div class="pull-right btn btn-default" data-toggle="modal" data-target="#signModal" style="color:#fff; font-size:25px;cursor: pointer;"><i class="fa fa-user"></i> Login</div>
         </div>
     </div>
 </div>
-
 <!--    middle body work start here-->
-{% block content %}{% endblock %}
+            {% block content %} {% endblock %}
 <!--    -->
 <!--    middle body work end here-->
-
 <!--    footer work start here-->
 <div class="row" style="margin:0px">
-    <div class="col-lg-12 text-center">
-        <hr>
+    <div class="col-lg-12 text-center" style="margin:30px 0px">
+        <hr style="background:#000">
         <div class="container">
             <h3>We Have Recommendation For You</h3>
             <button type="button" class="btn btn-info" value="">Sign in to see Personalization recommendation</button>
@@ -62,116 +92,125 @@
         <div class="container text-center">
             <h5 style="color:#fff">Trade Alert - Delivering the Latest Product news Straight to you inbox</h5>
             <input type="text" class="form-control col-lg-4 offset-lg-3 text-center pull-left" placeholder="Your Email">
-            <input type="button" class="btn btn-success col-lg-2" value="submit" style="border:2px solid #fff">
+            <input type="button" class="btn text-white col-lg-2" value="submit" style="border:1px solid #fff;float:left;margin-left:20px">
+
+            <h6 style="width:100%;float:left;margin-top:10px;color:#fff">We'll Never Share your Email address with a Third party</h6>
         </div>
     </div>
-    <div class="col-lg-12"  style="background:#4f7718; padding:25px;">
+    <div class="col-lg-12" style="background:#4f7718; padding:25px;">
         <hr style="background:#fff">
         <div class="container">
-<!--            footer links start here-->
-            <ul class="nav flex-column col-lg-2 pull-left">
-  <li class="nav-item">
-    <a class="nav-link" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Disabled</a>
-  </li>
-</ul>
-<!--        first footer links end here-->
+            <!--            footer links start here-->
+            <ul class="nav flex-column col-lg-2 col-xs-6 pull-left">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Disabled</a>
+                </li>
+            </ul>
+            <!--        first footer links end here-->
 
+            <ul class="nav flex-column col-lg-2 col-xs-6 pull-left">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Disabled</a>
+                </li>
+            </ul>
+            <!--            second footer links end here-->
             <ul class="nav flex-column col-lg-2 pull-left">
-  <li class="nav-item">
-    <a class="nav-link" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Disabled</a>
-  </li>
-</ul>
-<!--            second footer links end here-->
-             <ul class="nav flex-column col-lg-2 pull-left">
-  <li class="nav-item">
-    <a class="nav-link" href="#" >gg</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Disabled</a>
-  </li>
-</ul>
-<!--            third links end here-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">gg</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">Disabled</a>
+                </li>
+            </ul>
+            <!--            third links end here-->
             <ul class="nav flex-column col-lg-3 pull-left">
-  <li class="nav-item">
-    <a class="nav-link" href="#" >Follow Us</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link pull-left" href="#" ><i class="fa fa-facebook-square" style="cursor: pointer;font-size:25px"></i> </a>
-      <a class="nav-link pull-left" href="#" ><i class="fa fa-instagram" style="cursor: pointer;font-size:25px"></i> </a>
-      <a class="nav-link pull-left" href="#" ><i class="fa fa-twitter-square" style="cursor: pointer;font-size:25px"></i> </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Disabled</a>
-  </li>
-</ul>
-<!--            footer links end here-->
-
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Follow Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link pull-left" href="#"><i class="fa fa-facebook-square" style="cursor: pointer;font-size:25px"></i> </a>
+                    <a class="nav-link pull-left" href="#"><i class="fa fa-instagram" style="cursor: pointer;font-size:25px"></i> </a>
+                    <a class="nav-link pull-left" href="#"><i class="fa fa-twitter-square" style="cursor: pointer;font-size:25px"></i> </a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">Secure Payment</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">
+                    <img src="{% static 'img/visa.png' %}" class="bank_card">
+                    <img src="{% static 'img/paypal.png' %}" class="bank_card">
+                    <img src="{% static 'img/mastercd.png' %}" class="bank_card">
+                    <img src="{% static 'img/visa.png' %}" class="bank_card">
+                </a>
+                </li>
+            </ul>
+            <!--            fourth links end here-->
+            <ul class="nav flex-column col-lg-3 pull-left">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><img src="{% static 'img/playstore.png' %}" style="width:30%"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><img src="{% static 'img/appstore.jpg' %}" style="width:30%"></a>
+                </li>
+            </ul>
+            <!--            footer links end here-->
         </div>
     </div>
 </div>
-
-
 <!--    footer work end here-->
-
-
 <!--    sign in and sign up form -->
 <!-- Modal -->
-<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<div class="modal fade" id="signModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-                <button type="button" class="close text-left" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <button type="button" class="close text-left" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <div class=" text-center">
                 <img src="{% static 'img/logo.png' %}" style="width:100px">
             </div>
             <span class="text-center" style="margin-top:15px">Sign in</span>
-
             <!--        model body start-->
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 text-center" style="margin:15px 0 25px">
-                                <a class="btn btn-danger  col-md-3" href="{% url 'social:begin' 'google-oauth2' %}"><i class="fa fa-google" ></i></a>
-                                <a class="btn btn-primary  col-md-3" href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook"></i>
-                                </a>
+                            <a class="btn btn-danger  col-md-3" href="{% url 'social:begin' 'google-oauth2' %}"><i class="fa fa-google"></i></a>
+                            <a class="btn btn-primary  col-md-3" href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook"></i>
+                            </a>
                         </div>
                     </div>
                     <div class="text-center">
                         <form action="{% url 'login' %}" method="post">
                             {% csrf_token %}
                             <input type="text" placeholder="Username" name="username" class="form-control"> <br>
-                            <input type="password"  name="password" placeholder="Password" class="form-control"> <br>
-                            <button type="submit" value="Login" class="btn btn-success col-md-5">Login</button> <br>
+                            <input type="password" name="password" placeholder="Password" class="form-control"> <br>
+                            <button type="submit" value="Login" class="btn btn-success col-md-5">Login</button>
+                            <br>
                             <span>Forget Password ?</span><br>
-                            <h6>Don't have an Account? <span data-dismiss="modal"  data-toggle="modal" data-target="#registerModal" style="cursor: pointer;" >Register here</span></h6>
+                            <h6>Don't have an Account? <span data-dismiss="modal" data-toggle="modal" data-target="#registerModal" style="cursor: pointer;">Register here</span></h6>
                         </form>
                     </div>
                 </div>
@@ -179,17 +218,14 @@
         </div>
     </div>
 </div>
-
-
 <!--    sign in form end here-->
-
 <!--registration page start here-->
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="signModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-                <button type="button" class="close text-left" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <button type="button" class="close text-left" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <div class=" text-center">
                 <img src="{% static 'img/logo.png' %}" style="width:100px">
             </div>
@@ -198,37 +234,35 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 text-center" style="margin:15px 0 25px">
-                                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger  col-md-3"><i class="fa fa-google" ></i></a>
-                                <a class="btn btn-primary  col-md-3" href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook"></i>
-                                </a>
+                            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger  col-md-3"><i class="fa fa-google"></i></a>
+                            <a class="btn btn-primary  col-md-3" href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook"></i></a>
                         </div>
                     </div>
-                     <form class="form-login text-center" method="post" action="{% url 'common:register' %}">
-            <h2 class="form-login-heading">Registration Form</h2>
-            <div class="login-wrap">
-                {% csrf_token %}
-                <h5>Register yourself to use Jathub!</h5>
-                <input type="text" class="form-control" placeholder="Username" name="username" value="{{ username }}" autofocus> <br>
-                <input type="text" class="form-control" placeholder="Phone No" name="phone" value="{{ phone }}" > <br>
-                <input type="password" class="form-control" name="password1" placeholder="Password" value="{{ password1 }}"><br>
-                <input type="password" class="form-control" name="password2" placeholder="Confirm Password" value="{{ password2 }}"><br>
-                <button class="btn btn-primary " type="submit"><i class="fa fa-lock"></i> Register</button>
-                <h6>Already have an Account <span data-dismiss="modal"  data-toggle="modal" data-target="#signModal" style="cursor: pointer; color:#ddd" >Sign in</span></h6>
-            </div>
-        </form>
+                    <form class="form-login text-center" method="post" action="{% url 'common:register' %}">
+                        <h2 class="form-login-heading">Registration Form</h2>
+                        <div class="login-wrap">
+                            {% csrf_token %}
+                            <h5>Register yourself to use Jathub!</h5>
+                            <input type="text" class="form-control" placeholder="Username" name="username" value="{{ username }}" autofocus> <br>
+                            <input type="text" class="form-control" placeholder="Phone No" name="phone" value="{{ phone }}"> <br>
+                            <input type="password" class="form-control" name="password1" placeholder="Password" value="{{ password1 }}"><br>
+                            <input type="password" class="form-control" name="password2" placeholder="Confirm Password" value="{{ password2 }}"><br>
+                            <button class="btn btn-primary " type="submit"><i class="fa fa-lock"></i> Register</button>
+                            <h6>Already have an Account <span data-dismiss="modal" data-toggle="modal" data-target="#signModal" style="cursor: pointer; color:#ddd">Sign in</span></h6>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <!--registration page end here-->
 
-<!--script file-->
 {% block scripts %}
-<script src="{% static 'js/jquery.js' %}"></script>
-<script src="{% static 'js/bootstrap.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+
+
 {% endblock %}
 
 </body>

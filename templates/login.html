@@ -2,22 +2,196 @@
     {% block title %} Home {% endblock %}
     {% block content %}
  {% load static %}
-<div class="row" style="margin:0px">
-    <div class="col-lg-12" style="padding:0px">
-   <div class="bg_img">
-       <img src="{% static 'img/camel1.jpg' %}" style="width:100%;height:450px">
-   </div>
-        <div class="text-center bg_button">
-            <a href="#"  class="btn btn-success col-md-2">Buy Camels</a>
-            <a href="#"  class="btn col-md-2" style="border:1px solid">Watch Videos</a>
-        </div>
-    </div>
-
-</div>
+ <div class="row" style="margin:0px">
+     <div class="col-lg-12" style="padding:0px">
+         <div class="bg_img">
+             <img src="{% static 'img/camel1.jpg' %}" style="width:100%;height:450px">
+         </div>
+         <div class="text-center bg_button">
+             <a href="#"  class="btn btn-success col-md-2">Buy Camels</a>
+             <a href="#"  class="btn col-md-2" style="border:1px solid">Watch Videos</a>
+         </div>
+     </div>
+ </div>
+ <div class="row" style="margin:20px 0 0 0">
+     <div class="col-lg-12" style="background:#ddd">
+<!--         step div start here-->
+         <div class="container">
+             <div class="row" style="margin:30px 0">
+                 <div class="col-lg-3">
+                     <div class="card bg-success text-white" style="border-radius: 20px;min-height:2">
+                         <div class="card-body text-center">
+                            <h5>Step 1</h5>
+                             <h6>Pick Brand</h6>
+                             <img src="{% static 'img/camel3.jpg' %}" style="width:30%;border-radius:40%">
+                             <p>Choose From 100+ top Relaiters</p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-lg-3">
+                     <div class="card bg-success text-white" style="border-radius: 20px;min-height:">
+                         <div class="card-body text-center">
+                             <h5>Step 2</h5>
+                             <h6>Personalize</h6>
+                             <img src="{% static 'img/camel3.jpg' %}" style="width:30%;border-radius:40%">
+                             <p>Add message, photo & video</p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-lg-3" >
+                     <div class="card bg-success text-white" style="border-radius: 20px;min-height:">
+                         <div class="card-body text-center">
+                             <h5>Step 3</h5>
+                             <h6>Pay & Delivery</h6>
+                             <img src="{% static 'img/delivery.png' %}" style="width:45%;border-radius:50%">
+                             <p>Instant by Email,SMS or print at home</p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-lg-3">
+                     <div class="card " style="border-radius: 20px;min-height:">
+                         <div class="card-body text-center">
+                             <h5 style="color:#6dad29">JATHUB</h5>
+                             <h6 style="color:#6dad29">For Bussines</h6>
+                             <hr style="width: 29%;background: #000;height: 2px;">
+                             <p style="color:#ADD8E6; font-size:15px;line-height: 16px;">Consumer Promotions <br> Employee Rewards <br> Customer Reward</p>
+                             <a href="#" class="btn btn-success">Learn More</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+<!--         step div end here-->
+<!--         border text div start -->
+         <div class="row">
+                 <div class="col-lg-1">
+                     <h3>Camels</h3>
+                 </div>
+                 <div class="col-lg-11">
+                     <hr style="background:#000;height:3px;margin-top:21px">
+                 </div>
+             </div>
+<!--         border text div end-->
+<!--         merchent image div start here-->
+         <div class="row" style="margin-top:30px;margin-bottom:40px">
+             <div class="col-lg-3" style="margin:15px 0px">
+                 <div class="card " style="border-radius: 5px;min-height:">
+                     <div class="card-body text-center">
+                         <h5>Merchent 1</h5>
+                         <img src="{% static 'img/grass1.jpg' %}" style="width:215px;height:130px">
+                         <h6>Shop Your Grass</h6>
+                         <a href="#" >Shop Now</a>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-3" style="margin:15px 0px" >
+                 <div class="card " style="border-radius: 5px;min-height:">
+                     <div class="card-body text-center">
+                         <h5>Merchent 2</h5>
+                         <img src="{% static 'img/grass2.jpg' %}" style="width:215px;height:130px">
+                         <h6>Shop Your Grass</h6>
+                         <a href="#" >Shop Now</a>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-3" style="margin:15px 0px">
+                 <div class="card " style="border-radius: 5px;min-height:">
+                     <div class="card-body text-center">
+                         <h5>Merchent 3</h5>
+                         <img src="{% static 'img/grass3.jpg' %}" style="width:215px;height:130px">
+                         <h6>Shop Your Grass</h6>
+                         <a href="#" >Shop Now</a>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-3" style="margin:15px 0px">
+                 <div class="card " style="border-radius: 5px;min-height:">
+                     <div class="card-body text-center">
+                         <h5>Merchent 4</h5>
+                         <img src="{% static 'img/grass4.jpg' %}" style="width:215px;height:130px">
+                         <h6>Shop Your Grass</h6>
+                         <a href="#" >Shop Now</a>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-3" style="margin:15px 0px">
+                 <div class="card " style="border-radius: 5px;min-height:">
+                     <div class="card-body text-center">
+                         <h5>Merchent 5</h5>
+                         <img src="{% static 'img/grass4.jpg' %}" style="width:215px;height:130px">
+                         <h6>Shop Your Grass</h6>
+                         <a href="#" >Shop Now</a>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-3" style="margin:15px 0px">
+                 <div class="card " style="border-radius: 5px;min-height:">
+                     <div class="card-body text-center">
+                         <h5>Merchent 6</h5>
+                         <img src="{% static 'img/grass3.jpg' %}" style="width:215px;height:130px">
+                         <h6>Shop Your Grass</h6>
+                         <a href="#" >Shop Now</a>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-3" style="margin:15px 0px">
+                 <div class="card " style="border-radius: 5px;min-height:">
+                     <div class="card-body text-center">
+                         <h5>Merchent 7</h5>
+                         <img src="{% static 'img/grass2.jpg' %}" style="width:215px;height:130px">
+                         <h6>Shop Your Grass</h6>
+                         <a href="#" >Shop Now</a>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-3" style="margin:15px 0px">
+                 <div class="card " style="border-radius: 5px;min-height:">
+                     <div class="card-body text-center">
+                         <h5>Merchent 8</h5>
+                         <img src="{% static 'img/grass1.jpg' %}" style="width:215px;height:130px">
+                         <h6>Shop Your Grass</h6>
+                         <a href="#" >Shop Now</a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+<!--         merchent div end here-->
+         <!--         border text div start -->
+         <div class="row">
+                 <div class="col-lg-5">
+                     <h3>CHOOSE YOUR SUPPLIER REGIONS</h3>
+                 </div>
+                 <div class="col-lg-7">
+                     <hr style="background:#000;height:3px;margin-top:21px">
+                 </div>
+             </div>
+<!--         border text div end-->
+         <div class="container">
+             <div class="row" style="margin-top:30px;margin-bottom:50px">
+                 <div class="col-lg-3">
+                     <img src="{% static 'img/saudi.png' %}" style="width:130px; height:75px;float:left">
+                     <h4 style="margin-top:10%;margin-left:60%">Saudi</h4>
+                 </div>
+                 <div class="col-lg-3">
+                     <img src="{% static 'img/UAE.png' %}" style="width:130px; height:75px;float:left">
+                     <h4 style="margin-top:10%;margin-left:60%">UAE</h4>
+                 </div>
+                 <div class="col-lg-3">
+                     <img src="{% static 'img/qatar.jpg' %}" style="width:130px; height:75px;float:left">
+                     <h4 style="margin-top:10%;margin-left:60%">Qatar</h4>
+                 </div>
+                 <div class="col-lg-3">
+                     <img src="{% static 'img/oman.png' %}" style="width:130px; height:75px;float:left">
+                     <h4 style="margin-top:10%;margin-left:60%">Oman</h4>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
 
  {% endblock %}
 
- {% block scripts %}
- {{ block.super}}
+<!-- {% block scripts %}-->
+<!-- {{ block.super}}-->
 
- {% endblock%}
+<!-- {% endblock%}-->
