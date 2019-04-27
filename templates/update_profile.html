@@ -1,21 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>update profile</title>
-</head>
-<body>
-<form  method="post" action="{% url 'common:update' pk=request.user.user_profile.id %}">
-    {% csrf_token %}
-profile name:<input type="text"  name="username" value="{{object.user}}"><br>
-phone:<input type="text"  name="phone" value="{{object.phone}}"><br>
-<select name="gender">
-     <option>m</option>
-    <option >f</option>
-</select><br>
-address:<input type="text"  name="address" value="{{object.address}}"><br>
-<input type="hidden" name="user" value="{{request.user.id}}">
-<input type="submit" value="Save">
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6" style="margin-top:30px">
+            <div class="card bg-light text-dark">
+                <div class="card-body ">
+                    <form  method="post" action="{% url 'common:update' pk=request.user.user_profile.id %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Profile Name</label>
+                            <input type="text"  name="username" value="{{object.user}}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text"  name="phone" value="{{object.phone}}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Select Gender</label>
+                            <select name="gender" class="form-control">
+                                <option>m</option>
+                                <option >f</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text"  name="address" value="{{object.address}}" class="form-control">
+                        </div>
+                        <input type="hidden" name="user" value="{{request.user.id}}">
+                        <input type="submit" value="Save" class="btn btn-success">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,18 +1,107 @@
-<ul>
-    <h1>For Client Merchant Detail</h1>
-    <h2>merchantid:{{ request.user.user_merchant.merchant.id }}</h2>
-    <h2>userid:{{ request.user.user_profile.id }}</h2>
-    {% if merchant %}
-    item quantity:{{merchant.item_quantity}}<br>
-    item price:{{merchant.item_price}} <br>
-        <img src="{{ merchant.image_1.url}}"  alt="{{ post.image_1 }}" height="200" width="200">
-        <img src="{{ merchant.image_2.url}}"  alt="{{ post.image_1 }}" height="200" width="200"><br>
-        <img src="{{ merchant.image_3.url}}"  alt="{{ post.image_1 }}" height="200" width="200">
-        <img src="{{ merchant.image_4.url}}"  alt="{{ post.image_1 }}" height="200" width="200"><br>
-        <video width="320" height="240" controls>
-            <source src="{{ merchant.video.url}}" alt="{{ post.video }}" type="video/mp4">
-        </video>
-    {% endif %}
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>For Client Merchant Detail</h1>
+        </div>
+        <div class="col-lg-12 text-center" style="margin-bottom:30px">
+            <h2>Merchant id : {{ request.user.user_merchant.merchant.id }}</h2>
+        </div>
+        <!--    <h2>userid:{{ request.user.user_profile.id }}</h2>-->
 
-             <a href="{% url 'client:client_order_item' pk=merchant.id  %}" ><input type="button" value="continue order" title="continue order"></a>
-</ul>
+        {% if merchant %}
+        <div class="col-lg-3">
+            <img src="{{ merchant.image_1.url}}"  alt="{{ post.image_1 }}" height="200" width="200">
+        </div>
+        <div class="col-lg-3">
+            <img src="{{ merchant.image_2.url}}"  alt="{{ post.image_1 }}" height="200" width="200">
+        </div>
+        <div class="col-lg-3">
+            <img src="{{ merchant.image_3.url}}"  alt="{{ post.image_1 }}" height="200" width="200">
+        </div>
+        <div class="col-lg-3"><img src="{{ merchant.image_4.url}}"  alt="{{ post.image_1 }}" height="200" width="200"></div>
+        <div class="col-lg-12 text-center" style="margin-top:20px">
+            <video width="320" height="240" controls>
+                <source src="{{ merchant.video.url}}" alt="{{ post.video }}" type="video/mp4">
+            </video>
+        </div>
+        <div class="col-lg-12" style="margin-top:30px">
+            <div class="col-lg-6 pull-left" style="font-weight:bold">
+                Item quantity :{{merchant.item_quantity}}
+                <br>
+                Item price :{{merchant.item_price}}
+            </div>
+            {% endif %}
+            <div class="col-lg-6 pull-right">
+<!--                            <a href="{% url 'client:client_order_item' pk=merchant.id  %}" ></a>-->
+                <input type="button" class="btn btn-success pull-right" value="continue order" title="continue order" data-toggle="modal" data-target="#myModal">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <!--      <div class="modal-header">-->
+            <!--        <h4 class="modal-title">Modal Heading</h4>-->
+            <!--        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            <!--      </div>-->
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <form method="post" action="{% url 'client:client_order_item' pk=request.user.user_profile.id  %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" value="{{request.user.username}}" class="form-control" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" name="customer_phone" value="{{request.user.user_profile.phone}}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            address: <textarea name="address" class="form-control">{{request.user.user_profile.address}} </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Item Quantity</label>
+                            <input type="number" name="item_quantity" placeholder="Item Quantity" class="form-control" id="quantity" onkeyup="sum();">
+                        </div>
+                        <div class="form-group">
+                            <label>Item Price</label>
+                            <input type="number" name="item_price" placeholder="Item Price" class="form-control" id="price" onkeyup="sum();" >
+                        </div>
+                        <input type="hidden" name="merchant_item_price" id="merchant_item_price" value="{{merchant_record.item_price}}" onkeyup="sum();"><br>
+                        <input type="hidden" name="merchant_daily_upload" value="{{merchant_record.id}}">
+                        <input type="hidden" name="user" value="{{request.user.id}}">
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" value="Continue" class="btn btn-success">
+<!--                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+<script>
+    function sum() {
+      var txtFirstNumberValue = document.getElementById('quantity').value;
+      var txtSecondNumberValue = document.getElementById('merchant_item_price').value;
+      var result = parseInt(txtFirstNumberValue) * parseInt(txtSecondNumberValue);
+      if (!isNaN(result)) {
+         document.getElementById('price').value = result;
+      }
+}
+</script>
