@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="{% url 'client:client_order_item' pk=request.user.user_profile.id  %}">
+    {% csrf_token %}
+name:{{request.user.username}}<br>
+phone:<input type="text" name="customer_phone" value="{{request.user.user_profile.phone}}"><br><br><br>
+    address: <textarea name="address">{{request.user.user_profile.address}} </textarea><br><br>
+<input type="number" name="item_quantity" placeholder="Item Quantity" id="quantity" onkeyup="sum();"><br>
+<input type="number" name="item_price" placeholder="Item Price" id="price" onkeyup="sum();" readonly><br>
+<input type="hidden" name="merchant_item_price" id="merchant_item_price" value="{{merchant_record.item_price}}" onkeyup="sum();"><br>
+    <input type="hidden" name="merchant_daily_upload" value="{{merchant_record.id}}">
+    <input type="hidden" name="user" value="{{request.user.id}}">
+<input type="submit" value="Continue">
+    </form>
+</body>
+</html>
+
+
+<script>
+    function sum() {
+      var txtFirstNumberValue = document.getElementById('quantity').value;
+      var txtSecondNumberValue = document.getElementById('merchant_item_price').value;
+      var result = parseInt(txtFirstNumberValue) * parseInt(txtSecondNumberValue);
+      if (!isNaN(result)) {
+         document.getElementById('price').value = result;
+      }
+}
+</script>

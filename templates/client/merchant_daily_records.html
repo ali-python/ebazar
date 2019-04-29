@@ -1,0 +1,11 @@
+<ul>
+    <h1>Merchant Daily records</h1>
+    <h2>merchant{{ request.user.user_merchant.merchant.name }}</h2>
+    {% if object_list %}
+      {% for post in object_list %}
+        <a href="{% url 'client:record_detail' pk=post.id %}" ><img src="{{ post.image_1.url}}"  alt="{{ post.image_1 }}" height="200" width="200"></a>
+      {% endfor %}
+    {% endif %}
+</ul>
+
+<a href="{% url 'client:invoice_history' pk=request.user.id %}"><input type="button" value="invoices"></a>

@@ -5,6 +5,11 @@
         <div class="col-sm-12 mb-3">
             <h4 class="text-center"> Welcome {{ user.username }} </h4>
         </div>
+         <div class="col-sm-12 mb-3">
+           <a href="{% url 'common:update' pk=request.user.id %}"><input type="button" value="update_profile"></a>
+           <a href="{% url 'common:user_info' pk=request.user.id %}"><input type="button" value="info"></a>
+             <a href="{% url 'client:invoice_history' pk=request.user.id %}"><input type="button" value="invoices"></a>
+        </div>
           {% for ass in backends.associated %}
           {% if ass.provider == 'facebook' %}
             <div class="col-md-6 text-center">
@@ -22,4 +27,19 @@
           </button>
         </div>
     </div>
+ <div class="row" style="margin:0px">
+     {% for record in merchant_daily_records %}
+     <div class="col-lg-3">
+     <div class="card" style="width:300px">
+         <div class="card-body text-center">
+         <h4 class="card-title">John Doe</h4>
+         <img class="card-img-top"  src="{{ record.image_1.url}}"  alt="{{ record.image_1 }}" height="200" width="200">
+             <h6 class="text-center">Shop Your grass</h6>
+             <a href="{% url 'client:record_detail' pk=record.id %}" class="btn btn-success">Show details</a>
+         </div>
+     </div>
+     </div>
+     {% endfor %}
+
+ </div>
     {% endblock %}
