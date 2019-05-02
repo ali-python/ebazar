@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'common',
     'merchant',
     'client',
+    'mobile_web',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'jathub.middlewares.CommonMiddleware',
+    'jathub.middlewares.MobileMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -91,10 +94,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+                'jathub.context_processors.settings_context',
             ]
         },
     },
 ]
+
 
 SOCIAL_AUTH_FACEBOOK_KEY = '326856704685471'        # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '62a42fb43a77538eecef23d0e8151fee'  # App Secret
@@ -179,6 +184,21 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(ROOT_DIR, 'media')
+
+
+#
+# MOBILE EXPERIENCE
+#
+# If True, will check the request headers to detect if the request is
+# from a smart phone and will set the necessary request attributes to
+# enable the mobile experience.
+MOBILE_ENABLED = True
+
+
+#
+# LOCAL_ENV would be True for Local Environment and False for Production
+#
+LOCAL_ENV = False
 
 
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

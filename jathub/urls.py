@@ -32,7 +32,6 @@ urlpatterns = [
     path("", views.HomeView.as_view(), name="home"),
     path('merchant/', include(('merchant.urls', 'merchant'), namespace="merchant")),
     path('client/', include(('client.urls', 'client'), namespace="client")),
-
 ]
 
 urlpatterns += staticfiles_urlpatterns()
