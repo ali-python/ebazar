@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, TemplateView,UpdateView, FormView
 from .models import Order,OrderItem,Invoice,Payment
 from .forms import OrderForm, OrderItemForm
-from merchant.models import MerchantDailyRecord
+from merchant.models import MerchantDailyRecord, MerchantSalesRecords
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse, HttpResponseRedirect
 from common.models import UserProfile
@@ -54,6 +54,12 @@ class OrderItemView(FormView):
             amount=obj.item_price
         )
         invoice.save()
+        merchant_sales_record=MerchantSalesRecords.objects.create(
+            merchant_daily_record=obj.merchant_daily_upload,
+            purchased_quantity=obj.item_quantity,
+            purchased_price=obj.item_price
+        )
+        merchant_sales_record.save()
         self.request.user.user_profile.phone=self.request.POST.get('customer_phone')
         self.request.user.user_profile.address=self.request.POST.get('address')
         self.request.user.user_profile.save()

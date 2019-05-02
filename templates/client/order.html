@@ -14,6 +14,7 @@ phone:<input type="text" name="customer_phone" value="{{request.user.user_profil
 <input type="number" name="item_price" placeholder="Item Price" id="price" onkeyup="sum();" readonly><br>
 <input type="hidden" name="merchant_item_price" id="merchant_item_price" value="{{merchant_record.item_price}}" onkeyup="sum();"><br>
     <input type="hidden" name="merchant_daily_upload" value="{{merchant_record.id}}">
+    <input type="hidden" name="merchant" value="{{merchant_record.merchant.id}}">
     <input type="hidden" name="user" value="{{request.user.id}}">
 <input type="submit" value="Continue">
     </form>

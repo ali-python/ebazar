@@ -18,9 +18,10 @@ class DashboardView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        merchant = (
-            self.request.user.user_merchant.merchant.merchant_record.all()
-        )
+        # merchant = (
+        #     self.request.user.user_merchant.merchant.merchant_record.all()
+        # ).latest('id')
+        daily_records=MerchantDailyRecord.objects.filter(merchant=self.request.user.user_merchant.merchant).latest('id')
         sales = MerchantSalesRecords.objects.filter(
             merchant_daily_record__merchant=self.request.user.user_merchant.merchant
         )
@@ -28,11 +29,12 @@ class DashboardView(TemplateView):
         purchased_price = purchased_price.get('purchased_price__sum')
         purchased_quantity=sales.aggregate(Sum('purchased_quantity'))
         purchased_quantity=purchased_quantity.get('purchased_quantity__sum')
-
+        remaining_quantity=float(daily_records.item_quantity) - float(purchased_quantity)
         context.update({
             'purchased_price': purchased_price,
             'purchased_quantity':purchased_quantity,
-            'merchant':merchant
+            'daily_records':daily_records,
+            'remaining_quantity':remaining_quantity
         })
         return context
 
