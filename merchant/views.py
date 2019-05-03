@@ -18,10 +18,9 @@ class DashboardView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        # merchant = (
-        #     self.request.user.user_merchant.merchant.merchant_record.all()
-        # ).latest('id')
-        daily_records=MerchantDailyRecord.objects.filter(merchant=self.request.user.user_merchant.merchant).latest('id')
+        daily_records=MerchantDailyRecord.objects.filter(
+            merchant=self.request.user.user_merchant.merchant
+        ).latest('id')
         sales = MerchantSalesRecords.objects.filter(
             merchant_daily_record__merchant=self.request.user.user_merchant.merchant
         )

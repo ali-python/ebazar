@@ -6,6 +6,8 @@ from merchant.models import MerchantDailyRecord, MerchantSalesRecords
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse, HttpResponseRedirect
 from common.models import UserProfile
+from django.db import transaction
+
 
 class ListMerchantDailyRecordView(ListView):
     model = MerchantDailyRecord
@@ -43,30 +45,31 @@ class OrderItemView(FormView):
             OrderItemView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.order = Order.objects.create(
-            customer_name=self.request.POST.get('customer_name'),
-            customer_phone=self.request.POST.get('customer_phone'),
-            user=self.request.user,
-        )
-        invoice=Invoice.objects.create(
-            order=obj.order,
-            amount=obj.item_price
-        )
-        invoice.save()
-        merchant_sales_record=MerchantSalesRecords.objects.create(
-            merchant_daily_record=obj.merchant_daily_upload,
-            purchased_quantity=obj.item_quantity,
-            purchased_price=obj.item_price
-        )
-        merchant_sales_record.save()
-        self.request.user.user_profile.phone=self.request.POST.get('customer_phone')
-        self.request.user.user_profile.address=self.request.POST.get('address')
-        self.request.user.user_profile.save()
-        obj.save()
-        return HttpResponseRedirect(reverse('client:client_order_invoice',  kwargs={
-                        'pk': invoice.id
-                    }))
+        with transaction.atomic():
+            obj = form.save(commit=False)
+            obj.order = Order.objects.create(
+                customer_name=self.request.POST.get('customer_name'),
+                customer_phone=self.request.POST.get('customer_phone'),
+                user=self.request.user,
+            )
+            invoice=Invoice.objects.create(
+                order=obj.order,
+                amount=obj.item_price
+            )
+            invoice.save()
+            merchant_sales_record=MerchantSalesRecords.objects.create(
+                merchant_daily_record=obj.merchant_daily_upload,
+                purchased_quantity=obj.item_quantity,
+                purchased_price=obj.item_price
+            )
+            merchant_sales_record.save()
+            self.request.user.user_profile.phone=self.request.POST.get('customer_phone')
+            self.request.user.user_profile.address=self.request.POST.get('address')
+            self.request.user.user_profile.save()
+            obj.save()
+            return HttpResponseRedirect(reverse('client:client_order_invoice',  kwargs={
+                            'pk': invoice.id
+                        }))
 
     def form_invalid(self, form):
         return super(OrderItemView, self).form_invalid(form)
