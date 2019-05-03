@@ -1,3 +1,11 @@
+.sign_txt{
+    margin:20px;
+    font-size:30px;
+}
+.card_shadow{
+    box-shadow:1px 2px 5px 7px #000;
+}
+
 .phone:before{
     content: '';
     display: inline-block;
@@ -10,3 +18,4 @@
 .nav-link{
     color:#fff;
  }
+

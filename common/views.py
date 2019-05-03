@@ -83,6 +83,12 @@ class LoginView (FormView):
     def form_invalid(self, form):
         return super(LoginView, self).form_invalid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(LoginView, self).get_context_data(**kwargs)
+        merchant_daily_records=MerchantDailyRecord.objects.all()
+        context.update({
+            'merchant_daily_records': merchant_daily_records
+        })
 class HomeView(TemplateView):
     template_name = 'index.html'
 

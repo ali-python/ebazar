@@ -1,45 +1,156 @@
- {% extends 'base.html' %}
-    {% block title %} Home {% endblock %}
-    {% block content %}
-    <div class="row" style="margin:0px">
-        <div class="col-sm-12 mb-3">
-            <h4 class="text-center"> Welcome {{ user.username }} </h4>
-        </div>
-         <div class="col-sm-12 mb-3">
-           <a href="{% url 'common:update' pk=request.user.id %}"><input type="button" value="update_profile"></a>
-           <a href="{% url 'common:user_info' pk=request.user.id %}"><input type="button" value="info"></a>
-             <a href="{% url 'client:invoice_history' pk=request.user.id %}"><input type="button" value="invoices"></a>
-        </div>
-          {% for ass in backends.associated %}
-          {% if ass.provider == 'facebook' %}
-            <div class="col-md-6 text-center">
-                <img src="{{ass.extra_data.picture.data.url}}" alt="" width="150" height="150" style="border-radius: 50%">
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
+<style>
+    .card_shadow{
+    box-shadow:0px 2px 12px 7px #ddd;
+}
+ .flip_img {
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+          transition: transform .8s ease-in-out;
+}
+.flip_img:hover {
+   -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+</style>
+<div  style="background:#F5F5F5">
+    <!--         step div start here-->
+    <div class="container">
+        <div class="row" >
+            <div class="col-lg-3 col-md-6" style="margin-top:30px; margin-bottom:30px">
+                <div class="card bg-success text-white" style="border-radius: 20px;min-height:250px">
+                    <div class="card-body text-center">
+                        <h5>Step 1</h5>
+                        <h6>Pick Brand</h6>
+                        <img src="{% static 'img/camel3.jpg' %}" style="width:30%;border-radius:40%">
+                        <p>Choose From 100+ top Relaiters</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6 social-container my-2">                 <p> Signed in via:  {{ ass.provider }} </p>
-                <p> Name:  {{ ass.extra_data.name }} </p>
-                <p> Provider url: <a href="{{ass.extra_data.profile_url}}">link</a></p>
+            <div class="col-lg-3 col-md-6" style="margin-top:30px; margin-bottom:30px">
+                <div class="card bg-success text-white" style="border-radius: 20px;min-height:250px">
+                    <div class="card-body text-center">
+                        <h5>Step 2</h5>
+                        <h6>Personalize</h6>
+                        <img src="{% static 'img/camel3.jpg' %}" style="width:30%;border-radius:40%">
+                        <p>Add message, photo & video</p>
+                    </div>
+                </div>
             </div>
-          {% endif %}
-        {% endfor %}
-        <div class="col-sm-12 mt-2 text-center">
-          <button class="btn btn-danger">
-            <a href="{% url 'logout' %}">Logout</a>
-          </button>
+            <div class="col-lg-3 col-md-6" style="margin-top:30px; margin-bottom:30px">
+                <div class="card bg-success text-white" style="border-radius: 20px;min-height:250px">
+                    <div class="card-body text-center">
+                        <h5>Step 3</h5>
+                        <h6>Pay & Delivery</h6>
+                        <img src="{% static 'img/delivery.png' %}" style="width:45%;border-radius:50%">
+                        <p>Instant by Email,SMS or print at home</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" style="margin-top:30px; margin-bottom:30px">
+                <div class="card " style="border-radius: 20px;min-height:250px">
+                    <div class="card-body text-center">
+                        <h5 style="color:#6dad29">JATHUB</h5>
+                        <h6 style="color:#6dad29">For Bussines</h6>
+                        <hr style="width: 29%;background: #000;height: 2px;">
+                        <p style="color:#ADD8E6; font-size:15px;line-height: 16px;">Consumer Promotions <br> Employee Rewards <br> Customer Reward</p>
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
- <div class="row" style="margin:0px">
-     {% for record in merchant_daily_records %}
-     <div class="col-lg-3">
-     <div class="card" style="width:300px">
-         <div class="card-body text-center">
-         <h4 class="card-title">John Doe</h4>
-         <img class="card-img-top"  src="{{ record.image_1.url}}"  alt="{{ record.image_1 }}" height="200" width="200">
-             <h6 class="text-center">Shop Your grass</h6>
-             <a href="{% url 'client:record_detail' pk=record.id %}" class="btn btn-success">Show details</a>
-         </div>
-     </div>
-     </div>
-     {% endfor %}
-
- </div>
-    {% endblock %}
+    <!--         step div end here-->
+    <div class="row" style="margin:0px">
+        <div class="col-lg-12" style="padding:0px">
+            <div class="bg_img">
+                <img src="{% static 'img/camel1.jpg' %}" style="width:100%;height:450px">
+            </div>
+        </div>
+    </div>
+    {% for ass in backends.associated %}
+    {% if ass.provider == 'facebook' %}
+    <div class="col-md-6 text-center">
+        <img src="{{ass.extra_data.picture.data.url}}" alt="" width="150" height="150" style="border-radius: 50%">
+    </div>
+    <div class="col-md-6 social-container my-2">
+        <p> Signed in via:  {{ ass.provider }} </p>
+        <p> Name:  {{ ass.extra_data.name }} </p>
+        <p> Provider url: <a href="{{ass.extra_data.profile_url}}">link</a></p>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <div class="row" style="margin:20px 0 0 0">
+        <div class="col-lg-12">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-5">
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option>Select Country</option>
+                                <option>Pakistan</option>
+                                <option>Iran</option>
+                                <option>UAE</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-5">
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option>Select City</option>
+                                <option>Dubai</option>
+                                <option>Quetta</option>
+                                <option>Nushki</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--         merchant image div start here-->
+                <!--<div class="row" style="margin-top:30px;margin-bottom:40px">-->
+                <!--{% for record in merchant_daily_records %}-->
+                <!--<div class="col-lg-3" style="margin:15px 0px">-->
+                <!--<div class="card card_shadow" style="border-radius: 5px;min-height:">-->
+                <!--<div class="card-body text-center">-->
+                <!--<h5>Merchent Id {{ record.id }}</h5>-->
+                <!--<img src="{{ record.image_1.url}}"  alt="{{ record.image_1 }}"  style="width:215px;height:130px" class="flip_img">-->
+                <!--<h6>Shop Your Grass</h6>-->
+                <!--<a href="{% url 'client:record_detail' pk=record.id %}" >Shop Now</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--{% endfor %}-->
+                <!--</div>-->
+                <!--         merchent div end here-->
+                <!-- Card -->
+                <div class="row" >
+                    {% for record in merchant_daily_records %}
+                    <div class="col-lg-3 col-md-6 col-xs-12" style="margin-top:30px;margin-bottom:40px">
+                        <div class="card ">
+                            <!-- Card image -->
+                            <div class=" overlay flip_img">
+                                <img class="card-img-top " src="{{ record.image_1.url}}"  alt="{{ record.image_1 }}" style="width:100%;height:150px" >
+                                <a href="{% url 'client:record_detail' pk=record.id %}">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!-- Card content -->
+                            <div class="card-body text-center">
+                                <!-- Title -->
+                                <h4 class="card-title">Merchent Id {{ record.id }}</h4>
+                                <!-- Text -->
+                                <p class="card-text">Shop Your Grass</p>
+                                <!-- Button -->
+                                <a href="{% url 'client:record_detail' pk=record.id %}" class="btn btn-success">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Card -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
