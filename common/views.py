@@ -64,13 +64,6 @@ class LoginView (FormView):
     def dispatch(self, request, *args, **kwargs):
 
         if self.request.user.is_authenticated:
-            if (
-                    self.request.user.user_profile.USER_TYPES ==
-                    self.request.user.user_profile.USER_TYPE_COMPANY
-            ):
-                return HttpResponseRedirect(
-                    reverse('home'))
-
             return HttpResponseRedirect(reverse('home'))
 
         return super(LoginView, self).dispatch(request, *args, **kwargs)
@@ -85,6 +78,27 @@ class LoginView (FormView):
 
 class HomeView(TemplateView):
     template_name = 'index.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('login'))
+        else:
+
+            if self.request.user.user_profile:
+                if (
+                        self.request.user.user_profile.type ==
+                        self.request.user.user_profile.USER_TYPE_MERCHANT
+                ):
+                    return HttpResponseRedirect(reverse('merchant:dashboard'))
+            if self.request.user.user_profile:
+                if (
+                        self.request.user.user_profile.type ==
+                        self.request.user.user_profile.USER_TYPE_CLIENT
+                ):
+                    return HttpResponseRedirect(reverse('home'))
+
+        return super(
+            HomeView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
