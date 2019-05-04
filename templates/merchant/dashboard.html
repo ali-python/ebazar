@@ -20,6 +20,24 @@
             <div> Total price {{purchased_price}} </div>
         </div>
     </div>
+    <div>
+             <img src="{{ daily_records.image_1.url}}"  alt="{{ daily_records.image_1 }}" height="200" width="200">
+                <img src="{{ daily_records.image_2.url}}" alt="{{ daily_records.image_2 }}" height="200" width="200">
+                <img src="{{ daily_records.image_3.url}}" alt="{{ daily_records.image_3 }}" height="200" width="200">
+                <img src="{{ daily_records.image_4.url}}" alt="{{ daily_records.image_4 }}" height="200" width="200"><br>
+                <video width="320" height="240" controls style="margin:15px 0px">
+                    <source src="{{ daily_records.video.url}}" alt="{{ daily_records.video }}" type="video/mp4">
+                </video>
+                </div>
+                <div class="col-lg-6 pull-left">
+                <h4>Quantity {{ remaining_quantity}}</h4>
+                <h4>Item Price {{ daily_records.item_price }}</h4>
+                <h4>Upload Time and Date {{ daily_records.upload_time }}</h4>
+                </div>
+                <a href="{% url 'merchant:update_record' pk=daily_records.id %}" class="btn btn-success">update</a>
+
+
+    </div>
 </div>
 
 <!-- The Modal -->
