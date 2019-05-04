@@ -15,7 +15,6 @@ from django.http import Http404
 from merchant.models import MerchantDailyRecord
 
 
-
 class RegisterView(FormView):
     form_class = auth_forms.UserCreationForm
     template_name = 'register.html'
@@ -57,6 +56,7 @@ class RegisterView(FormView):
 
         return context
 
+
 class LoginView (FormView):
     template_name = 'login.html'
     form_class = auth_forms.AuthenticationForm
@@ -82,14 +82,14 @@ class LoginView (FormView):
         context.update({
             'merchant_daily_records': merchant_daily_records
         })
+        return context
+
+
 class HomeView(TemplateView):
     template_name = 'index.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('login'))
-        else:
-
+        if self.request.user.is_authenticated:
             if self.request.user.user_profile:
                 if (
                         self.request.user.user_profile.type ==
