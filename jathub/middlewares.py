@@ -21,7 +21,8 @@ class MobileMiddleware:
         if MOBILE_AGENT_RE.match(request.META['HTTP_USER_AGENT']):
             request.is_mobile = True
 
-        if hasattr(request, 'is_mobile') and request.is_mobile:
+        if settings.MOBILE_ENABLED and \
+                hasattr(request, 'is_mobile') and request.is_mobile:
             request.urlconf = 'jathub.mobile_urls'
 
         response = self.get_response(request)
