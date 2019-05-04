@@ -6,28 +6,27 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
     <!--        Bootstrap css file - -->
-
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="{% static 'css/lightSlider.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <script src="{% static 'js/jquery.js' %}"></script>
-    <script src="{% static 'js/popper.js' %}"></script>
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/js/mdb.min.js"></script>-->
+
+
     <style>
-        .logo_jathub{
-    width: 27%;
+.logo_jathub{
+    width: 8%;
     display: inline-block;
     position: absolute;
-    top: -16px;
-    left: 4%;
+    top: -17px;
+    left: 5%;
+    border-radius:50%;
     z-index:1;
 }
 .bg_img{
@@ -47,13 +46,47 @@
     height: 35px;
     padding: 2px;
 }
+@media only screen and (max-width : 1440px) {
+.logo_jathub{
+    width: 6%;
+    top: -5px;
+    }
+}
+
+@media only screen and (max-width : 1024px) {
+.logo_jathub{
+    width: 8%;
+    top: -5px;
+    }
+}
+
+@media only screen and (max-width : 786px) {
+.logo_jathub{
+    width: 11%;
+    top: -6px;
+}
+}
+
+@media only screen and (max-width : 480px) {
+.logo_jathub{
+    width: 20%;
+    top: -6px;
+}
+}
+@media only screen and (max-width : 320px) {
+.logo_jathub{
+     width: 27%;
+    top: -6px;
+    }
+}
+
     </style>
     <!-- bootstrap css file ---->
     <title>Jathub home page</title>
 </head>
 <body>
 <div class="row" style="margin:0px">
-    <div class="col-lg-4 text-right">
+    <div class="col-lg-4 col-sm-12 text-right">
         <h5 style="padding-top:20px">Your Online Mall For Camels</h5>
     </div>
     <div class="col-lg-4" style="padding-top:10px">
@@ -63,17 +96,36 @@
         <img class="col-lg-2 bank_card" src="{% static 'img/paypal.png' %}" >
         <img class="col-lg-2 bank_card" src="{% static 'img/visa.png' %}">
     </div>
-    <div class="col-lg-4">
-        <h6 class="col-lg-5 pull-left phone" style="padding:20px 0 0 0"><i class="fa fa-phone"></i> +92111111 </h6>
-        <h6 class="col-lg-7 pull-right phone" style="padding:0px;padding-top:20px"><i class="fa fa-envelope-o"></i> info@solutionspartum.com </h6>
+    <div class="col-lg-4 col-md-12 col-xs-12">
+        <h6 class="col-lg-5 col-md-6 col-xs-6 pull-left phone" style="padding:20px 0 0 0"><i class="fa fa-phone"></i> +92111111 </h6>
+        <h6 class="col-lg-7 col-md-6 col-xs-6 pull-right phone" style="padding:0px;padding-top:20px"><i class="fas fa-envelope"></i> info@solutionspartum.com </h6>
     </div>
 </div>
-<div class="row" style="margin:0px">
-    <div class="col-lg-12" style="background:#6dad29;position:relative">
-        <div class="container">
-
-            <span class="col-lg-6">PARTUM solutions</span>
-            <div class="pull-right btn btn-default" data-toggle="modal" data-target="#signModal" style="color:#fff; font-size:25px;cursor: pointer;"><i class="fa fa-user"></i> Login </div>
+<nav class="navbar navbar-dark primary-color">
+  <a class="navbar-brand" href="#">
+     <img src="{% static 'img/logo.png' %}" class="logo_jathub">
+  </a>
+    {%if not user.is_authenticated%}
+            <div class=" pull-right" data-toggle="modal" data-target="#signModal" style="color:#fff; font-size:25px;cursor: pointer; padding:10px 0"><i class="fa fa-user"></i> Login</div>
+            {% endif %}
+            {%if user.is_authenticated%}
+            <div class="dropdown pull-right">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background:#42E289">
+                    Hi ! {{ user.username }}
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="">Update Profile</a>
+                    <a class="dropdown-item" href="">Info</a>
+                    <a class="dropdown-item" href="">Invoices</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+                {% endif %}
+            </div>
+</nav>
+<!--<div class="row" style="margin:0px">-->
+    <!--<div class="col-lg-12" style="background:#6dad29;">-->
+            <!--<span class="col-lg-6">PARTUM solutions</span>-->
+            <!--<div class="pull-right btn btn-default" data-toggle="modal" data-target="#signModal" style="color:#fff; font-size:25px;cursor: pointer;"><i class="fa fa-user"></i> Login </div>-->
 <!--            <div class="dropdown">-->
 <!--                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">-->
 <!--                    Dropdown button-->
@@ -85,201 +137,281 @@
 <!--                </div>-->
 <!--            </div>-->
 
-        </div>
-    </div>
-</div>
+
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <!--    middle body work start here-->
-            {% block content %} {% endblock %}
-<!--    -->
+{% block content %} {% endblock %}
 <!--    middle body work end here-->
 <!--    footer work start here-->
-<div class="row" style="margin:0px">
-    <div class="col-lg-12 text-center" style="margin:30px 0px">
-        <hr style="background:#000">
-        <div class="container">
-            <h3>We Have Recommendation For You</h3>
-            <button type="button" class="btn btn-info" value="">Sign in to see Personalization recommendation</button>
+<footer class="page-footer font-small pt-4" style="background:#66c376ed">
+    <!-- Footer Elements -->
+    <div class="container">
+      <!--Grid row-->
+      <div class="row">
+        <div class="col-md-6 offset-3 mb-4">
+          <form class="input-group">
+            <input type="text" class="form-control form-control-sm" placeholder="Your email" aria-label="Your email" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-outline-white my-0" type="button">Sign up</button>
+            </div>
+          </form>
         </div>
+        <!--Grid column-->
+      </div>
     </div>
-</div>
-<div class="row" style="margin:0px">
-    <div class="col-lg-12" style="background:#4f7718; padding:25px; margin-top:20px">
-        <div class="container text-center">
-            <h5 style="color:#fff">Trade Alert - Delivering the Latest Product news Straight to you inbox</h5>
-            <input type="text" class="form-control col-lg-4 offset-lg-3 text-center pull-left" placeholder="Your Email">
-            <input type="button" class="btn text-white col-lg-2" value="submit" style="border:1px solid #fff;float:left;margin-left:20px">
+<!-- Footer Links -->
+    <div class="container text-center text-md-left">
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-4 mx-auto">
+          <!-- Content -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+          <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit.</p>
+        </div>
+        <!-- Grid column -->
+        <hr class="clearfix w-100 d-md-none">
+        <!-- Grid column -->
+        <div class="col-md-2 mx-auto">
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+        <hr class="clearfix w-100 d-md-none">
+        <!-- Grid column -->
+        <div class="col-md-2 mx-auto">
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+        <hr class="clearfix w-100 d-md-none">
+        <!-- Grid column -->
+        <div class="col-md-2 mx-auto">
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+    <!-- Footer Links -->
+    <hr>
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center py-2">
+      <li class="list-inline-item">
+        <h5 class="mb-1">Register for free</h5>
+      </li>
+      <li class="list-inline-item">
+        <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+      </li>
+    </ul>
+    <!-- Call to action -->
+    <hr>
+    <!-- Social buttons -->
+    <div class="col-md-12 py-5">
+          <div class="mb-5 flex-center">
 
-            <h6 style="width:100%;float:left;margin-top:10px;color:#fff">We'll Never Share your Email address with a Third party</h6>
+            <!-- Facebook -->
+            <a class="fb-ic">
+              <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
+            <!-- Twitter -->
+            <a class="tw-ic">
+              <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
+            <!-- Google +-->
+            <a class="gplus-ic">
+              <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
+            <!--Linkedin -->
+            <a class="li-ic">
+              <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
+            <!--Instagram-->
+            <a class="ins-ic">
+              <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
+            <!--Pinterest-->
+            <a class="pin-ic">
+              <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+            </a>
+          </div>
         </div>
+    <!-- Social buttons -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+      <a href="#"> JatHub</a>
     </div>
-    <div class="col-lg-12" style="background:#4f7718; padding:25px;">
-        <hr style="background:#fff">
-        <div class="container">
-            <!--            footer links start here-->
-            <ul class="nav flex-column col-lg-2 col-xs-6 pull-left">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Disabled</a>
-                </li>
-            </ul>
-            <!--        first footer links end here-->
-
-            <ul class="nav flex-column col-lg-2 col-xs-6 pull-left">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Disabled</a>
-                </li>
-            </ul>
-            <!--            second footer links end here-->
-            <ul class="nav flex-column col-lg-2 pull-left">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">gg</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="#">Disabled</a>
-                </li>
-            </ul>
-            <!--            third links end here-->
-            <ul class="nav flex-column col-lg-3 pull-left">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Follow Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link pull-left" href="#"><i class="fa fa-facebook-square" style="cursor: pointer;font-size:25px"></i> </a>
-                    <a class="nav-link pull-left" href="#"><i class="fa fa-instagram" style="cursor: pointer;font-size:25px"></i> </a>
-                    <a class="nav-link pull-left" href="#"><i class="fa fa-twitter-square" style="cursor: pointer;font-size:25px"></i> </a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="#">Secure Payment</a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="#">
-                    <img src="{% static 'img/visa.png' %}" class="bank_card">
-                    <img src="{% static 'img/paypal.png' %}" class="bank_card">
-                    <img src="{% static 'img/mastercd.png' %}" class="bank_card">
-                    <img src="{% static 'img/visa.png' %}" class="bank_card">
-                </a>
-                </li>
-            </ul>
-            <!--            fourth links end here-->
-            <ul class="nav flex-column col-lg-3 pull-left">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><img src="{% static 'img/playstore.png' %}" style="width:30%"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><img src="{% static 'img/appstore.jpg' %}" style="width:30%"></a>
-                </li>
-            </ul>
-            <!--            footer links end here-->
-        </div>
-    </div>
-</div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
 <!--    footer work end here-->
 <!--    sign in and sign up form -->
-<!-- Modal -->
-<!--<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<div class="modal fade" id="signModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close text-left" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class=" text-center">
-                <img src="{% static 'img/logo.png' %}" style="width:100px">
-            </div>
-            <span class="text-center" style="margin-top:15px">Sign in</span>
-            <!--        model body start-->
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 text-center" style="margin:15px 0 25px">
-                            <a class="btn btn-danger  col-md-3" href="{% url 'social:begin' 'google-oauth2' %}"><i class="fa fa-google"></i></a>
-                            <a class="btn btn-primary  col-md-3" href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <form action="{% url 'login' %}" method="post">
-                            {% csrf_token %}
-                            <input type="text" placeholder="Username" name="username" class="form-control"> <br>
-                            <input type="password" name="password" placeholder="Password" class="form-control"> <br>
-                            <button type="submit" value="Login" class="btn btn-success col-md-5">Login</button>
-                            <br>
-                            <span>Forget Password ?</span><br>
-                            <h6>Don't have an Account? <span data-dismiss="modal" data-toggle="modal" data-target="#registerModal" style="cursor: pointer;">Register here</span></h6>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!--    sign in form end here-->
-<!--registration page start here-->
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="signModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close text-left" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class=" text-center">
-                <img src="{% static 'img/logo.png' %}" style="width:100px">
+        <!--Content-->
+        <div class="modal-content form-elegant">
+            <!--Header-->
+            <div class="text-center">
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-4 " id="myModalLabel"><strong>Sign in</strong></h3>
+                <div class="w-100">
+                    <img src="{% static 'img/logo.png' %}" style="width:100px">
+                </div>
+            </div>
+            <!--Body-->
+            <div class="modal-body mx-4">
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <!--Body-->
+                    <div class="md-form mb-5">
+                        <i class="fas fa-envelope prefix"></i>
+                        <input type="text"   name="username"  class="form-control validate">
+                        <label>Username</label>
+                    </div>
+                    <div class="md-form pb-3">
+                        <i class="fas fa-lock prefix"></i>
+                        <input type="password" id="Form-pass1" name="password" class="form-control validate">
+                        <label> password</label>
+                        <p class="font-small blue-text d-flex justify-content-end">Forgot <a href="#" class="blue-text ml-1">
+                            Password?</a></p>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <button type="submit" value="login" class="btn btn-success btn-block btn-rounded z-depth-1a">Sign in</button>
+                    </div>
+                    <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in
+                        with:</p>
+                </form>
+                <div class="row my-3 d-flex justify-content-center">
+                    <!--Facebook-->
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-blue btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-facebook-f text-center"></i></a>
+                    <!--Twitter-->
+                    <a href="#" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-twitter"></i></a>
+                    <!--Google +-->
+                    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-red btn-rounded z-depth-1a"><i class="fab fa-google-plus-g"></i></a>
+                </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer mx-5 pt-3 mb-1">
+                <p class="font-small grey-text d-flex justify-content-end">Not a member? <span data-toggle="modal" data-target="#registerModal" class="blue-text ml-1" style="cursor: pointer;">
+            Sign Up</span></p>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal -->
+<!--registration page start here-->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content form-elegant">
+            <!-- Modal Header -->
+            <div class="text-center">
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-4 "><strong>Sign up</strong></h3>
+                <div class="w-100">
+                    <img src="{% static 'img/logo.png' %}" style="width:100px">
+                </div>
             </div>
             <!--        model body start-->
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 text-center" style="margin:15px 0 25px">
-                            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger  col-md-3"><i class="fa fa-google"></i></a>
-                            <a class="btn btn-primary  col-md-3" href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook"></i></a>
-                        </div>
+            <div class="modal-body mx-4">
+                <form class="form-login" method="post" action="{% url 'common:register' %}">
+                    {% csrf_token %}
+                    <div class="md-form mb-5">
+                        <i class="fas fa-envelope prefix"></i>
+                        <input type="text" class="form-control  validate" name="username" value="{{ username }}" autofocus>
+                        <label>Username</label>
                     </div>
-                    <form class="form-login text-center" method="post" action="{% url 'common:register' %}">
-                        <h2 class="form-login-heading">Registration Form</h2>
-                        <div class="login-wrap">
-                            {% csrf_token %}
-                            <h5>Register yourself to use Jathub!</h5>
-                            <input type="text" class="form-control" placeholder="Username" name="username" value="{{ username }}" autofocus> <br>
-                            <input type="text" class="form-control" placeholder="Phone No" name="phone" value="{{ phone }}"> <br>
-                            <input type="password" class="form-control" name="password1" placeholder="Password" value="{{ password1 }}"><br>
-                            <input type="password" class="form-control" name="password2" placeholder="Confirm Password" value="{{ password2 }}"><br>
-                            <button class="btn btn-primary " type="submit"><i class="fa fa-lock"></i> Register</button>
-                            <h6>Already have an Account <span data-dismiss="modal" data-toggle="modal" data-target="#signModal" style="cursor: pointer; color:#ddd">Sign in</span></h6>
-                        </div>
-                    </form>
+                    <div class="md-form mb-5">
+                        <i class="fas fa-phone prefix"></i>
+                        <input type="text"  name="phone"   value="{{ phone }}" class="form-control validate">
+                        <label>Phone</label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fa fa-lock prefix"></i>
+                        <input type="password" name="password1" value="{{ password1 }}" class="form-control validate">
+                        <label>Password</label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fa fa-lock prefix"></i>
+                        <input type="password" name="password2" value="{{ password2 }}" class="form-control validate">
+                        <label>Confirm Password</label>
+                    </div>
+                    <!--<input type="text" class="form-control form-group" placeholder="Username" name="username" value="{{ username }}" autofocus>-->
+                    <!--<input type="text" class="form-control form-group" placeholder="Phone No" name="phone" value="{{ phone }}">-->
+                    <!--<input type="password" class="form-control form-group" name="password1" placeholder="Password" value="{{ password1 }}">-->
+                    <!--<input type="password" class="form-control form-group" name="password2" placeholder="Confirm Password" value="{{ password2 }}">-->
+                    <button class="btn aqua-gradient btn-block btn-rounded" type="submit"> Register</button>
+                    <div class="col-md-12" style="margin-top:10px">
+                        <p class="font-small  d-flex justify-content-end">Have an account? <a href="#" class="green-text ml-1 font-weight-bold">
+                            Log in</a></p>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-12 text-center" style="margin:15px 0 25px">
+                        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger  col-md-3"><i class="fab fa-google"></i></a>
+                        <a class="btn btn-primary  col-md-3" href="{% url 'social:begin' 'facebook' %}"><i class="fab fa-facebook-f"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <!--registration page end here-->
+{% block scripts %}
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/js/mdb.min.js"></script>
+<script src="{% static 'js/popper.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
 
-<!--script file-->
-<!--{% block scripts %}-->
-<!--&lt;!&ndash;<script src="{% static 'js/jquery.js' %}"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;<script src="{% static 'js/bootstrap.js' %}"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;<script src="{% static 'js/bootstrap.min.js' %}"></script>&ndash;&gt;-->
-<!--{% endblock %}-->
-
+<!--<script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>-->
+{% endblock %}
 </body>
 </html>
