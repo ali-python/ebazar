@@ -96,12 +96,12 @@ class HomeView(TemplateView):
                         self.request.user.user_profile.USER_TYPE_MERCHANT
                 ):
                     return HttpResponseRedirect(reverse('merchant:dashboard'))
-            if self.request.user.user_profile:
-                if (
-                        self.request.user.user_profile.type ==
-                        self.request.user.user_profile.USER_TYPE_CLIENT
-                ):
-                    return HttpResponseRedirect(reverse('home'))
+            # if self.request.user.user_profile:
+            #     if (
+            #             self.request.user.user_profile.type ==
+            #             self.request.user.user_profile.USER_TYPE_CLIENT
+            #     ):
+            #         return HttpResponseRedirect(reverse('home'))
 
         return super(
             HomeView, self).dispatch(request, *args, **kwargs)
