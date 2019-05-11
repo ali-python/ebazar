@@ -1,13 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>user profile info</title>
-</head>
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
 <body>
-user name: {{user_profile.user.username}}
-phone: {{user_profile.phone}}
-gender: {{user_profile.gender}}
-address: {{user_profile.address}}
-</body>
-</html>
+<div class="container">
+    <div class="row" style="margin-top:20px">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-hover invoice-table">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Phone</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                        </tr>
+                        </thead>
+                         <tbody >
+                         <tr>
+                             <td>{{user_profile.user.username}}</td>
+                             <td>{{user_profile.phone}}</td>
+                             <td>{{user_profile.gender}}</td>
+                             <td>{{user_profile.address}}</td>
+                         </tr>
+                         </tbody>
+                    </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--user name: {{user_profile.user.username}}-->
+<!--phone: {{user_profile.phone}}-->
+<!--gender: {{user_profile.gender}}-->
+<!--address: {{user_profile.address}}-->
+
+{% endblock %}

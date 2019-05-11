@@ -2,79 +2,106 @@
 {% block title %} Home {% endblock %}
 {% block content %}
 {% load static %}
-<div class="row" style="margin:0px;background:#ddd;padding:50px 0px">
-    <div class="col-lg-12">
-        <div class="container" style="background:#fff;text-align:center;padding:20px 5px">
-        <h1>Merchant Daily records</h1>
-        <h2>{{ request.user.user_merchant.merchant.name }}</h2>
-        {% if object_list %}
-        {% for post in object_list %}
-            <hr style="background:#000;height:2px">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="col-lg-12">
-                <img src="{{ post.image_1.url}}"  alt="{{ post.image_1 }}" height="200" width="200">
-                <img src="{{ post.image_2.url}}" alt="{{ post.image_2 }}" height="200" width="200">
-                <img src="{{ post.image_3.url}}" alt="{{ post.image_3 }}" height="200" width="200">
-                <img src="{{ post.image_4.url}}" alt="{{ post.image_4 }}" height="200" width="200"><br>
-                <video width="320" height="240" controls style="margin:15px 0px">
-                    <source src="{{ post.video.url}}" alt="{{ post.video }}" type="video/mp4">
-                </video>
-                </div>
-                <div class="col-lg-6 pull-left">
-                <h4>Quantity {{ post.item_quantity }}</h4>
-                <h4>Item Price {{ post.item_price }}</h4>
-                <h4>Upload Time and Date {{ post.upload_time }}</h4>
-                </div>
-                <div class="col-lg-6 pull-right" style="padding-top:30px">
-                <input type="button" value="Update" data-toggle="modal" data-target="#updaterecord" class="btn btn-success" title="View History">
+<div class="container" style="padding:20px 0">
+    <div class="text-center" style="background:#9CF4A6;padding:30px 0px">
+        <a href="{% url 'merchant:dashboard' %}"><input type="button" class="btn btn-success " value="DashBoard" title="Dashboard"  style="background:#2bbbad!important"></a>
+        <a href="#" ><input type="button" class="btn btn-success " data-toggle="modal" data-target="#additem" value="Add Daily Items" title="Add Daily Items" style="background:#2bbbad!important"></a>
+        <a href="{% url 'merchant:records_view' %}" ><input type="button" class="btn btn-success " value="View Records" title="View Daily Record" style="background:#2bbbad!important"></a>
+        <a href="{% url 'merchant:sales_records_view' %}" ><input type="button" class="btn btn-success " value="Sales Records" title="Daily Sales Record" style="background:#2bbbad!important"></a>
+    </div>
+    <div class="row">
+        <div class="col-lg-12" style="margin-top:30px">
+            <div class="card">
+                <div class="card-body">
+                        <h1 class="text-center">Merchant records</h1>
+                        <!--<h2>{{ request.user.user_merchant.merchant.name }}</h2>-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table class="table table-striped table-hover invoice-table">
+                                    <thead>
+                                    <tr>
+                                        <th><i class=" fa fa-bookmark"></i> Item Price</th>
+                                        <th><i class="fa fa-bullhorn"></i> Item Block Quantity</th>
+                                        <th><i class="fa fa-question-circle"></i> Date & Time</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="invoice-table-body">
+                                    {% if object_list %}
+                                    {% for post in object_list %}
+                                    <tr>
+                                        <td> {{ post.item_price }}</td>
+                                        <td>{{ post.item_quantity }}</td>
+                                        <td>{{ post.upload_time }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
-        {% endif %}
     </div>
 </div>
-</div>
+            {% endblock %}
 
+        <!--<div class="col-lg-12">-->
+                            <!--<img src="{{ post.image_1.url}}"  alt="{{ post.image_1 }}" height="200" width="200">-->
+                            <!--<img src="{{ post.image_2.url}}" alt="{{ post.image_2 }}" height="200" width="200">-->
+                            <!--<img src="{{ post.image_3.url}}" alt="{{ post.image_3 }}" height="200" width="200">-->
+                            <!--<img src="{{ post.image_4.url}}" alt="{{ post.image_4 }}" height="200" width="200"><br>-->
+                            <!--<video width="320" height="240" controls style="margin:15px 0px">-->
+                            <!--<source src="{{ post.video.url}}" alt="{{ post.video }}" type="video/mp4">-->
+                            <!--</video>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-6 pull-left">-->
+                            <!--<h4>Quantity {{ post.item_quantity }}</h4>-->
+                            <!--<h4>Item Price {{ post.item_price }}</h4>-->
+                            <!--<h4>Upload Time and Date {{ post.upload_time }}</h4>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-6 pull-right" style="padding-top:30px">-->
+                            <!--&lt;!&ndash;<input type="button" value="Update" data-toggle="modal" data-target="#updaterecord" class="btn btn-success" title="View History">&ndash;&gt;-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
 <!-- The Modal -->
-<div class="modal" id="updaterecord">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<!--<div class="modal" id="updaterecord">-->
+  <!--<div class="modal-dialog">-->
+    <!--<div class="modal-content">-->
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Merchant Daily Records</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+      <!--&lt;!&ndash; Modal Header &ndash;&gt;-->
+      <!--<div class="modal-header">-->
+        <!--<h4 class="modal-title">Merchant Daily Records</h4>-->
+        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+      <!--</div>-->
 
-      <!-- Modal body -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="container">
-                <h2>{{ request.user.user_merchant.merchant.name }}</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-   <input type="hidden" name="merchant" value="{{  request.user.user_merchant.merchant.id }}">
-  {{form.image_1}}<br>
-  {{form.image_2}}<br>
-  {{form.image_3}}<br>
-  {{form.image_4}}<br>
-  {{form.video}}<br>
-  <h4>item quantity</h4>{{form.item_quantity}}<br>
-  <h4>item price</h4>{{form.item_price}}<br>
+      <!--&lt;!&ndash; Modal body &ndash;&gt;-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-12">-->
+                <!--<div class="container">-->
+                <!--<h2>{{ request.user.user_merchant.merchant.name }}</h2>-->
+<!--<form method="post" enctype="multipart/form-data">-->
+  <!--{% csrf_token %}-->
+   <!--<input type="hidden" name="merchant" value="{{  request.user.user_merchant.merchant.id }}">-->
+  <!--{{form.image_1}}<br>-->
+  <!--{{form.image_2}}<br>-->
+  <!--{{form.image_3}}<br>-->
+  <!--{{form.image_4}}<br>-->
+  <!--{{form.video}}<br>-->
+  <!--<h4>item quantity</h4>{{form.item_quantity}}<br>-->
+  <!--<h4>item price</h4>{{form.item_price}}<br>-->
+  <!--<button type="submit">Submit</button>-->
+<!--</form>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+      <!--&lt;!&ndash; Modal footer &ndash;&gt;-->
+      <!--<div class="modal-footer">-->
+        <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
-  <button type="submit">Submit</button>
-</form>
-                </div>
-            </div>
-        </div>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-{% endblock %}

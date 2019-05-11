@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-    <link rel="stylesheet" href="{% static 'css/lightSlider.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
@@ -48,8 +47,8 @@
 }
 @media only screen and (max-width : 1440px) {
 .logo_jathub{
-    width: 6%;
-    top: -5px;
+    width: 7%;
+    top: -9px;
     }
 }
 
@@ -78,6 +77,9 @@
      width: 27%;
     top: -6px;
     }
+.step_position{
+    display:none;
+    }
 }
 
     </style>
@@ -101,196 +103,180 @@
         <h6 class="col-lg-7 col-md-6 col-xs-6 pull-right phone" style="padding:0px;padding-top:20px"><i class="fas fa-envelope"></i> info@solutionspartum.com </h6>
     </div>
 </div>
-<nav class="navbar navbar-dark primary-color">
-  <a class="navbar-brand" href="#">
-     <img src="{% static 'img/logo.png' %}" class="logo_jathub">
-  </a>
+<nav class="navbar navbar-dark" style="background:#36c53aad">
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'img/logo.png' %}" class="logo_jathub">
+    </a>
     {%if not user.is_authenticated%}
-            <div class=" pull-right" data-toggle="modal" data-target="#signModal" style="color:#fff; font-size:25px;cursor: pointer; padding:10px 0"><i class="fa fa-user"></i> Login</div>
+    <div class="btn btn-default pull-right" data-toggle="modal" data-target="#signModal" style="color:#fff;"><i class="fa fa-user"></i> Login</div>
+    {% endif %}
+    {%if user.is_authenticated%}
+    <div class="dropdown pull-right">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background:#42E289">
+            Hi ! {{ user.username }}
+        </button>
+        <div class="dropdown-menu">
+            {% if request.user.user_profile.type == request.user.user_profile.USER_TYPE_CLIENT%}
+            <a class="dropdown-item" href="{% url 'common:update' pk=user.id %}"> Profile</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#info" >Feedback</a>
             {% endif %}
-            {%if user.is_authenticated%}
-            <div class="dropdown pull-right">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background:#42E289">
-                    Hi ! {{ user.username }}
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="">Update Profile</a>
-                    <a class="dropdown-item" href="">Info</a>
-                    <a class="dropdown-item" href="">Invoices</a>
-                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                </div>
-                {% endif %}
-            </div>
+            <!--<a class="dropdown-item" href="{% url 'client:invoice_history' pk=user.id %}">Invoices</a>-->
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        </div>
+        {% endif %}
+    </div>
 </nav>
-<!--<div class="row" style="margin:0px">-->
-    <!--<div class="col-lg-12" style="background:#6dad29;">-->
-            <!--<span class="col-lg-6">PARTUM solutions</span>-->
-            <!--<div class="pull-right btn btn-default" data-toggle="modal" data-target="#signModal" style="color:#fff; font-size:25px;cursor: pointer;"><i class="fa fa-user"></i> Login </div>-->
-<!--            <div class="dropdown">-->
-<!--                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">-->
-<!--                    Dropdown button-->
-<!--                </button>-->
-<!--                <div class="dropdown-menu">-->
-<!--                    <a class="dropdown-item" href="#">Link 1</a>-->
-<!--                    <a class="dropdown-item" href="#">Link 2</a>-->
-<!--                    <a class="dropdown-item" href="#">Link 3</a>-->
-<!--                </div>-->
-<!--            </div>-->
-
-
-
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 <!--    middle body work start here-->
-{% block content %} {% endblock %}
+<div  style="background:#FBF7F7;">
+    {% block content %} {% endblock %}
+</div>
 <!--    middle body work end here-->
 <!--    footer work start here-->
-<footer class="page-footer font-small pt-4" style="background:#66c376ed">
+<footer class="page-footer font-small pt-4" style="background:#66c376ed;">
     <!-- Footer Elements -->
     <div class="container">
-      <!--Grid row-->
-      <div class="row">
-        <div class="col-md-6 offset-3 mb-4">
-          <form class="input-group">
-            <input type="text" class="form-control form-control-sm" placeholder="Your email" aria-label="Your email" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-sm btn-outline-white my-0" type="button">Sign up</button>
+        <!--Grid row-->
+        <div class="row">
+            <div class="col-md-6 offset-3 mb-4">
+                <form class="input-group">
+                    <input type="text" class="form-control form-control-sm" placeholder="Your email" aria-label="Your email" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-white my-0" type="button">Sign up</button>
+                    </div>
+                </form>
             </div>
-          </form>
+            <!--Grid column-->
         </div>
-        <!--Grid column-->
-      </div>
     </div>
-<!-- Footer Links -->
+    <!-- Footer Links -->
     <div class="container text-center text-md-left">
-      <!-- Grid row -->
-      <div class="row">
-        <!-- Grid column -->
-        <div class="col-md-4 mx-auto">
-          <!-- Content -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-          <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit.</p>
+        <!-- Grid row -->
+        <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-4 mx-auto">
+                <!-- Content -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit.</p>
+            </div>
+            <!-- Grid column -->
+            <hr class="clearfix w-100 d-md-none">
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+            <hr class="clearfix w-100 d-md-none">
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+            <hr class="clearfix w-100 d-md-none">
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Grid column -->
         </div>
-        <!-- Grid column -->
-        <hr class="clearfix w-100 d-md-none">
-        <!-- Grid column -->
-        <div class="col-md-2 mx-auto">
-          <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-          <ul class="list-unstyled">
-            <li>
-              <a href="#!">Link 1</a>
-            </li>
-            <li>
-              <a href="#!">Link 2</a>
-            </li>
-            <li>
-              <a href="#!">Link 3</a>
-            </li>
-            <li>
-              <a href="#!">Link 4</a>
-            </li>
-          </ul>
-        </div>
-        <!-- Grid column -->
-        <hr class="clearfix w-100 d-md-none">
-        <!-- Grid column -->
-        <div class="col-md-2 mx-auto">
-          <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-          <ul class="list-unstyled">
-            <li>
-              <a href="#!">Link 1</a>
-            </li>
-            <li>
-              <a href="#!">Link 2</a>
-            </li>
-            <li>
-              <a href="#!">Link 3</a>
-            </li>
-            <li>
-              <a href="#!">Link 4</a>
-            </li>
-          </ul>
-        </div>
-        <!-- Grid column -->
-        <hr class="clearfix w-100 d-md-none">
-        <!-- Grid column -->
-        <div class="col-md-2 mx-auto">
-          <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-          <ul class="list-unstyled">
-            <li>
-              <a href="#!">Link 1</a>
-            </li>
-            <li>
-              <a href="#!">Link 2</a>
-            </li>
-            <li>
-              <a href="#!">Link 3</a>
-            </li>
-            <li>
-              <a href="#!">Link 4</a>
-            </li>
-          </ul>
-        </div>
-        <!-- Grid column -->
-      </div>
-      <!-- Grid row -->
+        <!-- Grid row -->
     </div>
     <!-- Footer Links -->
     <hr>
     <!-- Call to action -->
     <ul class="list-unstyled list-inline text-center py-2">
-      <li class="list-inline-item">
-        <h5 class="mb-1">Register for free</h5>
-      </li>
-      <li class="list-inline-item">
-        <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
-      </li>
+        <li class="list-inline-item">
+            <h5 class="mb-1">Register for free</h5>
+        </li>
+        <li class="list-inline-item">
+            <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+        </li>
     </ul>
     <!-- Call to action -->
     <hr>
     <!-- Social buttons -->
     <div class="col-md-12 py-5">
-          <div class="mb-5 flex-center">
+        <div class="mb-5 flex-center">
 
             <!-- Facebook -->
             <a class="fb-ic">
-              <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
             </a>
             <!-- Twitter -->
             <a class="tw-ic">
-              <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
             </a>
             <!-- Google +-->
             <a class="gplus-ic">
-              <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
             </a>
             <!--Linkedin -->
             <a class="li-ic">
-              <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
             </a>
             <!--Instagram-->
             <a class="ins-ic">
-              <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
             </a>
             <!--Pinterest-->
             <a class="pin-ic">
-              <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+                <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
             </a>
-          </div>
         </div>
+    </div>
     <!-- Social buttons -->
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2019 Copyright:
-      <a href="#"> JatHub</a>
+        <a href="#"> JatHub</a>
     </div>
     <!-- Copyright -->
-  </footer>
-  <!-- Footer -->
+</footer>
+<!-- Footer -->
 <!--    footer work end here-->
 <!--    sign in and sign up form -->
 <!--    sign in form end here-->
@@ -405,6 +391,50 @@
     </div>
 </div>
 <!--registration page end here-->
+
+<!-- user profile Info -->
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify  modal-success" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">Personal Info</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                    <table class="table table-hover invoice-table">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Phone</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        <tr>
+                            <td>{{user_profile.user.username}}</td>
+                            <td>{{user_profile.phone}}</td>
+                            <td>{{user_profile.gender}}</td>
+                            <td>{{user_profile.address}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- user profile Info-->
+
 {% block scripts %}
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/js/mdb.min.js"></script>
