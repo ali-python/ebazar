@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{user.username}}
+<form method="POST" action="{% url 'common:feedback' pk=request.user.id %}">
+    {% csrf_token %}
+<textarea name="comments" placeholder="FeedBack"> </textarea>
+<input type="hidden" name="user" value="{{request.user.id}}">
+<input type="submit" value="Ok">
+</form>
+
+</body>
+</html>

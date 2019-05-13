@@ -8,7 +8,7 @@ from django.db import transaction
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from common.form import UserProfileForm
+from common.form import UserProfileForm, FeedBackForm
 from common.models import UserProfile
 from django.contrib.auth.models import User
 from django.http import Http404
@@ -144,3 +144,20 @@ class UserProfileInfo(TemplateView):
         })
 
         return context
+
+class FeedBack(FormView):
+    template_name = 'client/feedback.html'
+    form_class = FeedBackForm
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('home'))
+
+        return super(FeedBack, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponseRedirect(reverse('home'))
+
+    def form_invalid(self, form):
+        return super(FeedBack, self).form_invalid(form)

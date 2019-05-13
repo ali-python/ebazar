@@ -5,7 +5,7 @@ from .forms import OrderForm, OrderItemForm
 from merchant.models import MerchantDailyRecord, MerchantSalesRecords
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse, HttpResponseRedirect
-from common.models import UserProfile
+from common.models import UserProfile, City
 from django.db import transaction
 
 
@@ -27,9 +27,11 @@ class MerchantDailyRecordDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MerchantDailyRecordDetailView, self).get_context_data(**kwargs)
         merchant = MerchantDailyRecord.objects.get(id=self.kwargs.get('pk'))
+        city=City.objects.all()
 
         context.update({
-            'merchant': merchant
+            'merchant': merchant,
+            'city':city
         })
         return context
 
@@ -47,11 +49,16 @@ class OrderItemView(FormView):
     def form_valid(self, form):
         with transaction.atomic():
             obj = form.save(commit=False)
+
             obj.order = Order.objects.create(
                 customer_name=self.request.POST.get('customer_name'),
                 customer_phone=self.request.POST.get('customer_phone'),
+                alternate_phone=self.request.POST.get('alternate_phone'),
                 user=self.request.user,
             )
+
+            obj.city=City.objects.get(city_name=self.request.POST.get('city'))
+            obj.city.save()
             invoice=Invoice.objects.create(
                 order=obj.order,
                 amount=obj.item_price
@@ -64,6 +71,7 @@ class OrderItemView(FormView):
             )
             merchant_sales_record.save()
             self.request.user.user_profile.phone=self.request.POST.get('customer_phone')
+            self.request.user.user_profile.alternate_phone=self.request.POST.get('alternate_phone')
             self.request.user.user_profile.address=self.request.POST.get('address')
             self.request.user.user_profile.save()
             obj.save()

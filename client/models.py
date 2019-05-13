@@ -31,6 +31,10 @@ class Order(models.Model):
                                 related_name='user_order', null=True, blank=True)
     customer_name=models.CharField(max_length=200, null=True, blank=True)
     customer_phone=models.CharField(max_length=100, null=True, blank=True)
+    alternate_phone=models.CharField(max_length=100, null=True, blank=True)
+    city=models.ForeignKey(City, on_delete=models.CASCADE,
+                            related_name='order_city',null=True, blank=True
+                            )
     date_created=models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):

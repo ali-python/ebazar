@@ -4,6 +4,20 @@ from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
 
 
+class Country(models.Model):
+    country_name=models.CharField(max_length=200, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.country_name
+
+class City(models.Model):
+    country=models.ForeignKey(Country, on_delete=models.CASCADE,
+                              related_name='country', null=True, blank=True)
+    city_name=models.CharField(max_length=200, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.country.country_name
+
 class UserProfile(models.Model):
     USER_TYPE_COMPANY = 'Company'
     USER_TYPE_CLIENT = 'client'
@@ -27,6 +41,7 @@ class UserProfile(models.Model):
     profile_image = models.CharField(max_length=500, blank=True, null=True)
     is_custom_profile_image = models.BooleanField(default=False)
     phone = models.CharField(max_length=256, blank=True, null=True)
+    alternate_phone=models.CharField(max_length=256, blank=True, null=True)
     gender = models.CharField(
         max_length=1, choices=(('m', _('Male')), ('f', _('Female'))),
         blank=True, null=True)
@@ -37,25 +52,18 @@ class UserProfile(models.Model):
     company_name = models.CharField(max_length=256, blank=True, null=True)
     location = models.CharField(max_length=256, blank=True, null=True)
     address=models.CharField(max_length=256, blank=True, null=True)
+    city=models.ForeignKey(City, on_delete=models.CASCADE, related_name='user_city' , null=True, blank=True)
+
     def __unicode__(self):
         return self.user.username
 
 
-class Country(models.Model):
-    country_name=models.CharField(max_length=200, null=True, blank=True)
+class Feedback(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_feedback')
+    comments=models.CharField(max_length=600, null=True, blank=True)
 
     def __unicode__(self):
-        return self.country_name
-
-class City(models.Model):
-    country=models.ForeignKey(Country, on_delete=models.CASCADE,
-                              related_name='country', null=True, blank=True)
-    city_name=models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return self.country.name
-
-
+        return self.user.username
 
 
 # Signal Functions

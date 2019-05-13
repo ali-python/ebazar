@@ -32,7 +32,7 @@ class MerchantUserAdmin(admin.ModelAdmin):
 class MerchantDailyRecordAdmin(admin.ModelAdmin):
     list_display = (
         'merchant', 'upload_time','image_1','image_2','image_3',
-        'image_4','video','item_quantity', 'item_price' , 'expiry'
+        'image_4','video','item_quantity', 'item_price' , 'expiry','mid'
     )
 
     @staticmethod
@@ -40,12 +40,12 @@ class MerchantDailyRecordAdmin(admin.ModelAdmin):
         return obj.merchant.name
 
     search_fields = (
-        'merchant__name',
+        'merchant__name', 'mid',
     )
 
 class MerchantSalesRecordAdmin(admin.ModelAdmin):
     list_display = (
-     '__str__', 'added_date','purchased_quantity','purchased_price'
+     'merchant_daily_record', 'added_date','purchased_quantity','purchased_price'
     )
 
     @staticmethod
