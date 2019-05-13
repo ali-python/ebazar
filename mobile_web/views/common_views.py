@@ -1,17 +1,14 @@
 from django.views.generic import TemplateView
-from common.views import RegisterView, LoginView,HomeView
 
-class MobileRegisterView(RegisterView):
-    template_name = 'mopbile_web/register.html'
+class MobileRegisterView(TemplateView):
+    pass
 
-
-class MobileLoginView(LoginView):
-    template_name = 'mobile_web/login.html'
-
+class MobileLoginView(TemplateView):
+    pass
 
 class MobileLogoutView(TemplateView):
     pass
 
 
-class MobileHomePageView(HomeView):
+class MobileHomePageView(TemplateView ):
     template_name = 'mobile_web/home.html'
