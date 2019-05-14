@@ -24,21 +24,10 @@ class DashboardView(TemplateView):
         sales = MerchantSalesRecords.objects.filter(
             merchant_daily_record__merchant=self.request.user.user_merchant.merchant
         )
-        print(sales)
-        print(self.request.user.user_merchant.merchant)
-        print('_______________________ss___________________')
-        print('_______________________ss___________________')
-        print('_______________________ss___________________')
-        print('_______________________ss___________________')
         purchased_price = sales.aggregate(Sum('purchased_price'))
         purchased_price = purchased_price.get('purchased_price__sum')
         purchased_quantity=sales.aggregate(Sum('purchased_quantity'))
         purchased_quantity=purchased_quantity.get('purchased_quantity__sum')
-        print(purchased_quantity)
-        print("______________________________")
-        print("______________________________")
-        print("______________________________")
-        print("______________________________")
         remaining_quantity=float(daily_records.item_quantity) - float(purchased_quantity)
         context.update({
             'purchased_price': purchased_price,
