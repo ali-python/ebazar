@@ -4,9 +4,13 @@ from .models import Order, OrderItem, Invoice, Payment
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = (
-         '__str__','user', 'state', 'customer_name', 'customer_phone',
+         '__str__','user', 'state', 'customer_name', 'customer_phone', 'alternate_phone','city',
         'date_created'
     )
+
+    @staticmethod
+    def city(obj):
+        return obj.city.city_name
 
     search_fields = (
         'customer_name', 'customer_phone',

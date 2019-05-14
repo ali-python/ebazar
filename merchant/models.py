@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from common.models import Country, City
+from django.db.models.signals import post_save
+import random
+
+
 class Merchant(models.Model):
     name = models.CharField(max_length=256, blank=True, null=True)
     phone = models.CharField(max_length=200, blank=True, null=True)
@@ -35,6 +39,9 @@ class MerchantDailyRecord(models.Model):
     item_quantity = models.CharField(max_length=200, null=True, blank=True)
     item_price = models.CharField(max_length=200, null=True, blank=True)
     expiry = models.BooleanField(default=True)
+    mid=models.CharField(
+        max_length=20, unique=True, blank=True, null=True
+    )
 
     def __str__(self):
         return self.merchant.name if self.merchant else ''
@@ -56,5 +63,24 @@ class MerchantSalesRecords(models.Model):
         blank=True, null=True,
     )
 
-    def __str__(self):
-        return self.merchant_daily_record.merchant.name if self.merchant_daily_record.merchant else ''
+    # def __str__(self):
+    #     return self.merchant_daily_record.merchant.name if self.merchant_daily_record.merchant else ''
+
+
+# Signals Function for merchant daily record
+def create_save_receipt_no(sender, instance, created, **kwargs):
+    if created and not instance.mid:
+        while True:
+            random_code = random.randint(100000000, 999999999)
+            if (
+                not MerchantDailyRecord.objects.filter(
+                    mid=random_code).exists()
+            ):
+                break
+
+        instance.mid = random_code
+        instance.save()
+
+
+# Signal Calls
+post_save.connect(create_save_receipt_no, sender=MerchantDailyRecord)
