@@ -2,6 +2,14 @@
 {% block title %} Home {% endblock %}
 {% block content %}
 {% load static %}
+<style>
+    .flex-control-thumbs img {
+        height:100px !important;
+    }
+    .flexslider .slides img {
+        height:300px !important;
+    }
+</style>
 
 <div class="container">
     <div class="row" >
@@ -17,77 +25,31 @@
                         </div>
                         <div class="col-lg-8">
                             <!--Carousel Wrapper-->
-                            <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
-                                <!--Slides-->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100" src="{{ merchant.image_1.url}}"  alt="{{ post.image_1 }}" style="height:320px">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src="{{ merchant.image_2.url}}"  alt="{{ post.image_1 }}" style="height:320px">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src="{{ merchant.image_3.url}}"  alt="{{ post.image_1 }}" style="height:320px">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src="{{ merchant.image_4.url}}"  alt="{{ post.image_1 }}" style="height:320px">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <video class="video-fluid w-100" autoplay loop muted>
-                                            <source class=" w-100" src="{{ merchant.video.url}}" alt="{{ post.video }}" style="height:320px;width:100%">
-                                        </video>
-                                    </div>
+                            <section class="slider">
+                                <div class="flexslider">
+                                    <ul class="slides">
+                                        <li data-thumb="{{ merchant.image_1.url}}" >
+                                            <img src="{{ merchant.image_1.url}}"  alt="{{ post.image_1 }}"/>
+                                        </li>
+                                        <li data-thumb="{{ merchant.image_2.url}}">
+                                            <img src="{{ merchant.image_2.url}}"  alt="{{ post.image_1 }}"/>
+                                        </li>
+                                        <li data-thumb="{{ merchant.image_3.url}}" >
+                                            <img src="{{ merchant.image_3.url}}"  alt="{{ post.image_1 }}"/>
+                                        </li>
+                                        <li data-thumb="{{ merchant.image_4.url}}">
+                                            <img src="{{ merchant.image_4.url}}"  alt="{{ post.image_1 }}"/>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <!--/.Slides-->
-                                <!--Controls-->
-                                <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                                <!--/.Controls-->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carousel-thumb" data-slide-to="0" class="active">
-                                        <img src=" {{ merchant.image_1.url}}"  alt="{{ post.image_1 }}" width="100">
-                                    </li>
-                                    <li data-target="#carousel-thumb" data-slide-to="1">
-                                        <img src="{{ merchant.image_2.url}}"  alt="{{ post.image_1 }}" width="100" >
-                                    </li>
-                                    <li data-target="#carousel-thumb" data-slide-to="2">
-                                        <img src="{{ merchant.image_4.url}}"  alt="{{ post.image_1 }}" width="100">
-                                    </li>
-                                    <li data-target="#carousel-thumb" data-slide-to="3">
-                                        <img src="{{ merchant.image_4.url}}"  alt="{{ post.image_1 }}" width="100">
-                                    </li>
-                                    <li data-target="#video-carousel-example"data-slide-to="4">
-                                    </li>
-                                </ol>
-                            </div>
+                            </section>
                             <!--/.Carousel Wrapper-->
                             <!--    <h2>userid:{{ request.user.user_profile.id }}</h2>-->
-                            <div class="row" >
-                                {% if merchant %}
-                                <div class="col-lg-2 col-sm-6" style="margin-top:20px">
-                                    <img src="{{ merchant.image_1.url}}"  alt="{{ post.image_1 }}" style="width:100%;height:100px">
-                                </div>
-                                <div class="col-lg-2 col-sm-6" style="margin-top:20px">
-                                    <img src="{{ merchant.image_2.url}}"  alt="{{ post.image_1 }}" style="width:100%;height:100px">
-                                </div>
-                                <div class="col-lg-2 col-sm-6" style="margin-top:20px">
-                                    <img src="{{ merchant.image_3.url}}"  alt="{{ post.image_1 }}" style="width:100%;height:100px">
-                                </div>
-                                <div class="col-lg-2 col-sm-6" style="margin-top:20px">
-                                    <img src="{{ merchant.image_4.url}}"  alt="{{ post.image_1 }}" style="width:100%;height:100px">
-                                </div>
-                                <div class="col-lg-4 text-center" style="margin-top:20px">
-                                    <video  controls class="col-lg-12" style="width:100%;height:100px">
-                                        <source src="{{ merchant.video.url}}" alt="{{ post.video }}" type="video/mp4" >
-                                    </video>
-                                </div>
-                            </div>
+
+                            {% if merchant %}
+                            <video  controls style="width:470%;height:250px">
+                                <source src="{{ merchant.video.url}}" alt="{{ post.video }}" type="video/mp4" style="width:100%">
+                            </video>
                         </div>
                         <div class="col-lg-4" style="font-weight:bold">
                             <div class="card" style="margin-top:30px">
@@ -109,6 +71,7 @@
         </div>
     </div>
 </div>
+
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
@@ -165,5 +128,14 @@
       }
 }
 </script>
+<script type="text/javascript">
+
+    $(window).ready(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        controlNav: "thumbnails"
+      });
+    });
+  </script>
 
 {% endblock %}
