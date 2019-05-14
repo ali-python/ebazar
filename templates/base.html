@@ -10,15 +10,14 @@
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap_4.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
     <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+    <link href="{% static 'css/mdb_bootstrap.css' %}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="{% static 'fontawesome/md_fontawesome.css' %}">
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/jquery.flexslider.js' %}"></script>
-
 
     <style>
 .logo_jathub{
@@ -436,13 +435,11 @@
     </div>
 </div>
 <!-- user profile Info-->
-
 {% block scripts %}
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/js/mdb.min.js"></script>
+<script type="text/javascript" src="{% static 'js/mdb_bootstrap.js' %}"></script>
 <script src="{% static 'js/popper.js' %}"></script>
 <script src="{% static 'js/bootstrap.js' %}"></script>
-
 {% endblock %}
 </body>
 </html>

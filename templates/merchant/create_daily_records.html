@@ -1,69 +1,69 @@
 {% extends 'base.html' %}
-    {% block title %} Home {% endblock %}
-    {% block content %}
- {% load static %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
 
 <div class="container">
     <div class="row">
         <h1 class="col-lg-12 text-center">Merchant Daily Records</h1>
-<!--<h2 class="col-lg-12 text-center">{{ request.user.user_merchant.merchant.name }}</h2>-->
+        <!--<h2 class="col-lg-12 text-center">{{ request.user.user_merchant.merchant.name }}</h2>-->
 
-<form method="post" enctype="multipart/form-data" class="col-lg-12 form-group">
-  {% csrf_token %}
- <input type="hidden" name="merchant" value="{{  request.user.user_merchant.merchant.id }}">
+        <form method="post" enctype="multipart/form-data" class="col-lg-12 form-group">
+            {% csrf_token %}
+            <input type="hidden" name="merchant" value="{{  request.user.user_merchant.merchant.id }}">
 
-<label class="btn btn-success" for="image_1">
-    <input type="file" id="image_1" name="image_1" class=" col-lg-3 pull-left" style="display:none" title="Image 1"  onchange="$('#upload-file-info').html(this.files[0].name)">
-    Upload Image1
-    <span class='label label-info' id="upload-file-info"></span>
-</label>
-    <label class="btn btn-success col-lg-3" for="image_2">
-    <input type="file" id="image_2" name="image_2" class=" pull-left" style="display:none" title="Image 2"  onchange="$('#upload-file-info2').html(this.files[0].name)">
-    Upload Image2
-    <span class='label label-info' id="upload-file-info2"></span>
-</label>
-    <label class="btn btn-success col-lg-3" for="image_3">
-    <input type="file" id="image_3" name="image_3" class="pull-left" style="display:none" title="Image 3"  onchange="$('#upload-file-info3').html(this.files[0].name)">
-    Upload Image3
-    <span class='label label-info' id="upload-file-info3"></span>
-</label>
-    <label class="btn btn-success col-lg-3" for="image_4">
-    <input type="file" id="image_4" name="image_4" class=" col-lg-3 pull-left" style="display:none" title="Image 4"  onchange="$('#upload-file-info4').html(this.files[0].name)">
-    Upload Image4
-    <span class='label label-info' id="upload-file-info4"></span>
-</label>
-    <label class="btn btn-success col-lg-3" for="video">
-    <input type="file" id="video" name="video" class=" col-lg-3 pull-left" style="display:none" title="Video"  onchange="$('#upload-file-video').html(this.files[0].name)">
-    Upload Video
-    <span class='label label-info' id="upload-file-video"></span>
-</label>
-<!--    <input type="file" name="image_2" class="col-lg-3 pull-left"  title="Image 2">-->
-<!--    <input type="file" name="image_3" class="form-control col-lg-3 pull-left"  title="Image 3">-->
-<!--    <input type="file" name="image_4" class="form-control col-lg-3 pull-left"  title="Image 4">-->
-<!--    <input type="file" name="video" class="form-control col-lg-3 text-center"  title="Upload Video">-->
-<!--  {{form.image_2}}<br>-->
-<!--  {{form.image_3}}<br>-->
-<!--  {{form.image_4}}<br>-->
-<!--  {{form.video}}<br>-->
-<!--    <label class="btn btn-success" for="my-file-selector">-->
-<!--    <input id="my-file-selector" type="file" style="display:none"-->
-<!--    onchange="$('#upload-file-info').html(this.files[0].name)">-->
-<!--    Upload Image-->
-<!--</label>-->
+            <label class="btn btn-success" for="image_1">
+                <input type="file" id="image_1" name="image_1" class=" col-lg-3 pull-left" style="display:none" title="Image 1"  onchange="$('#upload-file-info').html(this.files[0].name)">
+                Upload Image1
+                <span class='label label-info' id="upload-file-info"></span>
+            </label>
+            <label class="btn btn-success col-lg-3" for="image_2">
+                <input type="file" id="image_2" name="image_2" class=" pull-left" style="display:none" title="Image 2"  onchange="$('#upload-file-info2').html(this.files[0].name)">
+                Upload Image2
+                <span class='label label-info' id="upload-file-info2"></span>
+            </label>
+            <label class="btn btn-success col-lg-3" for="image_3">
+                <input type="file" id="image_3" name="image_3" class="pull-left" style="display:none" title="Image 3"  onchange="$('#upload-file-info3').html(this.files[0].name)">
+                Upload Image3
+                <span class='label label-info' id="upload-file-info3"></span>
+            </label>
+            <label class="btn btn-success col-lg-3" for="image_4">
+                <input type="file" id="image_4" name="image_4" class=" col-lg-3 pull-left" style="display:none" title="Image 4"  onchange="$('#upload-file-info4').html(this.files[0].name)">
+                Upload Image4
+                <span class='label label-info' id="upload-file-info4"></span>
+            </label>
+            <label class="btn btn-success col-lg-3" for="video">
+                <input type="file" id="video" name="video" class=" col-lg-3 pull-left" style="display:none" title="Video"  onchange="$('#upload-file-video').html(this.files[0].name)">
+                Upload Video
+                <span class='label label-info' id="upload-file-video"></span>
+            </label>
+            <!--    <input type="file" name="image_2" class="col-lg-3 pull-left"  title="Image 2">-->
+            <!--    <input type="file" name="image_3" class="form-control col-lg-3 pull-left"  title="Image 3">-->
+            <!--    <input type="file" name="image_4" class="form-control col-lg-3 pull-left"  title="Image 4">-->
+            <!--    <input type="file" name="video" class="form-control col-lg-3 text-center"  title="Upload Video">-->
+            <!--  {{form.image_2}}<br>-->
+            <!--  {{form.image_3}}<br>-->
+            <!--  {{form.image_4}}<br>-->
+            <!--  {{form.video}}<br>-->
+            <!--    <label class="btn btn-success" for="my-file-selector">-->
+            <!--    <input id="my-file-selector" type="file" style="display:none"-->
+            <!--    onchange="$('#upload-file-info').html(this.files[0].name)">-->
+            <!--    Upload Image-->
+            <!--</label>-->
 
-<!--<span class='label label-info' id="upload-file-info"></span>-->
+            <!--<span class='label label-info' id="upload-file-info"></span>-->
 
-  <h4>item quantity</h4>
-    <input type="text" name="item_quantity" class="form-control col-lg-3">
-<!--    {{form.item_quantity}}<br>--><br>
-  <h4>item price</h4>
-    <input type="text" name="item_price" class="form-control col-lg-3">
-<!--    {{form.item_price}}<br>-->
+            <h4>item quantity</h4>
+            <input type="text" name="item_quantity" class="form-control col-lg-3">
+            <!--    {{form.item_quantity}}<br>--><br>
+            <h4>item price</h4>
+            <input type="text" name="item_price" class="form-control col-lg-3">
+            <!--    {{form.item_price}}<br>-->
 
-  <button type="submit" class="btn btn-success">Submit</button>
-</form>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
     </div>
 </div>
 
 
- {% endblock %}
+{% endblock %}
