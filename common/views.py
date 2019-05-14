@@ -13,6 +13,8 @@ from common.models import UserProfile
 from django.contrib.auth.models import User
 from django.http import Http404
 from merchant.models import MerchantDailyRecord
+from client.views import InvoiceHistoery
+from client.models import Invoice, Order
 
 
 class RegisterView(FormView):
@@ -127,6 +129,24 @@ class UpdateProfile(UpdateView):
 
     def form_invalid(self, form):
         return super(UpdateProfile, self).form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(
+            UpdateProfile, self).get_context_data(**kwargs)
+
+
+        invoices= Order.objects.all()
+
+        try:
+            user_profile = UserProfile.objects.get(id=self.kwargs.get('pk'))
+        except UserProfile.DoesNotExist:
+            return Http404('User does not exists')
+        context.update({
+            'invoices': invoices,
+            'user_profile': user_profile
+        })
+
+        return context
 
 class UserProfileInfo(TemplateView):
     template_name = 'user_profile_info.html'
