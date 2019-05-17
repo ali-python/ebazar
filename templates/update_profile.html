@@ -41,7 +41,7 @@
                                             <td>{{user_profile.phone}}</td>
 
                                         </tr>
-                                         <tr>
+                                        <tr>
                                             <th>Aternate Phone</th>
                                             <td>{{user_profile.alternate_phone}}</td>
 
@@ -51,8 +51,12 @@
                                             <td>{{user_profile.gender}}</td>
                                         </tr>
                                         <tr>
+                                            <th>City</th>
+                                            <td>{{user_profile.city.city_name}}</td>
+                                        </tr>
+                                        <tr>
                                             <th>Address</th>
-                                            <td>{{user_profile.address}}</td>
+                                            <td><textarea>{{user_profile.address}}</textarea></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -78,15 +82,16 @@
                                         <label>Phone</label>
                                         <input type="text"  name="phone" value="{{object.phone}}" class="form-control">
                                     </div>
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label>Phone</label>
                                         <input type="text"  name="alternate_phone" value="{{object.alternate_phone}}" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Select City</label>
-                                        <select name="gender" class="form-control">
-                                            <option>Dubai</option>
-                                            <option >Abu Dubai</option>
+                                        <select name="city_name" class="form-control">
+                                            {% for city in city %}
+                                            <option>{{city.city_name}}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -122,9 +127,6 @@
                                             <th><i class=" fa fa-bookmark"></i> Receipt No.</th>
                                             <th><i class="fa fa-bullhorn"></i> state</th>
                                             <th><i class="fa fa-question-circle"></i> amount</th>
-                                            <th><i class=" fa fa-edit"></i> customer phone</th>
-                                            <th><i class="fa fa-plus"></i> Quantity</th>
-                                            <th><i class=" fa fa-try"></i> Price</th>
                                             <th><i class=" fa fa-calendar"></i> Date</th>
                                             <th>Actions</th>
                                         </tr>
@@ -134,17 +136,10 @@
                                         {% for invoice in invoices %}
                                         <tbody >
                                         <tr>
-                                            {% for invoice_order in invoice.invoice_order.all %}
-                                            <td>{{invoice_order.receipt_no}}</td>
-                                            <td>{{invoice_order.state}}</td>
-                                            <td> {{invoice_order.amount}}</td>
-                                            {% endfor %}
-                                            <td>{{invoice.customer_phone}}</td>
-                                            {% for order in invoice.customer_order.all %}
-                                            <td>{{order.item_quantity}}</td>
-                                            <td>{{order.item_price}}</td>
-                                            {% endfor %}
-                                            <td>{{invoice.date_created}}</td>
+                                            <td>{{invoice.receipt_no}}</td>
+                                            <td>{{invoice.state}}</td>
+                                            <td>{{invoice.amount}}</td>
+                                            <td>{{invoice.order.date_created}}</td>
                                             <td>
                                                 <a href="{% url 'client:client_order_invoice' pk=invoice.id %}"><button class="btn btn-success btn-xs"><i class="fa fa-eye" title="Invoice list"></i></button></a>
                                             </td>

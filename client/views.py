@@ -7,6 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse, HttpResponseRedirect
 from common.models import UserProfile, City
 from django.db import transaction
+from django.db.models import Sum
 
 
 class ListMerchantDailyRecordView(ListView):
@@ -27,11 +28,18 @@ class MerchantDailyRecordDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MerchantDailyRecordDetailView, self).get_context_data(**kwargs)
         merchant = MerchantDailyRecord.objects.get(id=self.kwargs.get('pk'))
+        merchant_sales = MerchantSalesRecords.objects.filter(
+            merchant_daily_record__merchant=merchant.merchant
+        )
+        purchased_quantity = merchant_sales.aggregate(Sum('purchased_quantity'))
+        purchased_quantity = purchased_quantity.get('purchased_quantity__sum')
+        remaining_quantity = float(merchant.item_quantity) - float(purchased_quantity)
         city=City.objects.all()
 
         context.update({
             'merchant': merchant,
-            'city':city
+            'city':city,
+            'remaining_quantity': remaining_quantity
         })
         return context
 
@@ -54,11 +62,10 @@ class OrderItemView(FormView):
                 customer_name=self.request.POST.get('customer_name'),
                 customer_phone=self.request.POST.get('customer_phone'),
                 alternate_phone=self.request.POST.get('alternate_phone'),
+                city=City.objects.get(city_name=self.request.POST.get('city')),
                 user=self.request.user,
             )
 
-            obj.city=City.objects.get(city_name=self.request.POST.get('city'))
-            obj.city.save()
             invoice=Invoice.objects.create(
                 order=obj.order,
                 amount=obj.item_price
@@ -85,8 +92,10 @@ class OrderItemView(FormView):
     def get_context_data(self, **kwargs):
         context = super(OrderItemView, self).get_context_data(**kwargs)
         merchant_record = MerchantDailyRecord.objects.get(id=self.kwargs.get('pk'))
+
         context.update({
-            'merchant_record':merchant_record
+            'merchant_record':merchant_record,
+
         })
         return context
 

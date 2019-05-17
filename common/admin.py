@@ -26,7 +26,7 @@ class CityAdmin(admin.ModelAdmin):
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = (
-        '__unicode__', 'user', 'type', 'phone', 'alternate_phone','address'
+        '__unicode__', 'user', 'type', 'phone', 'alternate_phone','address', 'city'
     )
 
     search_fields = (

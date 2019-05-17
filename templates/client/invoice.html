@@ -16,8 +16,10 @@
                             <button class="btn btn-success pull-right">Confirm Payment</button>
                             <div class="row">
                                 <div class="col-xs-6 col-md-6">
-                                    <label><strong>Client Name:</strong></label> <span style="margin: 15px;">{{request.user.username}}</span><br>
-                                    <label><strong>Client Phone:</strong></label> <span style="margin: 15px;">{{invoice.order.customer_phone}}</span><br>
+                                    <label><strong> Name:</strong></label> <span style="margin: 15px;">{{request.user.username}}</span><br>
+                                    <label><strong> Phone:</strong></label> <span style="margin: 15px;">{{invoice.order.customer_phone}}</span><br>
+                                    <label><strong> Alternate Phone:</strong></label> <span style="margin: 15px;">{{invoice.order.alternate_phone}}</span><br>
+                                    <label><strong> City:</strong></label> <span style="margin: 15px;">{{invoice.order.city.city_name}}</span><br>
                                     <label><strong>Date:</strong></label><span style="margin: 15px;">{{invoice.order.date_created}}</span><br>
                                     <br>
                                 </div>

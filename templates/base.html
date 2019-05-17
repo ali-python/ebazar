@@ -122,6 +122,7 @@
             <a class="dropdown-item" href="{% url 'common:feedback' pk=request.user.id %}" data-toggle="modal" data-target="#info" >Feedback</a>
              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
             {% endif %}
+            {% endif %}
         </div>
     </div>
 </nav>

@@ -54,8 +54,8 @@
                         <div class="col-lg-4" style="font-weight:bold">
                             <div class="card" style="margin-top:30px">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Item quantity: {{merchant.item_quantity}}</li>
-                                    <li class="list-group-item">Item price: {{merchant.item_price}}</li>
+                                    <li class="list-group-item">Block Remaining quantity: {{remaining_quantity}}</li>
+                                    <li class="list-group-item">Block price: {{merchant.item_price}}</li>
                                 </ul>
                             </div>
                             <br>
@@ -94,7 +94,7 @@
                             <input type="text" name="alternate_phone" value="{{request.user.user_profile.alternate_phone}}" class="form-control">
                         </div>
                         <div class="form-group">
-                           <select name="city">
+                           <select name="city" class="form-control">
                                <option>Select City</option>
                                {% for city in city %}
                                <option value="{{city.city_name}}">{{city.city_name}}</option>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="form-group">
                             <label>Item Price</label>
-                            <input type="text" name="item_price" placeholder="Item Price" class="form-control" id="price" onkeyup="sum();" >
+                            <input type="text" name="item_price" placeholder="Item Price" class="form-control" id="price" onkeyup="sum();" readonly >
                         </div>
                         <input type="hidden" name="merchant_item_price" id="merchant_item_price" value="{{merchant.item_price}}" onkeyup="sum();"><br>
                         <input type="hidden" name="merchant_daily_upload" value="{{merchant.id}}">
