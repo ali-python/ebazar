@@ -99,12 +99,6 @@ class HomeView(TemplateView):
                         self.request.user.user_profile.USER_TYPE_MERCHANT
                 ):
                     return HttpResponseRedirect(reverse('merchant:dashboard'))
-            # if self.request.user.user_profile:
-            #     if (
-            #             self.request.user.user_profile.type ==
-            #             self.request.user.user_profile.USER_TYPE_CLIENT
-            #     ):
-            #         return HttpResponseRedirect(reverse('home'))
 
         return super(
             HomeView, self).dispatch(request, *args, **kwargs)
@@ -126,11 +120,6 @@ class UpdateProfile(UpdateView):
             obj = form.save(commit=False)
             obj.user = User.objects.get(username=self.request.POST.get('username'))
             obj.user.save()
-            print(self.request.POST.get('city_name'))
-            print("________________________________")
-            print("________________________________")
-            print("________________________________")
-            print("________________________________")
             obj.city=City.objects.get(city_name=self.request.POST.get('city_name'))
             # obj.city.save()
             obj.save()
@@ -145,16 +134,8 @@ class UpdateProfile(UpdateView):
         context = super(
             UpdateProfile, self).get_context_data(**kwargs)
 
-
-        # invoices= Order.objects.all()
         city=City.objects.all()
-
         invoices = Invoice.objects.filter(order__user=self.request.user)
-        print (self.request.user)
-        print (invoices)
-        print("__________________________________")
-        print("__________________________________")
-        print("__________________________________")
 
         try:
             user_profile = UserProfile.objects.get(id=self.kwargs.get('pk'))
