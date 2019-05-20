@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-register here
-</body>
-</html>
+{% extends 'mobile_web/mobile_base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
+<div class="row" style="background:#82dc80 ; heigth:100%;color:#fff">
+    <div class="col-sm-12">
+        <div class="text-center">
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-4 "><strong>Sign up</strong></h3>
+                <div class="w-100" style="margin-bottom:10%">
+                    <img src="{% static 'img/logo.png' %}" style="width:20%;border-radius:50%">
+                </div>
+            </div>
+        <div class="container">
+            <div class="text-center mb-3">
+                <!--Facebook-->
+                <button type="button" class="btn btn-white btn-rounded col-10 z-depth-1a btn-lg"  style="border-radius:25px;color:#fff !important; background:#3b5998 !important">
+                    <i class="fab fa-facebook-f" style="left:-5%"></i>  Sign in with Facebook</button>
+            </div>
+            <!--Google +-->
+            <div class="text-center mb-3">
+                <button type="button" class="btn btn-white btn-rounded col-10 z-depth-1a btn-lg"  style="border-radius:25px;color:#fff !important; background:#CC3333 !important">
+                    <i class="fab fa-google-plus-g" style="left:-5%"></i> sign in with google</button>
+            </div>
+            <p class="font-small white-text d-flex justify-content-center mb-4 pt-4"> or Sign in
+                with:</p>
+            <div class="text-center mb-3">
+                <button type="button" class="btn btn-outline-default col-10  waves-effect btn-lg" style="border-radius:25px;border:2px solid #fff !important;color:#fff !important">
+                    <i class="fas fa-envelope" style="left:-5%"></i> Sign up with email</button>
+            </div>
+
+            <!--Footer-->
+            <div class="mx-3 pt-4 mb-4">
+                <p class="font-small white-text d-flex justify-content-center">Already have Account? <a href="#" class="blue-text ml-2">
+                    Sign in</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

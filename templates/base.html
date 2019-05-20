@@ -13,21 +13,21 @@
     <link href="{% static 'css/bootstrap_4.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
     <!-- Material Design Bootstrap -->
-    <link href="{% static 'css/mdb_bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/md_bootstrap.css' %}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{% static 'fontawesome/md_fontawesome.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'css/md_fontawesome.css' %}">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/jquery.flexslider.js' %}"></script>
 
     <style>
 .logo_jathub{
-    width: 8%;
-    display: inline-block;
-    position: absolute;
-    top: -17px;
-    left: 5%;
     border-radius:50%;
     z-index:1;
+    width: 7%;
+    position: absolute;
+    top: -16px;
+    left: 5%;
 }
 .bg_img{
     width: 100%;
@@ -104,8 +104,8 @@
         <h6 class="col-lg-7 col-md-6 col-xs-6 pull-right phone" style="padding:0px;padding-top:20px"><i class="fas fa-envelope"></i> info@solutionspartum.com </h6>
     </div>
 </div>
-<nav class="navbar navbar-dark" style="background:#36c53aad">
-    <a class="navbar-brand" href="{% url 'home' %}">
+<nav class="navbar navbar-dark" style="background:#36c53aad;position:relative">
+    <a class="navbar-brand " href="{% url 'home' %}">
         <img src="{% static 'img/logo.png' %}" class="logo_jathub">
     </a>
     {%if not user.is_authenticated%}
@@ -120,7 +120,8 @@
             {% if request.user.user_profile.type == request.user.user_profile.USER_TYPE_CLIENT%}
             <a class="dropdown-item" href="{% url 'common:update' pk=user.id %}"> Profile</a>
             <a class="dropdown-item" href="{% url 'common:feedback' pk=request.user.id %}" data-toggle="modal" data-target="#info" >Feedback</a>
-             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            {% endif %}
             {% endif %}
         </div>
     </div>
@@ -435,7 +436,7 @@
 <!-- user profile Info-->
 {% block scripts %}
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="{% static 'js/mdb_bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/md_bootstrap.js' %}"></script>
 <script src="{% static 'js/popper.js' %}"></script>
 <script src="{% static 'js/bootstrap.js' %}"></script>
 {% endblock %}
