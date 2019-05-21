@@ -6,7 +6,10 @@
 </head>
 <body>
 <h1>Merchant dashboard</h1>
-
+<a href="{% url 'mobile:merchant_dashboard' %}"><input type="button" class="btn btn-success " value="Dashboard" title="Dashboard" style="background:#2bbbad!important"></a>
+<a href="{% url 'mobile:merchant_create_record' pk=request.user.user_merchant.merchant.id %}"><input type="button" class="btn btn-success " value="Create Record" title="Create Record" style="background:#2bbbad!important"></a>
+<a href="{% url 'mobile:merchant_daily_record' %}"><input type="button" class="btn btn-success " value="Daily Record" title="Daily Record" style="background:#2bbbad!important"></a>
+<a href="{% url 'mobile:merchant_sales_record' %}"><input type="button" class="btn btn-success " value="Sales Record" title="Sales Record" style="background:#2bbbad!important"></a>
 
 </body>
 </html>

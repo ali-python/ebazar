@@ -10,6 +10,7 @@ from django.db.models import Sum
 
 from django.contrib.auth import login as auth_login
 from merchant.models import MerchantDailyRecord, MerchantSalesRecords
+from merchant.forms import MerchantDailyRecordForm
 from common.views import RegisterView, LoginView,HomeView, UpdateProfile
 from merchant.views import (DashboardView,DailyRecordsView,SalesRecordsView,
                             CreateDailyRecordView,UpdateDailyRecordView)
@@ -112,7 +113,22 @@ class MobileMerchantSalesRecordsView(SalesRecordsView):
     template_name ='mobile_web/merchant_sales_record.html'
 
 class MobileMerchantCreateDailyRecordView(CreateDailyRecordView):
+    model = MerchantDailyRecord
+    form_class = MerchantDailyRecordForm
     template_name ='mobile_web/merchant_create_daily_record.html'
 
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.save()
+        return HttpResponseRedirect(reverse('mobile:merchant_daily_record'))
+
+    def form_invalid(self, form):
+        return super(MobileMerchantCreateDailyRecordView, self).form_invalid(form)
+
+
 class MobileMerchantUpdateDailyRecordView(UpdateDailyRecordView):
+    form_class = MerchantDailyRecordForm
     template_name ='mobile_web/merchant_update_record.html'
+    model = MerchantDailyRecord
+    success_url = reverse_lazy('mobile:merchant_daily_record')
+
