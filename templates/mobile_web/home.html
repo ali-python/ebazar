@@ -27,6 +27,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Download App</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">SignOut</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Select City
@@ -67,29 +70,29 @@
             <hr style="background:#74d06e;height:2px;">
 
 <!-- Card -->
-                <div class="row" >
-                    {% for record in merchant_daily_records %}
+             <div class="row" >
+                {% for record in merchant_daily_records %}
                     <div class="col-lg-3 col-md-6 col-xs-12" style="margin-top:30px;margin-bottom:40px">
                         <div class="card ">
                             <!-- Card image -->
                             <div class=" overlay flip_img">
                                 <img class="card-img-top " src="{{ record.image_1.url}}"  alt="{{ record.image_1 }}" style="width:100%;height:150px" >
-                                <a href="#">
+                                <a href="">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
                             <!-- Card content -->
                             <div class="card-body text-center">
                                 <!-- Title -->
-                                <h4 class="card-title">MID : {{ record.mid }}</h4>
+                                <h4 class="card-title">MID {{ record.mid }}</h4>
                                 <!-- Text -->
                                 <p class="card-text">Shop Your Grass</p>
                                 <!-- Button -->
-                                <a href="#" class="btn btn-success">Shop Now</a>
+                                <a href="{% url 'mobile:' %}" class="btn btn-success">Shop Now</a>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                {% endfor %}
                 </div>
                 <!-- Card -->
     <!-- green border ---->
