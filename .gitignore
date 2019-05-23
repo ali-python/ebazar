@@ -1,6 +1,7 @@
 *.pyc
 *~
 /media_local/*
+/media/*
 /static/
 /locale/
 /logs/*
