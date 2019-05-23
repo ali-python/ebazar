@@ -1,15 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Merchant dashboard</h1>
-<a href="{% url 'mobile:merchant_dashboard' %}"><input type="button" class="btn btn-success " value="Dashboard" title="Dashboard" style="background:#2bbbad!important"></a>
-<a href="{% url 'mobile:merchant_create_record' pk=request.user.user_merchant.merchant.id %}"><input type="button" class="btn btn-success " value="Create Record" title="Create Record" style="background:#2bbbad!important"></a>
-<a href="{% url 'mobile:merchant_daily_record' %}"><input type="button" class="btn btn-success " value="Daily Record" title="Daily Record" style="background:#2bbbad!important"></a>
-<a href="{% url 'mobile:merchant_sales_record' %}"><input type="button" class="btn btn-success " value="Sales Record" title="Sales Record" style="background:#2bbbad!important"></a>
+{% extends 'mobile_web/mobile_base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
+<style>
+    .flex-control-thumbs img {
+        height:100px !important;
+    }
+    .flexslider .slides img {
+        height:300px !important;
+    }
+</style>
 
-</body>
-</html>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" style="margin:20px 0">
+            <a href="{% url 'mobile:merchant_dashboard' %}"><input type="button" class="btn btn-success " value="Dashboard" title="Dashboard" style="background:#2bbbad!important"></a>
+            <a href="{% url 'mobile:merchant_create_record' pk=request.user.user_merchant.merchant.id %}"><input type="button" class="btn btn-success " value="Create Record" title="Create Record" style="background:#2bbbad!important"></a>
+            <a href="{% url 'mobile:merchant_daily_record' %}"><input type="button" class="btn btn-success " value="Daily Record" title="Daily Record" style="background:#2bbbad!important"></a>
+            <a href="{% url 'mobile:merchant_sales_record' %}"><input type="button" class="btn btn-success " value="Sales Record" title="Sales Record" style="background:#2bbbad!important"></a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row" style="margin:20px 0">
+        <div class="col-sm-12">
+            <section class="slider">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li data-thumb="{{ daily_records.image_1.url}}">
+                            <img src="{{ daily_records.image_1.url}}"  alt="{{ daily_records.image_1 }}" />
+                        </li>
+                        <li data-thumb="{{ daily_records.image_2.url}}" >
+                            <img src="{{ daily_records.image_2.url}}"  alt="{{ daily_records.image_2 }}" />
+                        </li>
+                        <li data-thumb="{{ daily_records.image_3.url}}">
+                            <img src="{{ daily_records.image_3.url}}"  alt="{{ daily_records.image_3 }}"/>
+                        </li>
+                        <li data-thumb="{{ daily_records.image_4.url}}">
+                            <img src="{{ daily_records.image_4.url}}"  alt="{{ daily_records.image_4 }}" />
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <div style="margin-top:20px">
+                <video  controls  style="width:47%;height:250px">
+                    <source src="{{ daily_records.video.url}}" alt="{{ daily_records.video }}"  type="video/mp4" >
+                </video>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="card" style="margin-top:30px">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Quantity: {{ remaining_quantity}}</li>
+                    <li class="list-group-item">Item Price: {{ daily_records.item_price }}</li>
+                    <li class="list-group-item">Upload Time and Date: {{ daily_records.upload_time }}</li>
+                </ul>
+            </div>
+            <br>
+            <br>
+            <a href="{% url 'mobile:merchant_update_record' pk=daily_records.id %}" class="btn btn-success pull-left">update</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(window).ready(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        controlNav: "thumbnails"
+      });
+    });
+  </script>
+{% endblock %}

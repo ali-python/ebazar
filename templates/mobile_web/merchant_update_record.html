@@ -1,11 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>update records</h1>
+{% extends 'mobile_web/mobile_base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
 
-</body>
-</html>
+<h1>update records</h1>
+<h1>Merchant Daily Records</h1>
+<h2>{{ request.user.user_merchant.merchant.name }}</h2>
+<form method="post" action="{% url 'mobile:merchant_update_record' pk=request.user.user_merchant.merchant.id %}"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="merchant" value="{{  request.user.user_merchant.merchant.id }}">
+    <!--{{form.image_1}}<br>-->
+    <!--{{form.image_2}}<br>-->
+    <!--{{form.image_3}}<br>-->
+    <!--{{form.image_4}}<br>-->
+    <!--{{form.video}}<br>-->
+    <label class="btn btn-success" for="image_1">
+        <input type="file" id="image_1" name="image_1" class=" col-lg-3 pull-left" style="display:none" title="Image 1"  onchange="$('#upload-file-info').html(this.files[0].name)">
+        Upload Image1
+        <span class='label label-info' id="upload-file-info"></span>
+    </label><br>
+    <label class="btn btn-success col-lg-3" for="image_2">
+        <input type="file" id="image_2" name="image_2" class=" pull-left" style="display:none" title="Image 2"  onchange="$('#upload-file-info2').html(this.files[0].name)">
+        Upload Image2
+        <span class='label label-info' id="upload-file-info2"></span>
+    </label><br>
+    <label class="btn btn-success col-lg-3" for="image_3">
+        <input type="file" id="image_3" name="image_3" class="pull-left" style="display:none" title="Image 3"  onchange="$('#upload-file-info3').html(this.files[0].name)">
+        Upload Image3
+        <span class='label label-info' id="upload-file-info3"></span>
+    </label><br>
+    <label class="btn btn-success col-lg-3" for="image_4">
+        <input type="file" id="image_4" name="image_4" class=" col-lg-3 pull-left" style="display:none" title="Image 4"  onchange="$('#upload-file-info4').html(this.files[0].name)">
+        Upload Image4
+        <span class='label label-info' id="upload-file-info4"></span>
+    </label><br>
+    <label class="btn btn-success col-lg-3" for="video">
+        <input type="file" id="video" name="video" class=" col-lg-3 pull-left" style="display:none" title="Video"  onchange="$('#upload-file-video').html(this.files[0].name)">
+        Upload Video
+        <span class='label label-info' id="upload-file-video"></span>
+    </label><br>
+
+    <h4>item quantity</h4>{{form.item_quantity}}<br>
+    <h4>item price</h4>{{form.item_price}}<br>
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

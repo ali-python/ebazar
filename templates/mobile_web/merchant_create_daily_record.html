@@ -1,10 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Create daily records</h1>
-</body>
-</html>
+{% extends 'mobile_web/mobile_base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 text-center" style="margin:20px 0">
+            <a href="{% url 'mobile:merchant_dashboard' %}"><input type="button" class="btn btn-success " value="Dashboard" title="Dashboard" style="background:#2bbbad!important"></a>
+            <a href="{% url 'mobile:merchant_create_record' pk=request.user.user_merchant.merchant.id %}"><input type="button" class="btn btn-success " value="Create Record" title="Create Record" style="background:#2bbbad!important"></a>
+            <a href="{% url 'mobile:merchant_daily_record' %}"><input type="button" class="btn btn-success " value="Daily Record" title="Daily Record" style="background:#2bbbad!important"></a>
+            <a href="{% url 'mobile:merchant_sales_record' %}"><input type="button" class="btn btn-success " value="Sales Record" title="Sales Record" style="background:#2bbbad!important"></a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h1>Merchant Daily Records</h1>
+            <!--<h2 class="col-lg-12 text-center">{{ request.user.user_merchant.merchant.name }}</h2>-->
+
+            <form method="post" enctype="multipart/form-data" class="col-lg-12 form-group">
+                {% csrf_token %}
+                <input type="hidden" name="merchant" value="{{  request.user.user_merchant.merchant.id }}">
+
+                <label class="btn btn-success col-sm-5" for="image_1">
+                    <input type="file" id="image_1" name="image_1" style="display:none" title="Image 1"  onchange="$('#upload-file-info').html(this.files[0].name)">
+                    Upload Image 1
+                    <span class='label label-info' id="upload-file-info"></span>
+                </label>
+                <label class="btn btn-success col-sm-5" for="image_2">
+                    <input type="file" id="image_2" name="image_2" style="display:none" title="Image 2"  onchange="$('#upload-file-info2').html(this.files[0].name)">
+                    Upload Image 2
+                    <span class='label label-info' id="upload-file-info2"></span>
+                </label>
+                <label class="btn btn-success col-sm-5" for="image_3">
+                    <input type="file" id="image_3" name="image_3"  style="display:none" title="Image 3"  onchange="$('#upload-file-info3').html(this.files[0].name)">
+                    Upload Image 3
+                    <span class='label label-info' id="upload-file-info3"></span>
+                </label>
+                <label class="btn btn-success col-sm-5" for="image_4">
+                    <input type="file" id="image_4" name="image_4" style="display:none" title="Image 4"  onchange="$('#upload-file-info4').html(this.files[0].name)">
+                    Upload Image 4
+                    <span class='label label-info' id="upload-file-info4"></span>
+                </label>
+                <label class="btn btn-success col-sm-8" for="video">
+                    <input type="file" id="video" name="video" style="display:none" title="Video"  onchange="$('#upload-file-video').html(this.files[0].name)">
+                    Upload Video
+                    <span class='label label-info' id="upload-file-video"></span>
+                </label>
+                <div class="col-sm-5 form-group pull-left" style="margin-top:20px">
+                    <label>item quantity</label>
+                    <input type="text" name="item_quantity" class="form-control">
+                </div>
+                <!--    {{form.item_quantity}}<br>-->
+                <div class="col-sm-5 form-group pull-left" style="margin-top:20px"s>
+                    <label>item price</label>
+                    <input type="text" name="item_price" class="form-control">
+                </div>
+                <!--    {{form.item_price}}<br>-->
+                <button type="submit" class="btn btn-success col-sm-3 pull-left">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
