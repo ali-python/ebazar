@@ -3,14 +3,6 @@
 {% block content %}
 {% load static %}
 
-
-<div class="row" style="margin:0px">
-    <div class="col-lg-12" style="padding:0px;position:relative">
-        <div class="bg_img">
-            <img src="{% static 'img/camel1.jpg' %}" style="width:100%;height:540px">
-        </div>
-    </div>
-</div>
 {% for ass in backends.associated %}
 {% if ass.provider == 'facebook' %}
 <div class="col-md-6 text-center">
@@ -29,36 +21,35 @@
             <hr style="background:#74d06e;height:2px;margin-top:25px">
             <hr style="background:#74d06e;height:2px;">
 
-<!-- Card -->
-                <div class="row" >
-                    {% for record in merchant_daily_records %}
-                    <div class="col-lg-3 col-md-6 col-xs-12" style="margin-top:30px;margin-bottom:40px">
-                        <div class="card ">
-                            <!-- Card image -->
-                            <div class=" overlay flip_img">
-                                <img class="card-img-top " src="{{ record.image_1.url}}"  alt="{{ record.image_1 }}" style="width:100%;height:150px" >
-                                <a href="#">
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!-- Card content -->
-                            <div class="card-body text-center">
-                                <!-- Title -->
-                                <h4 class="card-title">MID : {{ record.mid }}</h4>
-                                <!-- Text -->
-                                <p class="card-text">Shop Your Grass</p>
-                                <!-- Button -->
-                                <a href="#" class="btn btn-success">Shop Now</a>
-                            </div>
+            <!-- Card -->
+            <div class="row" >
+                {% for record in merchant_daily_records %}
+                <div class="col-lg-3 col-md-6 col-xs-12" style="margin-top:30px;margin-bottom:40px">
+                    <div class="card ">
+                        <!-- Card image -->
+                        <div class=" overlay flip_img">
+                            <img class="card-img-top " src="{{ record.image_1.url}}"  alt="{{ record.image_1 }}" style="width:100%;height:150px" >
+                            <a href="">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <!-- Card content -->
+                        <div class="card-body text-center">
+                            <!-- Title -->
+                            <h4 class="card-title">MID {{ record.mid }}</h4>
+                            <!-- Text -->
+                            <p class="card-text">Shop Your Grass</p>
+                            <!-- Button -->
+                            <a href="{% url 'mobile:merchant_record_detail' pk=record.id %}" class="btn btn-success">Shop Now</a>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
-                <!-- Card -->
-    <!-- green border ---->
+                {% endfor %}
+            </div>
+            <!-- Card -->
+            <!-- green border ---->
             <hr style="background:#74d06e;height:2px;margin-top:25px">
             <hr style="background:#74d06e;height:2px;">
-
         </div>
     </div>
 </div>
@@ -68,7 +59,4 @@
         <button type="button" class="btn btn-default" style="border-radius:25px">Sign in to see Personalization Recommendation</button>
     </div>
 </div>
-
-
-
 {% endblock %}

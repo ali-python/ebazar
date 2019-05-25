@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Here is the Mobile Design</title>
-     <!--        Bootstrap css file - -->
+    <!--        Bootstrap css file - -->
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
@@ -25,37 +25,36 @@
     <div class="col-12" style="position:relative">
         <!-- Basic dropdown -->
         <div class="btn-group btn-group-inline dropright mr-4">
-<a class="btn btn-default " type="button" data-toggle="dropdown" aria-haspopup="true"
-  aria-expanded="false"><i class="fas fa-bars"></i></a>
+            <a class="btn btn-default " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i></a>
 
-<div class="dropdown-menu">
-  <a class="dropdown-item" href="#">Dubai</a>
-  <a class="dropdown-item" href="#">Abu dubai</a>
-  <a class="dropdown-item" href="#">...</a>
-  <div class="dropdown-divider"></div>
-  <a class="dropdown-item" href="#">..</a>
-</div>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Dubai</a>
+                <a class="dropdown-item" href="#">Abu dubai</a>
+                <a class="dropdown-item" href="#">...</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">..</a>
+            </div>
         </div>
-<!-- Basic dropdown -->
-         <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}" style="position: absolute;
+        <!-- Basic dropdown -->
+        <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}" style="position: absolute;
     z-index: 1;
     border-radius: 50%;
     width: 5%;
     top: 0px;
     left: 45%;"> </a>
-         <!-- Basic dropdown -->
+        <!-- Basic dropdown -->
         <div class="btn-group btn-group-inline dropleft pull-right">
-<a class="btn btn-success " type="button" data-toggle="dropdown" aria-haspopup="true"
-  aria-expanded="false"><i class="fas fa-bars"></i></a>
-<div class="dropdown-menu">
-  <a class="dropdown-item" href="{% url 'mobile:home' %}">Home</a>
-  <a class="dropdown-item" href="{% url 'mobile:login' %}">Sign in</a>
-  <a class="dropdown-item" href="{% url  'mobile:register' %}">Sign up</a>
-  <div class="dropdown-divider"></div>
-  <a class="dropdown-item" href="#">Download App</a>
-</div>
+            <a class="btn btn-success " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i></a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'mobile:home' %}">Home</a>
+                <a class="dropdown-item" href="{% url 'mobile:login' %}">Sign in</a>
+                <a class="dropdown-item" href="{% url  'mobile:register' %}">Sign up</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Download App</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </div>
         </div>
-<!-- Basic dropdown -->
+        <!-- Basic dropdown -->
     </div>
 </div>
 <div class="row" style="margin:0px">
@@ -65,7 +64,7 @@
         </div>
     </div>
 </div>
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
 <!-- footer --->
 <footer class="page-footer font-small pt-4" style="background:#66c376ed;">
