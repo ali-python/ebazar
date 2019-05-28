@@ -196,9 +196,9 @@ class MobilerOrderItemView(FormView):
             self.request.user.user_profile.address = self.request.POST.get('address')
             self.request.user.user_profile.save()
             obj.save()
-            return HttpResponseRedirect(reverse('mobile:client_order_invoice', kwargs={
-                'pk': invoice.id
-            }))
+        return HttpResponseRedirect(reverse('mobile:client_order_invoice', kwargs={
+            'pk': invoice.id
+        }))
 
     def form_invalid(self, form):
         return super(MobilerOrderItemView, self).form_invalid(form)
@@ -213,14 +213,15 @@ class MobilerOrderItemView(FormView):
         })
         return context
 
+
 class MobileClientInvoice(TemplateView):
     template_name = 'mobile_web/client_invoice.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('mobile:home'))
-        return super(
-            MobileClientInvoice, self).dispatch(request, *args, **kwargs)
+    # def dispatch(self, request, *args, **kwargs):
+    #     if not self.request.user.is_authenticated:
+    #         return HttpResponseRedirect(reverse('mobile:home'))
+    #     return super(
+    #         MobileClientInvoice, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(MobileClientInvoice, self).get_context_data(**kwargs)
@@ -247,6 +248,7 @@ class MobileClientInvoice(TemplateView):
 
         })
         return context
+
 
 class MobileInvoiceHistoery(InvoiceHistoery):
     template_name = 'mobile_web/client_invoice_list.html'

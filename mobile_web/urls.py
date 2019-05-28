@@ -1,12 +1,13 @@
 from django.urls import path
 
-from .views.common_views import (MobileHomePageView,MobileRegisterView, MobileLoginView,
-                                 MobileUserInfo, MobileMerchantCreateDailyRecordView,
-                                 MobileMerchantDashboardView, MobileMerchantDailyRecordsView,
-                                 MobileMerchantSalesRecordsView, MobileMerchantUpdateDailyRecordView,
-                                 MobilerOrderItemView, MobileClientInvoice, MobileMerchantDailyRecordDetailView,
-                                 MobileInvoiceHistoery,
-                                 )
+from .views.common_views import (
+    MobileHomePageView,MobileRegisterView, MobileLoginView,
+    MobileUserInfo, MobileMerchantCreateDailyRecordView,
+    MobileMerchantDashboardView, MobileMerchantDailyRecordsView,
+    MobileMerchantSalesRecordsView, MobileMerchantUpdateDailyRecordView,
+    MobilerOrderItemView, MobileClientInvoice, MobileMerchantDailyRecordDetailView,
+    MobileInvoiceHistoery,
+)
 
 
 urlpatterns = [
