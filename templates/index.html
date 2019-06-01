@@ -139,9 +139,15 @@
                                 <!-- Title -->
                                 <h4 class="card-title">MID : {{ record.mid }}</h4>
                                 <!-- Text -->
-                                <p class="card-text">Shop Your Grass</p>
+                                <p class="card-text">{{record.merchant.city.city_name|title }}</p>
                                 <!-- Button -->
-                                <a href="{% url 'client:record_detail' pk=record.id %}" class="btn btn-success">Shop Now</a>
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'client:record_detail' pk=record.id %}" class="btn btn-success">Order Now</a>
+                                {% endif %}
+                                {% if not user.is_authenticated %}
+                                <div class="btn btn-default pull-right" data-toggle="modal" data-target="#signModal" style="color:#fff;"><i class="fa fa-user"></i>Order Now</div>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>

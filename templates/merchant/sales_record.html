@@ -47,6 +47,16 @@
                         </tbody>
                     </table>
                     {% endif %}
+
+                      {% if paginator.page_range|length > 1 %}
+                                <div class="text-center col-lg-12">
+                                    <ul class="pagination justify-content-center">
+                                        <li><a class="page_previous" href="{% if page_obj.has_previous %}{% url 'merchant:sales_records_view' %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}" title="Previous"><button class="btn btn-primary btn-sm"><<</button></a></li>
+                                        <li><a class="page_next" href="{% if page_obj.has_next %}{% url 'merchant:sales_records_view' %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}" title="Next"><button class="btn btn-primary btn-sm">>></button></a></li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+
                 </div>
             </div>
         </div>

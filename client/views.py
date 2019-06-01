@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, TemplateView,UpdateView, FormView
+from django.views.generic import ListView, CreateView, TemplateView,UpdateView, FormView, View
 from .models import Order,OrderItem,Invoice,Payment
 from .forms import OrderForm, OrderItemForm
 from merchant.models import MerchantDailyRecord, MerchantSalesRecords
@@ -16,6 +16,7 @@ class ListMerchantDailyRecordView(ListView):
     paginate_by = 150
     is_paginated = True
 
+
 class MerchantDailyRecordDetailView(TemplateView):
     template_name = 'client/record_detail.html'
 
@@ -26,15 +27,16 @@ class MerchantDailyRecordDetailView(TemplateView):
             MerchantDailyRecordDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(MerchantDailyRecordDetailView, self).get_context_data(**kwargs)
+        context = super(
+            MerchantDailyRecordDetailView, self).get_context_data(**kwargs)
         merchant = MerchantDailyRecord.objects.get(id=self.kwargs.get('pk'))
         merchant_sales = MerchantSalesRecords.objects.filter(
             merchant_daily_record__merchant=merchant.merchant
         )
         purchased_quantity = merchant_sales.aggregate(Sum('purchased_quantity'))
-        purchased_quantity = purchased_quantity.get('purchased_quantity__sum')
+        purchased_quantity = purchased_quantity.get('purchased_quantity__sum') or 0
         remaining_quantity = float(merchant.item_quantity) - float(purchased_quantity)
-        city=City.objects.all()
+        city = City.objects.all()
 
         context.update({
             'merchant': merchant,
@@ -99,6 +101,7 @@ class OrderItemView(FormView):
         })
         return context
 
+
 class ClientInvoice(TemplateView):
     template_name = 'client/invoice.html'
 
@@ -134,8 +137,23 @@ class ClientInvoice(TemplateView):
         })
         return context
 
+
 class InvoiceHistoery(ListView):
     model = Order
     template_name = 'client/invoice_list.html'
     paginate_by = 150
     is_paginated = True
+
+
+class ConfirmClientInvoiceAPIView(View):
+
+    def post(self, request, *args, **kwargs):
+        invoice = Invoice.objects.get(id=self.request.POST.get('invoice_id'))
+        invoice.state = Invoice.STATE_TYPE_CONFIRMED
+        invoice.save()
+
+        return JsonResponse({
+            'status': True,
+            'invoice_state': invoice.state
+        })
+

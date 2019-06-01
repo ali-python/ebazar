@@ -135,7 +135,7 @@ class UpdateProfile(UpdateView):
             UpdateProfile, self).get_context_data(**kwargs)
 
         city=City.objects.all()
-        invoices = Invoice.objects.filter(order__user=self.request.user)
+        invoices = Invoice.objects.filter(order__user=self.request.user).order_by('-id')
 
         try:
             user_profile = UserProfile.objects.get(id=self.kwargs.get('pk'))

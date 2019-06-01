@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (ListMerchantDailyRecordView, MerchantDailyRecordDetailView
-                    ,OrderItemView,ClientInvoice,InvoiceHistoery)
+                    ,OrderItemView,ClientInvoice,InvoiceHistoery, ConfirmClientInvoiceAPIView)
 urlpatterns = [
     path('records/list/view/', ListMerchantDailyRecordView.as_view(),
          name='list_records_view'
@@ -16,5 +16,8 @@ urlpatterns = [
 
     path('invoice/<int:pk>/invoice/history/', InvoiceHistoery.as_view(),
          name='invoice_history'),
+    path('invoice/state/confirmed/', ConfirmClientInvoiceAPIView.as_view(),
+         name='invoice_state_confirmed'
+         ),
 
 ]

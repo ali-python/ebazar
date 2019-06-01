@@ -60,7 +60,19 @@ class Invoice(models.Model):
     STATE_TYPE_PENDING = 'Pending'
     STATE_TYPE_CANCELLED = 'Cancelled'
     STATE_TYPE_PAID = 'Paid'
+    STATE_TYPE_CONFIRMED = 'Confirmed'
+    STATE_TYPE_RECEIVED = 'Received'
 
+
+    # Confirmed
+    # Received
+
+    # support_status boolean field default False
+    # transport_status boolean field default False
+    # cash_on_delivery boolean field default True
+    support_status=models.BooleanField(default=False)
+    transport_status=models.BooleanField(default=False)
+    cash_on_delivery=models.BooleanField(default=True)
     STATE_TYPES = (
         (STATE_TYPE_PENDING, 'Pending'),
         (STATE_TYPE_CANCELLED, 'Cancelled'),
@@ -78,6 +90,7 @@ class Invoice(models.Model):
                               )
     amount=models.IntegerField(default=0, null=True, blank=True)
     is_payment=models.BooleanField(default=True)
+
 
     def __str__(self):
         return self.order.customer_name if self.order.customer_name else ''
