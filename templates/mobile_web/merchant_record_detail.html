@@ -33,24 +33,24 @@
                 </div>
             </section>
             <!--/.Carousel Wrapper-->
-            <div class="col-sm-12">
-                <div class="col-sm-6 pull-left">
-                    <video  controls style="width:100%;height:250px">
-                        <source src="{{ merchant.video.url}}" alt="{{ post.video }}" type="video/mp4" style="width:100%">
-                    </video>
-                </div>
-                <div class="col-sm-6 pull-right">
+            <!--<div class="col-sm-12">-->
+                <!--<div class="col-sm-6 pull-left">-->
+                    <!--<video  controls style="width:100%;height:250px">-->
+                        <!--<source src="{{ merchant.video.url}}" alt="{{ post.video }}" type="video/mp4" style="width:100%">-->
+                    <!--</video>-->
+                <!--</div>-->
+                <div class="col-sm-6">
                     <div class="card" style="margin-top:30px">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Item quantity: {{merchant.item_quantity}}</li>
                             <li class="list-group-item">Item price: {{merchant.item_price}}</li>
                         </ul>
                     </div>
-                    <div class="col-sm-12 text-right" style="margin-top:20px">
-                        <a href="{% url 'mobile:client_order_item' pk=merchant.id %}" class="btn btn-success pull-right">continue order</a>
+                    <div  style="margin-top:20px">
+                        <a href="{% url 'mobile:client_order_item' pk=merchant.id %}" class="btn btn-success">continue order</a>
                     </div>
                 </div>
-            </div>
+            <!--</div>-->
         </div>
     </div>
 </div>

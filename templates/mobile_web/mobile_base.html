@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Here is the Mobile Design</title>
+
     <!--        Bootstrap css file - -->
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -13,48 +14,251 @@
     <link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
     <!-- Material Design Bootstrap -->
     <link href="{% static 'css/md_bootstrap.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+
+    <style>
+      .hc-nav-trigger {
+        left: 20px;
+      }
+
+      .hc-nav-trigger span,
+      .hc-nav-trigger span::before,
+      .hc-nav-trigger span::after {
+        background: #fff;
+      }
+      .mbl_header{
+        position:relative;
+        background:#2ca050;
+        padding: 15px 0px;
+      }
+      .hc-nav-trigger{
+        top:15px;
+      }
+      .hc-offcanvas-nav .nav-container{
+        width:80%;
+      }
+      .hc-offcanvas-nav a, .hc-offcanvas-nav .nav-item{
+        font-size:32px;
+      }
+      .nav_button{
+        border-radius: 62px;
+        font-size: 50px;
+        padding: 30px;
+        text-align:left;
+      }
+      .hc-offcanvas-nav .nav-container, .hc-offcanvas-nav .nav-wrapper, .hc-offcanvas-nav ul {
+         background: #823174;
+       }
+      .hc-offcanvas-nav li.nav-close a, .hc-offcanvas-nav li.nav-back a {
+         background: #bd41b4;
+       }
+      .nav_btn{
+         border-radius: 62px;
+         font-size: 50px;
+         padding: 30px;
+         border:1px solid #fff;
+         text-align:left;
+       }
+      .img_user{
+        border: solid 2px #ccc;
+        display: inline-block;
+        padding: 20px 15px;
+        border-radius: 203px;
+        overflow: hidden;
+        margin-left: 37%;
+        margin-top: 25px;
+      }
+      .font_user{
+        font-size: 210px;
+        color: #ccc;
+        margin-bottom: -30px;
+        display: block;
+      }
+      .icon_font{
+        font-size:70px !important;
+        display:inline-block;
+        float:right
+      }
+      .logo_img{
+        position: absolute;
+        z-index: 1;
+        border-radius: 50%;
+        width: 5%;
+        top: 0px;
+        left: 45%;
+      }
+
+    </style>
     <!-- Font Awesome -->
-    <!--<link rel="stylesheet" href="{% static 'css/md_fontawesome.css' %}">-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/jquery.flexslider.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="{% static 'js/hc-offcanvas-nav.js' %}"></script>
 
 </head>
 <body>
 <div class="row" style="margin:0px">
-    <div class="col-12" style="position:relative">
-        <!-- Basic dropdown -->
-        <div class="btn-group btn-group-inline dropright mr-4">
-            <a class="btn btn-default " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i></a>
+    <div class="col-sm-12 mbl_header">
+        <nav id="nav">
+            <ul>
+                <!--<li>-->
+                <!--<a>Pages</a>-->
+                <!--<ul data-bind="template: { name: 'page-template', data: {pages: pages}}"></ul>-->
+                <!--</li>-->
+                <li>
+                    <span class="img_user">
+                        <i class="fa fa-user font_user"></i>
+                    </span>
+                </li>
 
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Dubai</a>
-                <a class="dropdown-item" href="#">Abu dubai</a>
-                <a class="dropdown-item" href="#">...</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">..</a>
-            </div>
-        </div>
-        <!-- Basic dropdown -->
-        <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}" style="position: absolute;
-    z-index: 1;
-    border-radius: 50%;
-    width: 5%;
-    top: 0px;
-    left: 45%;"> </a>
-        <!-- Basic dropdown -->
-        <div class="btn-group btn-group-inline dropleft pull-right">
-            <a class="btn btn-success " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i></a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="{% url 'mobile:home' %}">Home</a>
-                <a class="dropdown-item" href="{% url 'mobile:login' %}">Sign in</a>
-                <a class="dropdown-item" href="{% url  'mobile:register' %}">Sign up</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Download App</a>
-                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-            </div>
-        </div>
-        <!-- Basic dropdown -->
+                 {%if not user.is_authenticated%}
+                <li>
+                    <a href="{% url 'mobile:login' %}">
+                        <button type="button" class="btn btn-blue-grey btn-block nav_button">SIGN IN <i class="fas fa-sign-in-alt icon_font"></i></button>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url  'mobile:register' %}">
+                        <button type="button" class="btn btn-mdb-color btn-block nav_button">SIGN UP <i class="fas fa-sign-in-alt icon_font"></i></button>
+                    </a>
+                </li>
+                {% endif %}
+                {%if  user.is_authenticated%}
+                <li>
+                    <a href="{% url 'mobile:home' %}">
+                        <button type="button" class="btn btn-block nav_btn">HOME <i class="fa fa-home icon_font"></i></button>
+                    </a>
+                </li>
+                {% if request.user.user_profile.type == request.user.user_profile.USER_TYPE_CLIENT%}
+                <li>
+                    <a href="{% url 'mobile:user_info' pk=request.user.user_profile.id %}">
+                        <button type="button" class="btn btn-block nav_btn">PROFILE <i class="fas fa-male icon_font"></i></button>
+                    </a>
+                </li>
+                {% endif %}
+                {% endif %}
+                <li>
+                    <a href="#">
+                        <button type="button" class="btn btn-block nav_btn">CALL SUPPORT <i class="fa fa-phone icon_font"></i></button>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <button type="button" class="btn btn-block nav_btn">ONLINE CHAT <i class="fas fa-comments icon_font"></i></button>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <button type="button" class="btn btn-block nav_btn">DOWNLOAD APP <i class="fab fa-apple icon_font"></i></button>
+                    </a>
+                </li>
+                 {%if user.is_authenticated%}
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <button type="button" class="btn  btn-block nav_btn">LOGOUT <i class="fas fa-sign-out-alt icon_font"></i></button>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <script type="text/html" id="page-template">
+            <!-- ko foreach: pages -->
+            <li>
+                <a data-bind="click: $root.clicked">
+                    <span data-bind="text: title"></span>
+                </a>
+                <!-- ko if: pages().length > 0 -->
+                <ul data-bind="template: { name: 'page-template', data: {pages: pages}}"></ul>
+                <!-- /ko -->
+            </li>
+            <!-- /ko -->
+            <li><a data-bind="click: $root.createItem">New item</a></li>
+        </script>
+        <script>
+        (function($) {
+
+          var Nav;
+
+          var PageModel = function (page) {
+            var self = this;
+
+            self.id = page.id;
+            self.title = page.title;
+            self.pages = ko.observableArray();
+
+            self.pages(ko.utils.arrayMap(page.pages, function(page) {
+              return new PageModel(page);
+            }));
+          }
+
+          var NavigationModel = function(pages) {
+            var self = this;
+
+            self.pages = ko.observableArray();
+
+            self.pages(ko.utils.arrayMap(pages, function(page) {
+              return new PageModel(page);
+            }));
+
+            self.clicked = function(data) {
+              console.log('You clicked an item', data.title);
+            }.bind(self);
+
+            self.createItem = function(data) {
+              console.log('New item added');
+
+              data.pages.push({
+                title: 'N',
+                pages: ko.observableArray()
+              });
+
+              // update nav
+              Nav.update(true);
+
+              // or you can update the nav when it closes
+              /*Nav.on('close', (e) => {
+                Nav.update(true);
+                Nav.off('close');
+              });*/
+
+            }.bind(self);
+          };
+
+          var pages = [
+            {
+              title: 'X',
+              pages: [
+                {
+                  title: 'XX',
+                  pages: []
+                },
+                {
+                  title: 'XXX',
+                  pages: []
+                }
+              ]
+            },
+            {
+              title: 'Y',
+              pages: []
+            },
+            {
+              title: 'Z',
+              pages: []
+            }
+          ];
+
+          ko.applyBindings(new NavigationModel(pages));
+
+          Nav = $('#nav').hcOffcanvasNav({
+            maxWidth: false,
+            levelTitles: true,
+            closeOnClick: false
+          });
+        })(jQuery);
+      </script>
+        <a class="navbar-brand" href="{% url 'mobile:home' %}"><img src="{% static 'img/logo.png' %}" class="logo_img" > </a>
     </div>
 </div>
 <div class="row" style="margin:0px">
@@ -65,10 +269,8 @@
     </div>
 </div>
 {% block content %}{% endblock %}
-
 <!-- footer --->
 <footer class="page-footer font-small pt-4" style="background:#66c376ed;">
-    <!-- Footer Elements -->
     <!-- Footer Links -->
     <div class="container text-center text-md-left">
         <!-- Grid row -->
@@ -80,7 +282,6 @@
                 <img src="{% static 'img/card_img.png' %}" style="width:100%">
             </div>
             <!-- Grid column -->
-
         </div>
         <!-- Grid row -->
     </div>
@@ -121,6 +322,9 @@
 <script type="text/javascript" src="{% static 'js/md_bootstrap.js' %}"></script>
 <script src="{% static 'js/popper.js' %}"></script>
 <script src="{% static 'js/bootstrap.js' %}"></script>
+<!--<script src="{% static 'js/simply-nav.js' %}"></script>-->
+<!--<script src="{% static 'js/main.js' %}"></script>-->
+
 {% endblock %}
 </body>
 </html>

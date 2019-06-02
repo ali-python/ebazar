@@ -7,7 +7,10 @@ from django.contrib.auth import forms as auth_forms
 from django.db import transaction
 from django.contrib.auth import authenticate
 from django.db.models import Sum
-
+from django.http import Http404
+from common.form import UserProfileForm, FeedBackForm
+from common.models import UserProfile
+from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login
 from merchant.models import MerchantDailyRecord, MerchantSalesRecords
 from merchant.forms import MerchantDailyRecordForm
@@ -251,4 +254,33 @@ class MobileClientInvoice(TemplateView):
 
 
 class MobileInvoiceHistoery(InvoiceHistoery):
+    form_class = UserProfileForm
     template_name = 'mobile_web/client_invoice_list.html'
+    model = UserProfile
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.user = User.objects.get(username=self.request.POST.get('username'))
+        obj.user.save()
+        obj.save()
+        return HttpResponseRedirect(reverse('mobile:home'))
+
+    def form_invalid(self, form):
+        return super(MobileInvoiceHistoery, self).form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(
+            MobileInvoiceHistoery, self).get_context_data(**kwargs)
+
+
+        invoices= Order.objects.all()
+
+        try:
+            user_profile = UserProfile.objects.get(id=self.kwargs.get('pk'))
+        except UserProfile.DoesNotExist:
+            return Http404('User does not exists')
+        context.update({
+            'invoices': invoices,
+            'user_profile': user_profile
+        })
+
+        return context
