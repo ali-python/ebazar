@@ -13,8 +13,6 @@
                    aria-controls="v-pills-profile" aria-selected="false">Update Profile</a>
                 <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
                    aria-controls="v-pills-messages" aria-selected="false">Invoices</a>
-                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
-                   aria-controls="v-pills-settings" aria-selected="false">Settings</a>
             </div>
         </div>
     </div>
@@ -32,7 +30,7 @@
                                         <thead>
                                         <tr>
                                             <th>Username</th>
-                                            <td>{{user_profile.user.username}}</td>
+                                            <td>{{user_profile.user.username|title}}</td>
                                         </tr>
                                         </thead>
                                         <tbody >
@@ -48,15 +46,15 @@
                                         </tr>
                                         <tr>
                                             <th>Gender</th>
-                                            <td>{{user_profile.gender}}</td>
+                                            <td>{{user_profile.gender|title}}</td>
                                         </tr>
                                         <tr>
                                             <th>City</th>
-                                            <td>{{user_profile.city.city_name}}</td>
+                                            <td>{{user_profile.city.city_name|title}}</td>
                                         </tr>
                                         <tr>
                                             <th>Address</th>
-                                            <td><textarea>{{user_profile.address}}</textarea></td>
+                                            <td>{{user_profile.address}}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -133,19 +131,19 @@
                                         </thead>
 
                                         {% if invoices %}
-                                        {% for invoice in invoices %}
-                                        <tbody >
-                                        <tr>
-                                            <td>{{invoice.receipt_no}}</td>
-                                            <td>{{invoice.state}}</td>
-                                            <td>{{invoice.amount}}</td>
-                                            <td>{{invoice.order.date_created}}</td>
-                                            <td>
-                                                <a href="{% url 'client:client_order_invoice' pk=invoice.id %}"><button class="btn btn-success btn-xs"><i class="fa fa-eye" title="Invoice list"></i></button></a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                        {% endfor %}
+                                            {% for invoice in invoices %}
+                                                <tbody >
+                                                    <tr>
+                                                        <td>{{invoice.receipt_no}}</td>
+                                                        <td>{{invoice.state}}</td>
+                                                        <td>{{invoice.amount}}</td>
+                                                        <td>{{invoice.order.date_created}}</td>
+                                                        <td>
+                                                            <a href="{% url 'client:client_order_invoice' pk=invoice.id %}"><button class="btn btn-success btn-xs"><i class="fa fa-eye" title="Invoice list"></i></button></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            {% endfor %}
                                         {% endif %}
                                     </table>
                                 </div>
@@ -154,7 +152,6 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
         </div>
     </div>
 </div>

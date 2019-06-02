@@ -31,26 +31,36 @@
                             <section class="slider">
                                 <div class="flexslider">
                                     <ul class="slides">
+                                        {% if daily_records.image_1 %}
                                         <li data-thumb="{{ daily_records.image_1.url}}">
                                             <img src="{{ daily_records.image_1.url}}"  alt="{{ daily_records.image_1 }}" />
                                         </li>
+                                        {% endif %}
+                                        {% if daily_records.image_2 %}
                                         <li data-thumb="{{ daily_records.image_2.url}}" >
                                             <img src="{{ daily_records.image_2.url}}"  alt="{{ daily_records.image_2 }}" />
                                         </li>
+                                        {% endif %}
+                                        {% if daily_records.image_3 %}
                                         <li data-thumb="{{ daily_records.image_3.url}}">
                                             <img src="{{ daily_records.image_3.url}}"  alt="{{ daily_records.image_3 }}"/>
                                         </li>
+                                        {% endif %}
+                                        {% if daily_records.image_4 %}
                                         <li data-thumb="{{ daily_records.image_4.url}}">
                                             <img src="{{ daily_records.image_4.url}}"  alt="{{ daily_records.image_4 }}" />
                                         </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </section>
-                            <div style="margin-top:20px">
-                                <video  controls  style="width:47%;height:250px">
-                                    <source src="{{ daily_records.video.url}}" alt="{{ daily_records.video }}"  type="video/mp4" >
-                                </video>
-                            </div>
+<!--                            {% if daily_records.video %}-->
+<!--                            <div style="margin-top:20px">-->
+<!--                                <video  controls  style="width:47%;height:250px">-->
+<!--                                    <source src="{{ daily_records.video.url}}" alt="{{ daily_records.video }}"  type="video/mp4" >-->
+<!--                                </video>-->
+<!--                            </div>-->
+<!--                            {% endif %}-->
                         </div>
                         <div class="col-lg-5 ">
                             <div class="card" style="margin-top:30px">
@@ -106,13 +116,13 @@
                             Upload Image4
                             <span class='label label-info' id="upload-file-info4"></span>
                         </label>
-                        <div class="col-md-12 text-center">
-                            <label class="btn btn-success col-lg-5 offset-3" for="video" style="min-height:80px">
-                                <input type="file" id="video" name="video" class=" col-lg-3 pull-left" style="display:none" title="Video"  onchange="$('#upload-file-video').html(this.files[0].name)">
-                                Upload Video
-                                <span class='label label-info' id="upload-file-video"></span>
-                            </label>
-                        </div>
+<!--                        <div class="col-md-12 text-center">-->
+<!--                            <label class="btn btn-success col-lg-5 offset-3" for="video" style="min-height:80px">-->
+<!--                                <input type="file" id="video" name="video" class=" col-lg-3 pull-left" style="display:none" title="Video"  onchange="$('#upload-file-video').html(this.files[0].name)">-->
+<!--                                Upload Video-->
+<!--                                <span class='label label-info' id="upload-file-video"></span>-->
+<!--                            </label>-->
+<!--                        </div>-->
                         <h4>item quantity</h4>
                         <input type="text" name="item_quantity" class="form-control col-lg-3">
                         <!--    {{form.item_quantity}}<br>--><br>
@@ -170,12 +180,12 @@
                                 Upload Image 4
                                 <span class='label label-info' id="upload-file-info8"></span>
                             </label>
-                            <!--{{form.video}}<br>-->
-                            <label class="btn btn-success col-lg-5 " for="video" style="min-height:80px">
-                                <input type="file" id="video_1" name="video" class="  pull-left" style="display:none" title="video"  onchange="$('#upload-file-info9').html(this.files[0].name)">
-                                Upload video
-                                <span class='label label-info' id="upload-file-info9"></span>
-                            </label>
+<!--                            {{form.video}}<br>-->
+<!--                            <label class="btn btn-success col-lg-5 " for="video" style="min-height:80px">-->
+<!--                                <input type="file" id="video_1" name="video" class="  pull-left" style="display:none" title="video"  onchange="$('#upload-file-info9').html(this.files[0].name)">-->
+<!--                                Upload video-->
+<!--                                <span class='label label-info' id="upload-file-info9"></span>-->
+<!--                            </label>-->
                             <h4>item quantity</h4><br>
                             <input type="text" name="item_quantity" class="form-control col-lg-3">
                             <h4>item price</h4><br>
