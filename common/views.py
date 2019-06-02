@@ -9,9 +9,10 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from common.form import UserProfileForm, FeedBackForm
-from common.models import UserProfile
+from common.models import UserProfile, City
 from django.contrib.auth.models import User
 from django.http import Http404
+from django.db import transaction
 from merchant.models import MerchantDailyRecord
 from client.views import InvoiceHistoery
 from client.models import Invoice, Order
@@ -98,12 +99,6 @@ class HomeView(TemplateView):
                         self.request.user.user_profile.USER_TYPE_MERCHANT
                 ):
                     return HttpResponseRedirect(reverse('merchant:dashboard'))
-            # if self.request.user.user_profile:
-            #     if (
-            #             self.request.user.user_profile.type ==
-            #             self.request.user.user_profile.USER_TYPE_CLIENT
-            #     ):
-            #         return HttpResponseRedirect(reverse('home'))
 
         return super(
             HomeView, self).dispatch(request, *args, **kwargs)
@@ -121,11 +116,16 @@ class UpdateProfile(UpdateView):
     template_name = 'update_profile.html'
     model = UserProfile
     def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.user = User.objects.get(username=self.request.POST.get('username'))
-        obj.user.save()
-        obj.save()
-        return HttpResponseRedirect(reverse('home'))
+        with transaction.atomic():
+            obj = form.save(commit=False)
+            obj.user = User.objects.get(username=self.request.POST.get('username'))
+            obj.user.save()
+            obj.city=City.objects.get(city_name=self.request.POST.get('city_name'))
+            # obj.city.save()
+            obj.save()
+
+            return HttpResponseRedirect(reverse('common:update', kwargs={
+                            'pk': obj.user.id}))
 
     def form_invalid(self, form):
         return super(UpdateProfile, self).form_invalid(form)
@@ -134,8 +134,8 @@ class UpdateProfile(UpdateView):
         context = super(
             UpdateProfile, self).get_context_data(**kwargs)
 
-
-        invoices= Order.objects.all()
+        city=City.objects.all()
+        invoices = Invoice.objects.filter(order__user=self.request.user)
 
         try:
             user_profile = UserProfile.objects.get(id=self.kwargs.get('pk'))
@@ -143,7 +143,8 @@ class UpdateProfile(UpdateView):
             return Http404('User does not exists')
         context.update({
             'invoices': invoices,
-            'user_profile': user_profile
+            'user_profile': user_profile,
+            'city':city
         })
 
         return context

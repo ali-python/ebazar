@@ -1,0 +1,1 @@
+web: gunicorn jathub.wsgi --log-file -

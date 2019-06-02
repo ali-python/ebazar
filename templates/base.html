@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
     <!-- Material Design Bootstrap -->
     <link href="{% static 'css/md_bootstrap.css' %}" rel="stylesheet">
-    <!-- Font Awesome -->
-    <!--<link rel="stylesheet" href="{% static 'css/md_fontawesome.css' %}">-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/jquery.flexslider.js' %}"></script>
@@ -121,6 +119,7 @@
             <a class="dropdown-item" href="{% url 'common:update' pk=user.id %}"> Profile</a>
             <a class="dropdown-item" href="{% url 'common:feedback' pk=request.user.id %}" data-toggle="modal" data-target="#info" >Feedback</a>
             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            {% endif %}
             {% endif %}
             {% endif %}
         </div>
