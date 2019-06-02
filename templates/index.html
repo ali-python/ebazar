@@ -106,23 +106,6 @@
                         </div>
                     </div>
                 </div>
-                <!--         merchant image div start here-->
-                <!--<div class="row" style="margin-top:30px;margin-bottom:40px">-->
-                <!--{% for record in merchant_daily_records %}-->
-                <!--<div class="col-lg-3" style="margin:15px 0px">-->
-                <!--<div class="card card_shadow" style="border-radius: 5px;min-height:">-->
-                <!--<div class="card-body text-center">-->
-                <!--<h5>Merchent Id {{ record.id }}</h5>-->
-                <!--<img src="{{ record.image_1.url}}"  alt="{{ record.image_1 }}"  style="width:215px;height:130px" class="flip_img">-->
-                <!--<h6>Shop Your Grass</h6>-->
-                <!--<a href="{% url 'client:record_detail' pk=record.id %}" >Shop Now</a>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--{% endfor %}-->
-                <!--</div>-->
-                <!--         merchent div end here-->
-                <!-- Card -->
                 <div class="row" >
                     {% for record in merchant_daily_records %}
                     <div class="col-lg-3 col-md-6 col-xs-12" style="margin-top:30px;margin-bottom:40px">
@@ -145,7 +128,7 @@
                                 <a href="{% url 'client:record_detail' pk=record.id %}" class="btn btn-success">Order Now</a>
                                 {% endif %}
                                 {% if not user.is_authenticated %}
-                                <div class="btn btn-default pull-right" data-toggle="modal" data-target="#signModal" style="color:#fff;"><i class="fa fa-user"></i>Order Now</div>
+                                <div class="btn btn-default" data-toggle="modal" data-target="#signModal" style="color:#fff;">Order Now</div>
                                 {% endif %}
 
                             </div>
