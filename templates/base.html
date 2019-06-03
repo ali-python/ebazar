@@ -10,13 +10,20 @@
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+<!--    <link rel="stylesheet" href="{% static 'css/style.css' %}">-->
     <link href="{% static 'css/bootstrap_4.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
     <!-- Material Design Bootstrap -->
     <link href="{% static 'css/md_bootstrap.css' %}" rel="stylesheet">
+<<<<<<< HEAD
+=======
+    <!-- Font Awesome -->
+    <link href="{% static 'css/sweetalert2.min.css' %}" rel="stylesheet" />
+>>>>>>> master
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/jquery.flexslider.js' %}"></script>
+
 
     <style>
 .logo_jathub{
@@ -116,14 +123,12 @@
         </button>
         <div class="dropdown-menu">
             {% if request.user.user_profile.type == request.user.user_profile.USER_TYPE_CLIENT%}
-            <a class="dropdown-item" href="{% url 'common:update' pk=user.id %}"> Profile</a>
-            <a class="dropdown-item" href="{% url 'common:feedback' pk=request.user.id %}" data-toggle="modal" data-target="#info" >Feedback</a>
+            <a class="dropdown-item" href="{% url 'common:update' pk=user.id %}"> Profile</a
+            {% endif %}
             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-            {% endif %}
-            {% endif %}
-            {% endif %}
         </div>
     </div>
+    {% endif %}
 </nav>
 <!--    middle body work start here-->
 <div  style="background:#FBF7F7;">
@@ -392,6 +397,7 @@
 <!--registration page end here-->
 
 <!-- user profile Info -->
+ {%if user.is_authenticated%}
 <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-notify  modal-success" role="document">
@@ -399,7 +405,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-                <p class="heading lead">Personal Info</p>
+                <p class="heading lead">FeedBack</p>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
@@ -408,36 +414,26 @@
             <!--Body-->
             <div class="modal-body">
                 <div class="text-center">
-                    <table class="table table-hover invoice-table">
-                        <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Phone</th>
-                            <th>Gender</th>
-                            <th>Address</th>
-                        </tr>
-                        </thead>
-                        <tbody >
-                        <tr>
-                            <td>{{user_profile.user.username}}</td>
-                            <td>{{user_profile.phone}}</td>
-                            <td>{{user_profile.gender}}</td>
-                            <td>{{user_profile.address}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+           <form method="POST" action="{% url 'common:feedback' pk=request.user.id %}">
+            {% csrf_token %}
+        <textarea name="comments" placeholder="FeedBack" class="form-control"> </textarea>
+        <input type="hidden" name="user" value="{{request.user.id}}">
+        <input type="submit" value="Ok" class="btn btn-success">
+        </form>
                 </div>
             </div>
         </div>
         <!--/.Content-->
     </div>
 </div>
+{% endif %}
 <!-- user profile Info-->
 {% block scripts %}
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{% static 'js/md_bootstrap.js' %}"></script>
 <script src="{% static 'js/popper.js' %}"></script>
 <script src="{% static 'js/bootstrap.js' %}"></script>
+ <script src="{% static 'js/sweetalert2.min.js' %}"></script>
 {% endblock %}
 </body>
 </html>

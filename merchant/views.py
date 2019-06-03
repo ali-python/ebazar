@@ -7,6 +7,7 @@ from django.db.models import Sum
 from merchant.forms import MerchantDailyRecordForm
 from merchant.models import MerchantDailyRecord, MerchantSalesRecords, Merchant
 
+
 class DashboardView(TemplateView):
     template_name = 'merchant/dashboard.html'
 
@@ -27,7 +28,7 @@ class DashboardView(TemplateView):
         purchased_price = sales.aggregate(Sum('purchased_price'))
         purchased_price = purchased_price.get('purchased_price__sum')
         purchased_quantity=sales.aggregate(Sum('purchased_quantity'))
-        purchased_quantity=purchased_quantity.get('purchased_quantity__sum')
+        purchased_quantity=purchased_quantity.get('purchased_quantity__sum') or 0
         remaining_quantity=float(daily_records.item_quantity) - float(purchased_quantity)
         context.update({
             'purchased_price': purchased_price,
@@ -40,14 +41,16 @@ class DashboardView(TemplateView):
 class DailyRecordsView(ListView):
     model = MerchantDailyRecord
     template_name = 'merchant/daily_records.html'
-    paginate_by = 150
+    paginate_by = 100
     is_paginated = True
+    ordering = '-id'
 
 class SalesRecordsView(ListView):
     model = MerchantSalesRecords
     template_name = 'merchant/sales_record.html'
-    paginate_by = 150
+    paginate_by = 3
     is_paginated = True
+    ordering = '-id'
 
 
 class CreateDailyRecordView(FormView):

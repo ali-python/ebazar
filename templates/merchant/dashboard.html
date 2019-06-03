@@ -31,26 +31,36 @@
                             <section class="slider">
                                 <div class="flexslider">
                                     <ul class="slides">
+                                        {% if daily_records.image_1 %}
                                         <li data-thumb="{{ daily_records.image_1.url}}">
                                             <img src="{{ daily_records.image_1.url}}"  alt="{{ daily_records.image_1 }}" />
                                         </li>
+                                        {% endif %}
+                                        {% if daily_records.image_2 %}
                                         <li data-thumb="{{ daily_records.image_2.url}}" >
                                             <img src="{{ daily_records.image_2.url}}"  alt="{{ daily_records.image_2 }}" />
                                         </li>
+                                        {% endif %}
+                                        {% if daily_records.image_3 %}
                                         <li data-thumb="{{ daily_records.image_3.url}}">
                                             <img src="{{ daily_records.image_3.url}}"  alt="{{ daily_records.image_3 }}"/>
                                         </li>
+                                        {% endif %}
+                                        {% if daily_records.image_4 %}
                                         <li data-thumb="{{ daily_records.image_4.url}}">
                                             <img src="{{ daily_records.image_4.url}}"  alt="{{ daily_records.image_4 }}" />
                                         </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </section>
-                            <div style="margin-top:20px">
-                                <video  controls  style="width:47%;height:250px">
-                                    <source src="{{ daily_records.video.url}}" alt="{{ daily_records.video }}"  type="video/mp4" >
-                                </video>
-                            </div>
+<!--                            {% if daily_records.video %}-->
+<!--                            <div style="margin-top:20px">-->
+<!--                                <video  controls  style="width:47%;height:250px">-->
+<!--                                    <source src="{{ daily_records.video.url}}" alt="{{ daily_records.video }}"  type="video/mp4" >-->
+<!--                                </video>-->
+<!--                            </div>-->
+<!--                            {% endif %}-->
                         </div>
                         <div class="col-lg-5 ">
                             <div class="card" style="margin-top:30px">
@@ -81,51 +91,49 @@
             <!-- Modal body -->
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <!--<h1 class="col-lg-12 text-center">Merchant Daily Records</h1>-->
-                        <!--<h2 class="col-lg-12 text-center">{{ request.user.user_merchant.merchant.name }}</h2>-->
-                        <form method="post" enctype="multipart/form-data" action="{% url 'merchant:create_record' pk=request.user.user_merchant.merchant.id %}" class="col-lg-12 form-group">
-                            {% csrf_token %}
-                            <input type="hidden" name="merchant" value="{{  request.user.user_merchant.merchant.id }}">
-                            <label class="btn btn-success col-lg-5 " for="image_1" style="min-height:80px">
-                                <input type="file" id="image_1" name="image_1" class="  pull-left" style="display:none" title="Image 1"  onchange="$('#upload-file-info').html(this.files[0].name)">
-                                Upload Image1
-                                <span class='label label-info' id="upload-file-info"></span>
-                            </label>
-                            <label class="btn btn-success col-lg-5" for="image_2" style="min-height:80px">
-                                <input type="file" id="image_2" name="image_2" class=" pull-left" style="display:none" title="Image 2"  onchange="$('#upload-file-info2').html(this.files[0].name)">
-                                Upload Image2
-                                <span class='label label-info col-lg-1' id="upload-file-info2"></span>
-                            </label>
-                            <label class="btn btn-success col-lg-5 offset-1" for="image_3" style="min-height:80px">
-                                <input type="file" id="image_3" name="image_3" class="pull-left" style="display:none" title="Image 3"  onchange="$('#upload-file-info3').html(this.files[0].name)">
-                                Upload Image3
-                                <span class='label label-info col-lg-1' id="upload-file-info3"></span>
-                            </label>
-                            <label class="btn btn-success col-lg-5" for="image_4" style="min-height:80px">
-                                <input type="file" id="image_4" name="image_4" class=" col-lg-3 pull-left" style="display:none" title="Image 4"  onchange="$('#upload-file-info4').html(this.files[0].name)">
-                                Upload Image4
-                                <span class='label label-info' id="upload-file-info4"></span>
-                            </label>
-                            <div class="col-md-12 text-center">
-                                <label class="btn btn-success col-lg-5 offset-3" for="video" style="min-height:80px">
-                                    <input type="file" id="video" name="video" class=" col-lg-3 pull-left" style="display:none" title="Video"  onchange="$('#upload-file-video').html(this.files[0].name)">
-                                    Upload Video
-                                    <span class='label label-info' id="upload-file-video"></span>
-                                </label>
-                            </div>
-                            <h4 class="col-lg-3" >item quantity</h4>
-                            <input type="text" name="item_quantity" class="form-control col-lg-3">
-                            <!--    {{form.item_quantity}}<br>--><br>
-                            <h4 class="col-lg-3">item price</h4>
-                            <input type="text" name="item_price" class="form-control col-lg-3">
-                            <!--    {{form.item_price}}<br>-->
-                            <!-- Modal footer -->
-                            <div class="modal-footer" style="margin-top:5px">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+                    <!--<h1 class="col-lg-12 text-center">Merchant Daily Records</h1>-->
+                    <!--<h2 class="col-lg-12 text-center">{{ request.user.user_merchant.merchant.name }}</h2>-->
+                    <form method="post" enctype="multipart/form-data" action="{% url 'merchant:create_record' pk=request.user.user_merchant.merchant.id %}" class="col-lg-12 form-group">
+                        {% csrf_token %}
+                        <input type="hidden" name="merchant" value="{{  request.user.user_merchant.merchant.id }}">
+                        <label class="btn btn-success col-lg-5 " for="image_1" style="min-height:80px">
+                            <input type="file" id="image_1" name="image_1" class="  pull-left" style="display:none" title="Image 1"  onchange="$('#upload-file-info').html(this.files[0].name)">
+                            Upload Image1
+                            <span class='label label-info' id="upload-file-info"></span>
+                        </label>
+                        <label class="btn btn-success col-lg-5" for="image_2" style="min-height:80px">
+                            <input type="file" id="image_2" name="image_2" class=" pull-left" style="display:none" title="Image 2"  onchange="$('#upload-file-info2').html(this.files[0].name)">
+                            Upload Image2
+                            <span class='label label-info col-lg-1' id="upload-file-info2"></span>
+                        </label>
+                        <label class="btn btn-success col-lg-5 offset-1" for="image_3" style="min-height:80px">
+                            <input type="file" id="image_3" name="image_3" class="pull-left" style="display:none" title="Image 3"  onchange="$('#upload-file-info3').html(this.files[0].name)">
+                            Upload Image3
+                            <span class='label label-info col-lg-1' id="upload-file-info3"></span>
+                        </label>
+                        <label class="btn btn-success col-lg-5" for="image_4" style="min-height:80px">
+                            <input type="file" id="image_4" name="image_4" class=" col-lg-3 pull-left" style="display:none" title="Image 4"  onchange="$('#upload-file-info4').html(this.files[0].name)">
+                            Upload Image4
+                            <span class='label label-info' id="upload-file-info4"></span>
+                        </label>
+<!--                        <div class="col-md-12 text-center">-->
+<!--                            <label class="btn btn-success col-lg-5 offset-3" for="video" style="min-height:80px">-->
+<!--                                <input type="file" id="video" name="video" class=" col-lg-3 pull-left" style="display:none" title="Video"  onchange="$('#upload-file-video').html(this.files[0].name)">-->
+<!--                                Upload Video-->
+<!--                                <span class='label label-info' id="upload-file-video"></span>-->
+<!--                            </label>-->
+<!--                        </div>-->
+                        <h4>item quantity</h4>
+                        <input type="text" name="item_quantity" class="form-control col-lg-3">
+                        <!--    {{form.item_quantity}}<br>--><br>
+                        <h4>item price</h4>
+                        <input type="text" name="item_price" class="form-control col-lg-3">
+                        <!--    {{form.item_price}}<br>-->
+                        <!-- Modal footer -->
+                        <div class="modal-footer" style="margin-top:5px">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -172,12 +180,12 @@
                                 Upload Image 4
                                 <span class='label label-info' id="upload-file-info8"></span>
                             </label>
-                            <!--{{form.video}}<br>-->
-                            <label class="btn btn-success col-lg-5 " for="video" style="min-height:80px">
-                                <input type="file" id="video_1" name="video" class="  pull-left" style="display:none" title="video"  onchange="$('#upload-file-info9').html(this.files[0].name)">
-                                Upload video
-                                <span class='label label-info' id="upload-file-info9"></span>
-                            </label>
+<!--                            {{form.video}}<br>-->
+<!--                            <label class="btn btn-success col-lg-5 " for="video" style="min-height:80px">-->
+<!--                                <input type="file" id="video_1" name="video" class="  pull-left" style="display:none" title="video"  onchange="$('#upload-file-info9').html(this.files[0].name)">-->
+<!--                                Upload video-->
+<!--                                <span class='label label-info' id="upload-file-info9"></span>-->
+<!--                            </label>-->
                             <h4>item quantity</h4><br>
                             <input type="text" name="item_quantity" class="form-control col-lg-3">
                             <h4>item price</h4><br>

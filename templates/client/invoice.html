@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-12" style="margin-top:30px">
+        <div class="col-lg-12" style="margin:30px 0">
             <div class="card text-dark">
                 <div class="card-body">
                     <!--                    <h1>client : {{request.user.username}}</h1>-->
@@ -13,13 +13,17 @@
                         </div>
                         <br>
                         <div class="col-md-12">
-                            <button class="btn btn-success pull-right">Confirm Payment</button>
+                            {% if invoice.state == 'Pending' %}
+                                <div class="confirmation-btn pull-right"><button class="btn btn-success pull-right confirm_btn">Confirm Payment</button></div>
+                            {% else %}
+                                <div class="confirmation-btn pull-right">Your Order is Confirmed!</div>
+                            {% endif %}
                             <div class="row">
                                 <div class="col-xs-6 col-md-6">
-                                    <label><strong> Name:</strong></label> <span style="margin: 15px;">{{request.user.username}}</span><br>
+                                    <label><strong> Name:</strong></label> <span style="margin: 15px;">{{request.user.username|title}}</span><br>
                                     <label><strong> Phone:</strong></label> <span style="margin: 15px;">{{invoice.order.customer_phone}}</span><br>
-                                    <label><strong> Alternate Phone:</strong></label> <span style="margin: 15px;">{{invoice.order.alternate_phone}}</span><br>
-                                    <label><strong> City:</strong></label> <span style="margin: 15px;">{{invoice.order.city.city_name}}</span><br>
+                                    <label><strong> Address:</strong></label> <span style="margin: 15px;">{{request.user.user_profile.address}}</span><br>
+                                    <label><strong> City:</strong></label> <span style="margin: 15px;">{{invoice.order.city.city_name|title}}</span><br>
                                     <label><strong>Date:</strong></label><span style="margin: 15px;">{{invoice.order.date_created}}</span><br>
                                     <br>
                                 </div>
@@ -50,7 +54,7 @@
                                     <tr style="border-top: 3px solid">
                                         <td></td>
                                         <td class="text-right"><strong>State</strong></td>
-                                        <td>{{invoice.state}}</td>
+                                        <td class="invoice-state">{{invoice.state}}</td>
                                     </tr>
                                     <tr>
                                         {% for item in order_items %}
@@ -87,7 +91,11 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <br>
-                            <button class="btn btn-success pull-right">Confirm Payment</button>
+                            {% if invoice.state == 'Pending' %}
+                                <div class="confirmation-btn pull-right"><button class="btn btn-success pull-right confirm_btn">Confirm Payment</button></div>
+                            {% else %}
+                                <div class="confirmation-btn pull-right">Your Order is Confirmed!</div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -95,17 +103,30 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
-<!--<h1>client : {{request.user.username}}</h1>-->
+{% block scripts %}
+{{ block.super }}
+ <script>
+        $('.confirm_btn').on ('click', function (){
 
-<!--<div>-->
-<!--phone :{{invoice.order.customer_phone}}<br>-->
-<!--date:{{invoice.order.date_created}}<br>-->
-<!--reciept no:{{invoice.receipt_no}}-->
-<!--state:{{invoice.state}}<br>-->
-<!--amount:{{invoice.amount}}<br>-->
-<!--{% for item in order_items %}-->
-<!--quantity:{{ item.item_price }} price:&#45;&#45; {{ item.item_quantity }} <br>-->
-<!--{% endfor %}-->
-<!--</div>-->
+            $.post("{% url 'client:invoice_state_confirmed' %}", {
+                invoice_id: '{{ invoice.id }}',
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },function(result, status){
+                if (result.invoice_state == 'Confirmed') {
+                    $('.confirmation-btn').html('Your Order is Confirmed!');
+                    $('.invoice-state').html(result.invoice_state);
+                }
+            });
+
+            Swal.fire(
+              'Thank You!',
+              'For using  JatHub, our support team will contact you soon',
+              'success'
+            )
+        });
+
+
+    </script>
 {% endblock %}

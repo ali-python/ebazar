@@ -37,6 +37,25 @@
                                 {% endif %}
                                 </tbody>
                             </table>
+<!--                             {% if paginator.page_range|length > 1 %}-->
+<!--                                <div class="text-center">-->
+<!--                                    <ul class="pagination justify-content-center">-->
+<!--                                        <li><a  style="background-color: #3070A8; color: white" class="page_previous" href="{% if page_obj.has_previous %}{% url 'merchant:records_view' %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}" title="Previous"><<</a></li>-->
+<!--                                        <li><a style="background-color: #3070A8; color: white" class="page_next" href="{% if page_obj.has_next %}{% url 'merchant:records_view' %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}" title="Next">>></a></li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                            {% endif %}-->
+
+
+                            {% if paginator.page_range|length > 1 %}
+                                <div class="text-center col-lg-12">
+                                    <ul class="pagination justify-content-center">
+                                        <li><a class="page_previous" href="{% if page_obj.has_previous %}{% url 'merchant:records_view' %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}" title="Previous"><button class="btn btn-primary btn-sm"><<</button></a></li>
+                                        <li><a class="page_next" href="{% if page_obj.has_next %}{% url 'merchant:records_view' %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}" title="Next"><button class="btn btn-primary btn-sm">>></button></a></li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
