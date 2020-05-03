@@ -32,7 +32,7 @@ class MerchantUserAdmin(admin.ModelAdmin):
 class MerchantDailyRecordAdmin(admin.ModelAdmin):
     list_display = (
         'merchant', 'upload_time','image_1','image_2','image_3',
-        'image_4','video','item_quantity', 'item_price' , 'expiry','mid'
+        'image_4','item_quantity', 'item_price' , 'description', 'expiry','mid'
     )
 
     @staticmethod

@@ -50,34 +50,34 @@
 }
 @media only screen and (max-width : 1440px) {
 .logo_jathub{
-    width: 7%;
+    width: 215px;
     top: -9px;
     }
 }
 
 @media only screen and (max-width : 1024px) {
 .logo_jathub{
-    width: 8%;
+    width: 215px;
     top: -5px;
     }
 }
 
 @media only screen and (max-width : 786px) {
 .logo_jathub{
-    width: 11%;
+    width: 215px;
     top: -6px;
 }
 }
 
 @media only screen and (max-width : 480px) {
 .logo_jathub{
-    width: 20%;
+    width: 215px;
     top: -6px;
 }
 }
 @media only screen and (max-width : 320px) {
 .logo_jathub{
-     width: 27%;
+    width: 215px;
     top: -6px;
     }
 .step_position{
@@ -92,23 +92,24 @@
 <body>
 <div class="row" style="margin:0px">
     <div class="col-lg-4 col-sm-12 text-right">
-        <h5 style="padding-top:20px">Your Online Mall For Camels</h5>
+        <B><h5 style="padding-top:20px; font-family: Impact, Charcoal, sans-serif; color:blue;">eBazarr Stay Home Stay Safe </h5></B>
     </div>
     <div class="col-lg-4" style="padding-top:10px">
         <p class="col-lg-3" style="float:left;line-height: 17px;">Secure Payments</p>
-        <img class="col-lg-2 bank_card" src="{% static 'img/visa.png' %}">
+        <img class="col-lg-2 bank_card" src="{% static 'img/Visa.png' %}">
         <img class="col-lg-2 bank_card" src="{% static 'img/mastercd.png' %}">
         <img class="col-lg-2 bank_card" src="{% static 'img/paypal.png' %}" >
-        <img class="col-lg-2 bank_card" src="{% static 'img/visa.png' %}">
+        <img class="col-lg-2 bank_card" src="{% static 'img/Visa.png' %}">
     </div>
     <div class="col-lg-4 col-md-12 col-xs-12">
-        <h6 class="col-lg-5 col-md-6 col-xs-6 pull-left phone" style="padding:20px 0 0 0"><i class="fa fa-phone"></i> +92111111 </h6>
-        <h6 class="col-lg-7 col-md-6 col-xs-6 pull-right phone" style="padding:0px;padding-top:20px"><i class="fas fa-envelope"></i> info@solutionspartum.com </h6>
+        <h6 class="col-lg-5 col-md-6 col-xs-6 pull-left phone" style="padding:20px 0 0 0"><i class="fa fa-phone"></i> +92 312 8592826 </h6>
+        <h6 class="col-lg-7 col-md-6 col-xs-6 pull-right phone" style="padding:0px;padding-top:20px"><i class="fas fa-envelope"></i> help@ebazarr.com </h6>
     </div>
 </div>
 <nav class="navbar navbar-dark" style="background:#36c53aad;position:relative">
     <a class="navbar-brand " href="{% url 'home' %}">
-        <img src="{% static 'img/logo.png' %}" class="logo_jathub">
+        <img src="{% static 'img/logoebazar1.jpeg' %}" width="215px" style="border-radius: 10%;" >
+
     </a>
     {%if not user.is_authenticated%}
     <div class="btn btn-default pull-right" data-toggle="modal" data-target="#signModal" style="color:#fff;"><i class="fa fa-user"></i> Login</div>
@@ -119,10 +120,11 @@
             Hi ! {{ user.username }}
         </button>
         <div class="dropdown-menu">
-            {% if request.user.user_profile.type == request.user.user_profile.USER_TYPE_CLIENT%}
-            <a class="dropdown-item" href="{% url 'common:update' pk=user.id %}"> Profile</a
-            {% endif %}
-            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+<!--             {% if request.user.user_profile.type == request.user.user_profile.USER_TYPE_CLIENT%}
+ -->            
+<!--             {% endif %}
+ -->    <a class="dropdown-item" href="{% url 'common:update' pk=user.id %}"> Profile</a>
+        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
         </div>
     </div>
     {% endif %}
@@ -142,7 +144,7 @@
                 <form class="input-group">
                     <input type="text" class="form-control form-control-sm" placeholder="Your email" aria-label="Your email" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-sm btn-outline-white my-0" type="button">Sign up</button>
+                        <button class="btn btn-sm btn-outline-white my-0" type="button"  data-toggle="modal" data-target="#signModal">Sign up</button>
                     </div>
                 </form>
             </div>
@@ -156,28 +158,38 @@
             <!-- Grid column -->
             <div class="col-md-4 mx-auto">
                 <!-- Content -->
-                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-                <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
-                    adipisicing elit.</p>
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">eBazarr</h5>
+                <p>eBazarr comes to help you with in your difficult time
+                    </p>
             </div>
             <!-- Grid column -->
             <hr class="clearfix w-100 d-md-none">
             <!-- Grid column -->
             <div class="col-md-2 mx-auto">
                 <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Contact US</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#!">Link 1</a>
+                        <a href="">help@ebazarr.com</a>
                     </li>
                     <li>
-                        <a href="#!">Link 2</a>
+                        <a href="">+92 312 8592826</a>
                     </li>
                     <li>
-                        <a href="#!">Link 3</a>
+                        <a href="">+92 312 8592720</a>
                     </li>
+                
+                </ul>
+            </div>
+            <!-- Grid column -->
+            <hr class="clearfix w-100 d-md-none">
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Customer Care</h5>
+                <ul class="list-unstyled">
                     <li>
-                        <a href="#!">Link 4</a>
+                        <a href="">+92 312 8592826</a>
                     </li>
                 </ul>
             </div>
@@ -186,40 +198,10 @@
             <!-- Grid column -->
             <div class="col-md-2 mx-auto">
                 <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Help Line</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#!">Link 1</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 4</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- Grid column -->
-            <hr class="clearfix w-100 d-md-none">
-            <!-- Grid column -->
-            <div class="col-md-2 mx-auto">
-                <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#!">Link 1</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 4</a>
+                        <a href="">+92 312 8592720</a>
                     </li>
                 </ul>
             </div>
@@ -235,7 +217,7 @@
             <h5 class="mb-1">Register for free</h5>
         </li>
         <li class="list-inline-item">
-            <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+            <a href="" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#signModal">Sign up!</a>
         </li>
     </ul>
     <!-- Call to action -->
@@ -245,7 +227,7 @@
         <div class="mb-5 flex-center">
 
             <!-- Facebook -->
-            <a class="fb-ic">
+            <a class="fb-ic" href="https://www.facebook.com/109602770736689?referrer=whatsapp">
                 <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
             </a>
             <!-- Twitter -->
@@ -272,8 +254,8 @@
     </div>
     <!-- Social buttons -->
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href="#"> JatHub</a>
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="www.ebazarr.com"> eBazarr</a>
     </div>
     <!-- Copyright -->
 </footer>
@@ -290,7 +272,7 @@
             <div class="text-center">
                 <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-4 " id="myModalLabel"><strong>Sign in</strong></h3>
                 <div class="w-100">
-                    <img src="{% static 'img/logo.png' %}" style="width:100px">
+                    <img src="{% static 'img/logoebazar1.jpeg' %}" style="width:100px">
                 </div>
             </div>
             <!--Body-->
@@ -319,18 +301,26 @@
                 </form>
                 <div class="row my-3 d-flex justify-content-center">
                     <!--Facebook-->
-                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-blue btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-facebook-f text-center"></i></a>
+                    
+                    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-blue btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-facebook-f text-center"></i></a>
                     <!--Twitter-->
                     <a href="#" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-twitter"></i></a>
                     <!--Google +-->
-                    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-red btn-rounded z-depth-1a"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-red btn-rounded z-depth-1a"><i class="fab fa-google-plus-g"></i></a>
                 </div>
             </div>
             <!--Footer-->
             <div class="modal-footer mx-5 pt-3 mb-1">
                 <p class="font-small grey-text d-flex justify-content-end">Not a member? <span data-toggle="modal" data-target="#registerModal" class="blue-text ml-1" style="cursor: pointer;">
-            Sign Up</span></p>
+            Sign Up as Customer</span>
+                   
+        </p>
+        <p class="font-small grey-text d-flex justify-content-end"> <span class="blue-text ml-1" style="cursor: pointer;">
+            <a href="{% url 'common:merchant_register' %}" >Sign Up as Retailer</a></span>
+                   
+        </p>
             </div>
+            
         </div>
         <!--/.Content-->
     </div>
@@ -344,7 +334,7 @@
             <div class="text-center">
                 <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-4 "><strong>Sign up</strong></h3>
                 <div class="w-100">
-                    <img src="{% static 'img/logo.png' %}" style="width:100px">
+                    <img src="{% static 'img/logoebazar1.jpeg' %}" style="width:100px">
                 </div>
             </div>
             <!--        model body start-->

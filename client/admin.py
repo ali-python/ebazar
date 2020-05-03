@@ -4,7 +4,7 @@ from .models import Order, OrderItem, Invoice, Payment
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = (
-         '__str__','user', 'state', 'customer_name', 'customer_phone', 'alternate_phone','city',
+         '__str__','user', 'state', 'customer_name', 'customer_phone', 'alternate_phone', 'customer_address',
         'date_created'
     )
 
@@ -18,7 +18,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = (
-         '__str__','order', 'merchant_daily_upload', 'item_quantity', 'item_price',
+         '__str__','order', 'merchant_daily_upload', 'item_quantity', 'item_price', 'item_description',
         'date_added'
     )
 
@@ -28,7 +28,7 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 class InvoiceAdmin(admin.ModelAdmin):
     list_display = (
-         '__str__', 'receipt_no', 'order', 'state', 'amount', 'is_payment',
+         '__str__', 'receipt_no', 'order', 'state', 'amount', 'percentage_amount', 'is_payment',
     )
 
     search_fields = (

@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (ListMerchantDailyRecordView, MerchantDailyRecordDetailView
                     ,OrderItemView,ClientInvoice,InvoiceHistoery, ConfirmClientInvoiceAPIView)
 urlpatterns = [
-    path('records/list/view/', ListMerchantDailyRecordView.as_view(),
+    path('records/list/view/<int:pk>/', ListMerchantDailyRecordView.as_view(),
          name='list_records_view'
          ),
     path('record/<int:pk>/detail/', MerchantDailyRecordDetailView.as_view(),

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, TemplateView,UpdateView, FormView, View
 from .models import Order,OrderItem,Invoice,Payment
 from .forms import OrderForm, OrderItemForm
-from merchant.models import MerchantDailyRecord, MerchantSalesRecords
+from merchant.models import MerchantDailyRecord, MerchantSalesRecords, Merchant
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse, HttpResponseRedirect
 from common.models import UserProfile, City
@@ -13,8 +13,32 @@ from django.db.models import Sum
 class ListMerchantDailyRecordView(ListView):
     model = MerchantDailyRecord
     template_name = 'client/merchant_daily_records.html'
-    paginate_by = 150
+    paginate_by = 20
     is_paginated = True
+
+    def get_queryset(self):
+        queryset = self.queryset
+
+        if not queryset:
+            queryset = MerchantDailyRecord.objects.all().order_by('-id')
+        if self.request.GET.get('item_name'):
+            queryset = MerchantDailyRecord.objects.filter(
+                item_name__contains=self.request.GET.get('item_name'))
+
+
+        if self.request.GET.get('category'):
+            queryset = MerchantDailyRecord.objects.filter(
+                item_category__contains=self.request.GET.get('category'))
+        return queryset.order_by('-id')
+
+    def get_context_data(self, **kwargs):
+        context = super(
+            ListMerchantDailyRecordView, self).get_context_data(**kwargs)
+        merchant = Merchant.objects.get(id=self.kwargs.get('pk'))
+        context.update({
+            'merchant': merchant,
+        })
+        return context
 
 
 class MerchantDailyRecordDetailView(TemplateView):
@@ -59,24 +83,32 @@ class OrderItemView(FormView):
     def form_valid(self, form):
         with transaction.atomic():
             obj = form.save(commit=False)
-
             obj.order = Order.objects.create(
                 customer_name=self.request.POST.get('customer_name'),
                 customer_phone=self.request.POST.get('customer_phone'),
                 alternate_phone=self.request.POST.get('alternate_phone'),
-                city=City.objects.get(city_name=self.request.POST.get('city')),
+                customer_address=self.request.POST.get('address'),
                 user=self.request.user,
             )
+            t_amount= obj.item_price
+            p_amount = float(t_amount) * 3 / 100
+            a_t_p_amount = float(p_amount) - float(t_amount)
+            print(a_t_p_amount)
+            print("_________________________________")
 
             invoice=Invoice.objects.create(
                 order=obj.order,
-                amount=obj.item_price
+                amount=obj.item_price,
+                percentage_amount=p_amount,
+                after_per_t=a_t_p_amount
             )
             invoice.save()
             merchant_sales_record=MerchantSalesRecords.objects.create(
                 merchant_daily_record=obj.merchant_daily_upload,
                 purchased_quantity=obj.item_quantity,
-                purchased_price=obj.item_price
+                purchased_price=obj.item_price,
+                percent_ebazarr=p_amount,
+                after_per_amount=a_t_p_amount
             )
             merchant_sales_record.save()
             self.request.user.user_profile.phone=self.request.POST.get('customer_phone')
@@ -115,6 +147,7 @@ class ClientInvoice(TemplateView):
         context = super(ClientInvoice, self).get_context_data(**kwargs)
         invoice= Invoice.objects.get(id=self.kwargs.get('pk'))
         order_items = invoice.order.customer_order.all()
+        item = OrderItem.objects.filter(order__id=invoice.order.id)
 
         from django.db.models import Sum
         try:
@@ -131,7 +164,8 @@ class ClientInvoice(TemplateView):
             'invoice': invoice,
             'order_items':order_items,
             'total_quantity': total_quantity,
-            'total_price': total_price
+            'total_price': total_price,
+            'item': item
             # 'order':order
 
         })
