@@ -15,18 +15,22 @@
     <div class="text-center" style="background:#9CF4A6;padding:30px 0px;">
         <a href="{% url 'merchant:dashboard' %}"><input type="button" class="btn btn-success " value="Dashboard" title="Dashboard" style="background:#2bbbad!important"></a>
         <a href="#" ><input type="button" class="btn btn-success" data-toggle="modal" data-target="#additem" value="Add Daily Items" title="Add Daily Items" style="background:#2bbbad!important"></a>
-        <a href="{% url 'merchant:records_view' %}" ><input type="button" class="btn btn-success " value="View Daily Record" title="View Records" style="background:#2bbbad!important"></a>
-        <a href="{% url 'merchant:sales_records_view' %}" ><input type="button" class="btn btn-success " value="Daily Sales Record" title="Sales Records" style="background:#2bbbad!important"></a>
+        <a href="{% url 'merchant:records_view' pk=request.user.user_merchant.merchant.id %}" ><input type="button" class="btn btn-success " value="View Daily Record" title="View Records" style="background:#2bbbad!important"></a>
+        <a href="{% url 'merchant:sales_records_view' pk=request.user.user_merchant.merchant.id %}" ><input type="button" class="btn btn-success " value="Daily Sales Record" title="Sales Records" style="background:#2bbbad!important"></a>
     </div>
     <div class="row" style="margin:30px 0px">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    {{request.user.id}}--------
+                    <table>
+                    
+                    </table>
                     <!--<h2 style="text-align:center;text-transform: uppercase;">{{ request.user.user_merchant.merchant.name }}</h2>-->
                     <!--<hr style="background:#000;height:2px">-->
                     <!--<div> Total Quantity {{purchased_quantity}} </div>-->
                     <!--<div> Total price {{purchased_price}} </div>-->
-                    <div class="row" style="margin:20px 0">
+                    <!-- <div class="row" style="margin:20px 0">
                         <div class="col-lg-7">
                             <section class="slider">
                                 <div class="flexslider">
@@ -54,13 +58,6 @@
                                     </ul>
                                 </div>
                             </section>
-<!--                            {% if daily_records.video %}-->
-<!--                            <div style="margin-top:20px">-->
-<!--                                <video  controls  style="width:47%;height:250px">-->
-<!--                                    <source src="{{ daily_records.video.url}}" alt="{{ daily_records.video }}"  type="video/mp4" >-->
-<!--                                </video>-->
-<!--                            </div>-->
-<!--                            {% endif %}-->
                         </div>
                         <div class="col-lg-5 ">
                             <div class="card" style="margin-top:30px">
@@ -74,7 +71,7 @@
                             <br>
                             <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#updaterecord" >update</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -82,7 +79,7 @@
 </div>
 <!-- The Modal -->
 <div class="modal fade" id="additem">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
@@ -116,19 +113,16 @@
                             Upload Image4
                             <span class='label label-info' id="upload-file-info4"></span>
                         </label>
-<!--                        <div class="col-md-12 text-center">-->
-<!--                            <label class="btn btn-success col-lg-5 offset-3" for="video" style="min-height:80px">-->
-<!--                                <input type="file" id="video" name="video" class=" col-lg-3 pull-left" style="display:none" title="Video"  onchange="$('#upload-file-video').html(this.files[0].name)">-->
-<!--                                Upload Video-->
-<!--                                <span class='label label-info' id="upload-file-video"></span>-->
-<!--                            </label>-->
-<!--                        </div>-->
+                        <h4>Item Name</h4>
+                        <input type="text" name="item_name" class="form-control col-lg-3">
                         <h4>item quantity</h4>
                         <input type="text" name="item_quantity" class="form-control col-lg-3">
                         <!--    {{form.item_quantity}}<br>--><br>
                         <h4>item price</h4>
                         <input type="text" name="item_price" class="form-control col-lg-3">
                         <!--    {{form.item_price}}<br>-->
+                        <h4>Item Description</h4>
+                        <textarea name="description" class="form-control" ></textarea>
                         <!-- Modal footer -->
                         <div class="modal-footer" style="margin-top:5px">
                             <button type="submit" class="btn btn-success">Submit</button>
@@ -141,7 +135,7 @@
 </div>
 <!--update Modal -->
 <div class="modal" id="updaterecord">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
@@ -150,7 +144,7 @@
             </div>
             <!-- Modal body -->
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 text-center">
                     <div class="container">
                         <!--<h2>{{ request.user.user_merchant.merchant.name }}</h2>-->
                         <form method="post" enctype="multipart/form-data">

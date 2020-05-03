@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
+<style>
+    .flex-control-thumbs img {
+        height:100px !important;
+    }
+    .flexslider .slides img {
+        height:300px !important;
+    }
+</style>
+
+
+    <div class="row" style="margin:30px 0px">
+        <div class="col-lg-2">
+            <a href="{% url 'common:admin_client_invoices' %}">
+            <div class="card">
+                <button>Invoices</button>
+            </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div class="modal fade" id="additem">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="container">
+                <div class="row">
+                    <h1>Welcome Admin</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

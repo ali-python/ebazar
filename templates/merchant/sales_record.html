@@ -16,8 +16,8 @@
     <div class="text-center" style="background:#9CF4A6;padding:30px 0px">
         <a href="{% url 'merchant:dashboard' %}"><input type="button" class="btn btn-default" value="Dashboard" title="Dashboard" style="background:#2bbbad!important"></a>
         <a href="#" ><input type="button" class="btn btn-default " data-toggle="modal" data-target="#additem" value="Add Daily Items" title="Add Daily Items" style="background:#2bbbad!important"></a>
-        <a href="{% url 'merchant:records_view' %}" ><input type="button" class="btn btn-default" value="View Records" title="View Daily Record" style="background:#2bbbad!important"></a>
-        <a href="{% url 'merchant:sales_records_view' %}" ><input type="button" class="btn btn-default" value="Sales Records" title="Daily Sales Record" style="background:#2bbbad!important"></a>
+        <a href="{% url 'merchant:records_view' pk=request.user.user_merchant.merchant.id %}" ><input type="button" class="btn btn-default" value="View Records" title="View Daily Record" style="background:#2bbbad!important"></a>
+        <a href="{% url 'merchant:sales_records_view' pk=request.user.user_merchant.merchant.id %}" ><input type="button" class="btn btn-default" value="Sales Records" title="Daily Sales Record" style="background:#2bbbad!important"></a>
 
     </div>
     <div class="row">
@@ -32,7 +32,9 @@
                         <thead>
                         <tr>
                             <th><i class=" fa fa-bookmark"></i> Purchase Price</th>
-                            <th><i class="fa fa-bullhorn"></i> Purchase Block Quantity</th>
+                            <th><i class="fa fa-bullhorn"></i> Purchase Item Quantity</th>
+                            <th><i class="fa fa-bullhorn"></i> 3 % Ebazarr</th>
+                            <th><i class="fa fa-bullhorn"></i> Total</th>
                             <th><i class="fa fa-question-circle"></i> Date</th>
                         </tr>
                         </thead>
@@ -41,6 +43,8 @@
                         <tr>
                             <td> {{ post.purchased_price }}</td>
                             <td>{{ post.purchased_quantity }}</td>
+                            <td>{{post.percent_ebazarr}}</td>
+                            <td>{{post.after_per_amount}}</td>
                             <td>{{ post.added_date }}</td>
                         </tr>
                         {% endfor %}
@@ -62,4 +66,19 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+ <script>
+$(document).ready(function(){
+            $.post("{% url 'merchant:invoice_api' %}", {
+                merchant_id : '{{request.user.user_merchant.merchant.id}}',
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },function(result, status){
+                  console.log(result, status);
+            });
+
+        })
+    </script>
 {% endblock %}

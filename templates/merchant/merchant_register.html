@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="row">
+        <h1 class="col-lg-12 text-center">Merchant Registration</h1>
+        <!--<h2 class="col-lg-12 text-center">{{ request.user.user_merchant.merchant.name }}</h2>-->
+
+        <form method="post" action="{% url 'common:merchant_register' %}" enctype="multipart/form-data" class="col-lg-12 form-group">
+            {% csrf_token %}
+            <label>UserName</label>
+            <input type="text" name="username" class="form-control col-lg-3" required>
+            <label>Phone</label>
+            <input type="text" name="phone" class="form-control col-lg-3" required>
+            <label>Password</label>
+            <input type="password" name="password1" class="form-control col-lg-3" required>
+            <label>Confirm Password</label>
+            <input type="password" name="password2" class="form-control col-lg-3" required>
+            <label>Shop Name</label>
+            <input type="text" name="shop_name" class="form-control col-lg-3" required>
+            <label>Shop Address</label><br>
+            <textarea name="address" required></textarea>
+            <br>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

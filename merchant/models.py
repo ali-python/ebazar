@@ -11,6 +11,8 @@ class Merchant(models.Model):
     phone = models.CharField(max_length=200, blank=True, null=True)
     city=models.ForeignKey(City, on_delete=models.CASCADE, related_name='city',
                            null=True, blank=True)
+    shop_name = models.CharField(max_length=200, null=True, blank=True)
+    location = models.CharField(max_length=200, null=True, blank=True)
     address = models.CharField(max_length=300, blank=True, null=True)
     status = models.BooleanField(default=True)
 
@@ -35,13 +37,15 @@ class MerchantDailyRecord(models.Model):
     image_2 = models.ImageField(upload_to="gallery", null=True, blank=True)
     image_3 = models.ImageField(upload_to="gallery", null=True, blank=True)
     image_4 = models.ImageField(upload_to="gallery", null=True, blank=True)
-    video = models.FileField(upload_to="gallery", null=True, blank=True)
+    item_name = models.CharField(max_length=200, null=True, blank=True)
+    item_category = models.CharField(max_length=200, null=True, blank=True)
     item_quantity = models.CharField(max_length=200, null=True, blank=True)
     item_price = models.CharField(max_length=200, null=True, blank=True)
     expiry = models.BooleanField(default=True)
     mid=models.CharField(
         max_length=20, unique=True, blank=True, null=True
     )
+    description = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.merchant.name if self.merchant else ''
@@ -58,6 +62,8 @@ class MerchantSalesRecords(models.Model):
         max_digits=65, decimal_places=2, default=0,
         blank=True, null=True,
     )
+    percent_ebazarr = models.DecimalField(max_digits=65, decimal_places=2, default=0, null=True, blank=True)
+    after_per_amount = models.DecimalField(max_digits=65, decimal_places=2, default=0, null=True, blank=True)
     purchased_price = models.DecimalField (
         max_digits=65, decimal_places=2, default=0,
         blank=True, null=True,

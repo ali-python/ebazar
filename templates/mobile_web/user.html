@@ -1,0 +1,153 @@
+{% extends 'mobile_web/mobile_base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12" style="margin:30px 0">
+            <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist" style="background:#66c376ed;padding:10px">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                       aria-controls="pills-home" aria-selected="true">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                       aria-controls="pills-profile" aria-selected="false">Update Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-invoice" role="tab"
+                       aria-controls="pills-invoice" aria-selected="false">Invoices</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="card">
+                                <div class="card-body">
+                                    <h1 class="text-center"> Personal Info</h1>
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <td>{{user_profile.user.username}}</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody >
+                                        <tr>
+                                            <th>Phone</th>
+                                            <td>{{user_profile.phone}}</td>
+
+                                        </tr>
+                                         <tr>
+                                            <th>Aternate Phone</th>
+                                            <td>{{user_profile.alternate_phone}}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th>Gender</th>
+                                            <td>{{user_profile.gender}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td>{{user_profile.address}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="card  text-dark">
+                            <div class="card-body ">
+                                <form  method="post" action="{% url 'mobile:user_info' pk=request.user.user_profile.id %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label>Profile Name</label>
+                                        <input type="text"  name="username" value="{{object.user}}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="text"  name="phone" value="{{object.phone}}" class="form-control">
+                                    </div>
+                                     <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="text"  name="alternate_phone" value="{{object.alternate_phone}}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Select City</label>
+                                        <select name="gender" class="form-control">
+                                            <option>Dubai</option>
+                                            <option >Abu Dubai</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Select Gender</label>
+                                        <select name="gender" class="form-control">
+                                            <option>m</option>
+                                            <option >f</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text"  name="address" value="{{object.address}}" class="form-control">
+                                    </div>
+                                    <input type="hidden" name="user" value="{{request.user.id}}">
+                                    <input type="submit" value="Save" class="btn btn-success">
+                                </form>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-invoice" role="tabpanel" aria-labelledby="pills-contact-tab">
+                     <div class="card  text-dark">
+                                <div class="card-body">
+                                    <!--<h2 class="text-center">user: {{ request.user.username }}</h2>-->
+                                    <table class="table table-hover invoice-table">
+                                        <thead>
+                                        <tr>
+                                            <th><i class=" fa fa-bookmark"></i> Receipt No.</th>
+                                            <th><i class="fa fa-bullhorn"></i> state</th>
+                                            <th><i class="fa fa-question-circle"></i> amount</th>
+                                            <th><i class=" fa fa-edit"></i> customer phone</th>
+                                            <th><i class="fa fa-plus"></i> Quantity</th>
+                                            <th><i class=" fa fa-try"></i> Price</th>
+                                            <th><i class=" fa fa-calendar"></i> Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+
+                                        {% if invoices %}
+                                        {% for invoice in invoices %}
+                                        <tbody >
+                                        <tr>
+                                            {% for invoice_order in invoice.invoice_order.all %}
+                                            <td>{{invoice_order.receipt_no}}</td>
+                                            <td>{{invoice_order.state}}</td>
+                                            <td> {{invoice_order.amount}}</td>
+                                            {% endfor %}
+                                            <td>{{invoice.customer_phone}}</td>
+                                            {% for order in invoice.customer_order.all %}
+                                            <td>{{order.item_quantity}}</td>
+                                            <td>{{order.item_price}}</td>
+                                            {% endfor %}
+                                            <td>{{invoice.date_created}}</td>
+                                            <td>
+                                                <a href="#"><button class="btn btn-success btn-xs"><i class="fa fa-eye" title="Invoice list"></i></button></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </table>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

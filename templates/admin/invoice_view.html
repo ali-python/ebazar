@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12" style="margin:30px 0">
+            <div class="card text-dark">
+                <div class="card-body">
+                    <!--                    <h1>client : {{request.user.username}}</h1>-->
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h1>Invoice</h1><h2> {% for item in item %}
+                        {{item.merchant_daily_upload.merchant.shop_name|title}}
+                        {% endfor %}</h2>
+                        </div>
+                  
+                       
+                        <br>
+                        <div class="col-md-12">
+                            {% if invoice.state == 'Pending' %}
+                                <div class="confirmation-btn pull-right"><button class="btn btn-success pull-right confirm_btn">Confirm Payment</button></div>
+                            {% else %}
+                                <div class="confirmation-btn pull-right">Your Order is Confirmed!</div>
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6">
+                                    <label><strong> Name:</strong></label> <span style="margin: 15px; text-align: center;">{{invoice.order.user.username|title}}545</span><br>
+                                    <label><strong> Phone:</strong></label> <span style="margin: 15px;">{{invoice.order.customer_phone}}</span><br>
+                                    <label><strong> Address:</strong></label> <span style="margin: 15px;">{{invoice.customer_address}}</span><br>
+                                    <label><strong> City:</strong></label> <span style="margin: 15px;">Quetta</span><br>
+                                    <label><strong>Date:</strong></label><span style="margin: 15px;">{{invoice.order.date_created}}</span><br>
+                                    <br>
+                                </div>
+                            </div>
+                            <span style="float: right; font-size: large">Receipt No. <span style="color:red">{{invoice.receipt_no}}</span></span>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr class="item-row">
+                                        <th>Item ID</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Description</th>   
+                                        <th>Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        {% for item in order_items %}
+                                        <td>{{item.id|stringformat:"07d"}}</td>
+                                        <td>{{ item.item_price }}</td>
+                                        <td>{{ item.item_quantity }}</td>
+                                        <td>{{item.item_description}}</td>
+                                        {% endfor %}
+                                        <td>{{invoice.amount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr style="border-top: 3px solid">
+                                        <td></td>
+                                        <td></td>
+
+                                        <td></td>
+                                        <td class="text-right"><strong>State</strong></td>
+                                        <td class="invoice-state">{{invoice.state}}</td>
+                                    </tr>
+                                    <tr>
+                                        {% for item in order_items %}
+                                        <td><strong>Total Quantity: </strong><span id="totalQty" style="color: red; font-weight: bold">{{ item.item_quantity }}</span> Units</td>
+                                        {% endfor %}
+                                        <td></td>
+                                        <td></td>   
+                                        <td class="text-right"><strong>Discount</strong></td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"><strong>Shipping</strong></td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"><strong>Grand Total</strong></td>
+                                        <td><span id="grandTotal" style="color: red;">{{invoice.amount}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"><strong>Kindly Pay Amount to Delivery Boy</strong></td>
+                                        <td><span id="receivedAmount">{{invoice.amount}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"><strong>Remaining Payment</strong></td>
+                                        <td><span id="remainingAmount">{{invoice.amount}}</span></td>
+                                    </tr>
+                                    {% if request.user.user_profile.type == 'USER_TYPE_COMPANY' %}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"><strong>3 % to eBazarr</strong></td>
+                                        <td><span id="remainingAmount">{{invoice.after_per_t}}</span></td>
+                                    </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <br>
+                            {% if invoice.state == 'Pending' %}
+                                <div class="confirmation-btn pull-right"><button class="btn btn-success pull-right confirm_btn">Confirm Payment</button></div>
+                            {% else %}
+                                <div class="confirmation-btn pull-right">Your Order is Confirmed!</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <span style="text-decoration-style:solid; color: blue;"> Powered By ebazarr www.ebazarr.com</span>
+                    <span style="color: red;">Stay Home Stay Safe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

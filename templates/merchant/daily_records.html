@@ -6,8 +6,8 @@
     <div class="text-center" style="background:#9CF4A6;padding:30px 0px">
         <a href="{% url 'merchant:dashboard' %}"><input type="button" class="btn btn-success " value="DashBoard" title="Dashboard"  style="background:#2bbbad!important"></a>
         <a href="#" ><input type="button" class="btn btn-success " data-toggle="modal" data-target="#additem" value="Add Daily Items" title="Add Daily Items" style="background:#2bbbad!important"></a>
-        <a href="{% url 'merchant:records_view' %}" ><input type="button" class="btn btn-success " value="View Records" title="View Daily Record" style="background:#2bbbad!important"></a>
-        <a href="{% url 'merchant:sales_records_view' %}" ><input type="button" class="btn btn-success " value="Sales Records" title="Daily Sales Record" style="background:#2bbbad!important"></a>
+        <a href="{% url 'merchant:records_view' pk=request.user.user_merchant.merchant.id  %}" ><input type="button" class="btn btn-success " value="View Records" title="View Daily Record" style="background:#2bbbad!important"></a>
+        <a href="{% url 'merchant:sales_records_view' pk=request.user.user_merchant.merchant.id %}" ><input type="button" class="btn btn-success " value="Sales Records" title="Daily Sales Record" style="background:#2bbbad!important"></a>
     </div>
     <div class="row">
         <div class="col-lg-12" style="margin-top:30px">
@@ -21,7 +21,10 @@
                                 <thead>
                                 <tr>
                                     <th><i class=" fa fa-bookmark"></i> Item Price</th>
+                                    <th><i class=" fa fa-bookmark"></i> Image</th>
+                                    <th><i class=" fa fa-bookmark"></i> Item Name</th>
                                     <th><i class="fa fa-bullhorn"></i> Item Block Quantity</th>
+                                    <th><i class="fa fa-bullhorn"></i> Description</th>
                                     <th><i class="fa fa-question-circle"></i> Date & Time</th>
                                 </tr>
                                 </thead>
@@ -30,7 +33,14 @@
                                 {% for post in object_list %}
                                 <tr>
                                     <td> {{ post.item_price }}</td>
+                                    <td>  {% if post.image_1 %}
+                                        <li data-thumb="{{ post.image_1.url}}" style="width: 200px;">
+                                            <img src="{{ post.image_1.url}}"  alt="{{ post.image_1 }}" width="200px" />
+                                        </li>
+                                        {% endif %}</td>
+                                    <td>{{post.item_name}}</td>
                                     <td>{{ post.item_quantity }}</td>
+                                    <td>{{ post.description }}</td>
                                     <td>{{ post.upload_time }}</td>
                                 </tr>
                                 {% endfor %}
@@ -62,7 +72,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}
 

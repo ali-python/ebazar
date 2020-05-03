@@ -32,9 +32,7 @@ class Order(models.Model):
     customer_name=models.CharField(max_length=200, null=True, blank=True)
     customer_phone=models.CharField(max_length=100, null=True, blank=True)
     alternate_phone=models.CharField(max_length=100, null=True, blank=True)
-    city=models.ForeignKey(City, on_delete=models.CASCADE,
-                            related_name='order_city',null=True, blank=True
-                            )
+    customer_address = models.CharField(max_length=300, null=True, blank=True)
     date_created=models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
@@ -51,6 +49,7 @@ class OrderItem(models.Model):
                                             )
     item_quantity=models.IntegerField(default=0, null=True, blank=True)
     item_price=models.IntegerField(default=0, null=True, blank=True)
+    item_description = models.CharField(max_length=300, null=True, blank=True)
     date_added=models.DateTimeField(auto_now=True, null=True, blank=True)
     #
     # def __str__(self):
@@ -62,14 +61,6 @@ class Invoice(models.Model):
     STATE_TYPE_PAID = 'Paid'
     STATE_TYPE_CONFIRMED = 'Confirmed'
     STATE_TYPE_RECEIVED = 'Received'
-
-
-    # Confirmed
-    # Received
-
-    # support_status boolean field default False
-    # transport_status boolean field default False
-    # cash_on_delivery boolean field default True
     support_status=models.BooleanField(default=False)
     transport_status=models.BooleanField(default=False)
     cash_on_delivery=models.BooleanField(default=True)
@@ -89,6 +80,8 @@ class Invoice(models.Model):
                               related_name='invoice_order'
                               )
     amount=models.IntegerField(default=0, null=True, blank=True)
+    percentage_amount = models.IntegerField(default=0, null=True, blank=True)
+    after_per_t = models.DecimalField(max_digits=65, decimal_places=2, default=0, null=True, blank=True)
     is_payment=models.BooleanField(default=True)
 
 
