@@ -25,7 +25,7 @@ SECRET_KEY = 'dp9#x5_r@)4wgnehjp()4jcrlp6%(1slm2lbpybr^4won=f)a-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['204.44.81.55']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -192,7 +192,7 @@ MEDIA_ROOT = os.path.join(ROOT_DIR, 'media')
 # If True, will check the request headers to detect if the request is
 # from a smart phone and will set the necessary request attributes to
 # enable the mobile experience.
-MOBILE_ENABLED = True
+MOBILE_ENABLED = False
 
 
 #

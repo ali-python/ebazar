@@ -3,283 +3,207 @@
 {% load static %}
 {% load staticfiles %}
 <head>
-    <meta charset="UTF-8">
-    <title>Here is the Mobile Design</title>
-
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <!--        Bootstrap css file - -->
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+<!--    <link rel="stylesheet" href="{% static 'css/style.css' %}">-->
     <link href="{% static 'css/bootstrap_4.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
     <!-- Material Design Bootstrap -->
     <link href="{% static 'css/md_bootstrap.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
-
-    <style>
-      .hc-nav-trigger {
-        left: 20px;
-      }
-
-      .hc-nav-trigger span,
-      .hc-nav-trigger span::before,
-      .hc-nav-trigger span::after {
-        background: #fff;
-      }
-      .mbl_header{
-        position:relative;
-        background:#2ca050;
-        padding: 15px 0px;
-      }
-      .hc-nav-trigger{
-        top:15px;
-      }
-      .hc-offcanvas-nav .nav-container{
-        width:80%;
-      }
-      .hc-offcanvas-nav a, .hc-offcanvas-nav .nav-item{
-        font-size:32px;
-      }
-      .nav_button{
-        border-radius: 62px;
-        font-size: 50px;
-        padding: 30px;
-        text-align:left;
-      }
-      .hc-offcanvas-nav .nav-container, .hc-offcanvas-nav .nav-wrapper, .hc-offcanvas-nav ul {
-         background: #823174;
-       }
-      .hc-offcanvas-nav li.nav-close a, .hc-offcanvas-nav li.nav-back a {
-         background: #bd41b4;
-       }
-      .nav_btn{
-         border-radius: 62px;
-         font-size: 50px;
-         padding: 30px;
-         border:1px solid #fff;
-         text-align:left;
-       }
-      .img_user{
-        border: solid 2px #ccc;
-        display: inline-block;
-        padding: 20px 15px;
-        border-radius: 203px;
-        overflow: hidden;
-        margin-left: 37%;
-        margin-top: 25px;
-      }
-      .font_user{
-        font-size: 210px;
-        color: #ccc;
-        margin-bottom: -30px;
-        display: block;
-      }
-      .icon_font{
-        font-size:70px !important;
-        display:inline-block;
-        float:right
-      }
-      .logo_img{
-        position: absolute;
-        z-index: 1;
-        border-radius: 50%;
-        width: 5%;
-        top: 0px;
-        left: 45%;
-      }
-
-    </style>
     <!-- Font Awesome -->
+    <link href="{% static 'css/sweetalert2.min.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/jquery.flexslider.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
-    <script src="{% static 'js/hc-offcanvas-nav.js' %}"></script>
 
+
+    <style>
+.logo_jathub{
+    border-radius:50%;
+    z-index:1;
+    width: 7%;
+    position: absolute;
+    top: -16px;
+    left: 5%;
+}
+.bg_img{
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+.bg_button{
+    position: absolute;
+    bottom: 6%;
+    left: 0%;
+    width: 100%;
+}
+.bank_card{
+    width:25%;
+    float:left;
+    height: 35px;
+    padding: 2px;
+}
+@media only screen and (max-width : 1440px) {
+.logo_jathub{
+    width: 215px;
+    top: -9px;
+    }
+}
+
+@media only screen and (max-width : 1024px) {
+.logo_jathub{
+    width: 215px;
+    top: -5px;
+    }
+}
+
+@media only screen and (max-width : 786px) {
+.logo_jathub{
+    width: 215px;
+    top: -6px;
+}
+}
+
+@media only screen and (max-width : 480px) {
+.logo_jathub{
+    width: 215px;
+    top: -6px;
+}
+}
+@media only screen and (max-width : 320px) {
+.logo_jathub{
+    width: 215px;
+    top: -6px;
+    }
+.step_position{
+    display:none;
+    }
+}
+
+    </style>
+    <!-- bootstrap css file ---->
+    <title>Jathub home page</title>
 </head>
 <body>
 <div class="row" style="margin:0px">
-    <div class="col-sm-12 mbl_header">
-        <nav id="nav">
-            <ul>
-                <!--<li>-->
-                <!--<a>Pages</a>-->
-                <!--<ul data-bind="template: { name: 'page-template', data: {pages: pages}}"></ul>-->
-                <!--</li>-->
-                <li>
-                    <span class="img_user">
-                        <i class="fa fa-user font_user"></i>
-                    </span>
-                </li>
-
-                 {%if not user.is_authenticated%}
-                <li>
-                    <a href="{% url 'mobile:login' %}">
-                        <button type="button" class="btn btn-blue-grey btn-block nav_button">SIGN IN <i class="fas fa-sign-in-alt icon_font"></i></button>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url  'mobile:register' %}">
-                        <button type="button" class="btn btn-mdb-color btn-block nav_button">SIGN UP <i class="fas fa-sign-in-alt icon_font"></i></button>
-                    </a>
-                </li>
-                {% endif %}
-                {%if  user.is_authenticated%}
-                <li>
-                    <a href="{% url 'mobile:home' %}">
-                        <button type="button" class="btn btn-block nav_btn">HOME <i class="fa fa-home icon_font"></i></button>
-                    </a>
-                </li>
-                {% if request.user.user_profile.type == request.user.user_profile.USER_TYPE_CLIENT%}
-                <li>
-                    <a href="{% url 'mobile:user_info' pk=request.user.user_profile.id %}">
-                        <button type="button" class="btn btn-block nav_btn">PROFILE <i class="fas fa-male icon_font"></i></button>
-                    </a>
-                </li>
-                {% endif %}
-                {% endif %}
-                <li>
-                    <a href="#">
-                        <button type="button" class="btn btn-block nav_btn">CALL SUPPORT <i class="fa fa-phone icon_font"></i></button>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <button type="button" class="btn btn-block nav_btn">ONLINE CHAT <i class="fas fa-comments icon_font"></i></button>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <button type="button" class="btn btn-block nav_btn">DOWNLOAD APP <i class="fab fa-apple icon_font"></i></button>
-                    </a>
-                </li>
-                 {%if user.is_authenticated%}
-                <li>
-                    <a href="{% url 'logout' %}">
-                        <button type="button" class="btn  btn-block nav_btn">LOGOUT <i class="fas fa-sign-out-alt icon_font"></i></button>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-        <script type="text/html" id="page-template">
-            <!-- ko foreach: pages -->
-            <li>
-                <a data-bind="click: $root.clicked">
-                    <span data-bind="text: title"></span>
-                </a>
-                <!-- ko if: pages().length > 0 -->
-                <ul data-bind="template: { name: 'page-template', data: {pages: pages}}"></ul>
-                <!-- /ko -->
-            </li>
-            <!-- /ko -->
-            <li><a data-bind="click: $root.createItem">New item</a></li>
-        </script>
-        <script>
-        (function($) {
-
-          var Nav;
-
-          var PageModel = function (page) {
-            var self = this;
-
-            self.id = page.id;
-            self.title = page.title;
-            self.pages = ko.observableArray();
-
-            self.pages(ko.utils.arrayMap(page.pages, function(page) {
-              return new PageModel(page);
-            }));
-          }
-
-          var NavigationModel = function(pages) {
-            var self = this;
-
-            self.pages = ko.observableArray();
-
-            self.pages(ko.utils.arrayMap(pages, function(page) {
-              return new PageModel(page);
-            }));
-
-            self.clicked = function(data) {
-              console.log('You clicked an item', data.title);
-            }.bind(self);
-
-            self.createItem = function(data) {
-              console.log('New item added');
-
-              data.pages.push({
-                title: 'N',
-                pages: ko.observableArray()
-              });
-
-              // update nav
-              Nav.update(true);
-
-              // or you can update the nav when it closes
-              /*Nav.on('close', (e) => {
-                Nav.update(true);
-                Nav.off('close');
-              });*/
-
-            }.bind(self);
-          };
-
-          var pages = [
-            {
-              title: 'X',
-              pages: [
-                {
-                  title: 'XX',
-                  pages: []
-                },
-                {
-                  title: 'XXX',
-                  pages: []
-                }
-              ]
-            },
-            {
-              title: 'Y',
-              pages: []
-            },
-            {
-              title: 'Z',
-              pages: []
-            }
-          ];
-
-          ko.applyBindings(new NavigationModel(pages));
-
-          Nav = $('#nav').hcOffcanvasNav({
-            maxWidth: false,
-            levelTitles: true,
-            closeOnClick: false
-          });
-        })(jQuery);
-      </script>
-        <a class="navbar-brand" href="{% url 'mobile:home' %}"><img src="{% static 'img/logo.png' %}" class="logo_img" > </a>
+    <div class="col-lg-4 col-sm-12 text-right">
+        <B><h5 style="padding-top:20px; font-family: Impact, Charcoal, sans-serif; color:blue;">eBazarr Stay Home Stay Safe </h5></B>
+    </div>
+    <div class="col-lg-4" style="padding-top:10px">
+        <p class="col-lg-3" style="float:left;line-height: 17px;">Secure Payments</p>
+        <img class="col-lg-2 bank_card" src="{% static 'img/Visa.png' %}">
+        <img class="col-lg-2 bank_card" src="{% static 'img/mastercd.png' %}">
+        <img class="col-lg-2 bank_card" src="{% static 'img/paypal.png' %}" >
+        <img class="col-lg-2 bank_card" src="{% static 'img/Visa.png' %}">
+    </div>
+    <div class="col-lg-4 col-md-12 col-xs-12">
+        <h6 class="col-lg-5 col-md-6 col-xs-6 pull-left phone" style="padding:20px 0 0 0"><i class="fa fa-phone"></i> +92 312 8592826 </h6>
+        <h6 class="col-lg-7 col-md-6 col-xs-6 pull-right phone" style="padding:0px;padding-top:20px"><i class="fas fa-envelope"></i> help@ebazarr.com </h6>
     </div>
 </div>
-<div class="row" style="margin:0px">
-    <div class="col-lg-12" style="padding:0px;position:relative">
-        <div class="bg_img">
-            <img src="{% static 'img/camel1.jpg' %}" style="width:100%;height:340px">
+<nav class="navbar navbar-dark" style="background:#36c53aad;position:relative">
+    <a class="navbar-brand " href="{% url 'home' %}">
+        <img src="{% static 'img/logoebazar1.jpeg' %}" width="215px" style="border-radius: 10%;" >
+
+    </a>
+    {%if not user.is_authenticated%}
+    <div class="btn btn-default pull-right" data-toggle="modal" data-target="#signModal" style="color:#fff;"><i class="fa fa-user"></i> Login</div>
+    {% endif %}
+    {%if user.is_authenticated%}
+    <div class="dropdown pull-right">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background:#42E289">
+            Hi ! {{ user.username }}
+        </button>
+        <div class="dropdown-menu">
+<!--             {% if request.user.user_profile.type == request.user.user_profile.USER_TYPE_CLIENT%}
+ -->            
+<!--             {% endif %}
+ -->    <a class="dropdown-item" href="{% url 'common:update' pk=user.id %}"> Profile</a>
+        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
         </div>
     </div>
+    {% endif %}
+</nav>
+<!--    middle body work start here-->
+<div  style="background:#FBF7F7;">
+    {% block content %} {% endblock %}
 </div>
-{% block content %}{% endblock %}
-<!-- footer --->
+<!--    middle body work end here-->
+<!--    footer work start here-->
 <footer class="page-footer font-small pt-4" style="background:#66c376ed;">
+    <!-- Footer Elements -->
+    <div class="container">
+        <!--Grid row-->
+        <div class="row">
+            <div class="col-md-6 offset-3 mb-4">
+                <form class="input-group">
+                    <input type="text" class="form-control form-control-sm" placeholder="Your email" aria-label="Your email" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-white my-0" type="button"  data-toggle="modal" data-target="#signModal">Sign up</button>
+                    </div>
+                </form>
+            </div>
+            <!--Grid column-->
+        </div>
+    </div>
     <!-- Footer Links -->
     <div class="container text-center text-md-left">
         <!-- Grid row -->
         <div class="row">
             <!-- Grid column -->
-            <div class="col-md-5 mx-auto">
+            <div class="col-md-4 mx-auto">
                 <!-- Content -->
-                <h5 class="font-weight-bold text-center">Secure Payments</h5>
-                <img src="{% static 'img/card_img.png' %}" style="width:100%">
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">eBazarr</h5>
+                <p>eBazarr comes to help you with in your difficult time
+                    </p>
+            </div>
+            <!-- Grid column -->
+            <hr class="clearfix w-100 d-md-none">
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Contact US</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="">help@ebazarr.com</a>
+                    </li>
+                    <li>
+                        <a href="">+92 312 8592826</a>
+                    </li>
+                    <li>
+                        <a href="">+92 312 8592720</a>
+                    </li>
+                
+                </ul>
+            </div>
+            <!-- Grid column -->
+            <hr class="clearfix w-100 d-md-none">
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Customer Care</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="">+92 312 8592826</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+            <hr class="clearfix w-100 d-md-none">
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Help Line</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="">+92 312 8592720</a>
+                    </li>
+                </ul>
             </div>
             <!-- Grid column -->
         </div>
@@ -287,12 +211,23 @@
     </div>
     <!-- Footer Links -->
     <hr>
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center py-2">
+        <li class="list-inline-item">
+            <h5 class="mb-1">Register for free</h5>
+        </li>
+        <li class="list-inline-item">
+            <a href="" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#signModal">Sign up!</a>
+        </li>
+    </ul>
+    <!-- Call to action -->
+    <hr>
     <!-- Social buttons -->
-    <div class="col-md-12 ">
-        <h4 class="text-center" style="padding-bottom:15px">Follow US </h4>
+    <div class="col-md-12 py-5">
         <div class="mb-5 flex-center">
+
             <!-- Facebook -->
-            <a class="fb-ic">
+            <a class="fb-ic" href="https://www.facebook.com/109602770736689?referrer=whatsapp">
                 <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
             </a>
             <!-- Twitter -->
@@ -303,28 +238,189 @@
             <a class="gplus-ic">
                 <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
             </a>
+            <!--Linkedin -->
+            <a class="li-ic">
+                <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
             <!--Instagram-->
             <a class="ins-ic">
                 <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+            </a>
+            <!--Pinterest-->
+            <a class="pin-ic">
+                <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
             </a>
         </div>
     </div>
     <!-- Social buttons -->
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href="#"> JatHub</a>
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="www.ebazarr.com"> eBazarr</a>
     </div>
     <!-- Copyright -->
 </footer>
+<!-- Footer -->
+<!--    footer work end here-->
+<!--    sign in and sign up form -->
+<!--    sign in form end here-->
+<!-- Modal -->
+<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content form-elegant">
+            <!--Header-->
+            <div class="text-center">
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-4 " id="myModalLabel"><strong>Sign in</strong></h3>
+                <div class="w-100">
+                    <img src="{% static 'img/logoebazar1.jpeg' %}" style="width:100px">
+                </div>
+            </div>
+            <!--Body-->
+            <div class="modal-body mx-4">
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <!--Body-->
+                    <div class="md-form mb-5">
+                        <i class="fas fa-envelope prefix"></i>
+                        <input type="text"   name="username"  class="form-control validate">
+                        <label>Username</label>
+                    </div>
+                    <div class="md-form pb-3">
+                        <i class="fas fa-lock prefix"></i>
+                        <input type="password" id="Form-pass1" name="password" class="form-control validate">
+                        <label> password</label>
+                        <p class="font-small blue-text d-flex justify-content-end">Forgot <a href="#" class="blue-text ml-1">
+                            Password?</a></p>
+                    </div>
 
+                    <div class="text-center mb-3">
+                        <button type="submit" value="login" class="btn btn-success btn-block btn-rounded z-depth-1a">Sign in</button>
+                    </div>
+                    <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in
+                        with:</p>
+                </form>
+                <div class="row my-3 d-flex justify-content-center">
+                    <!--Facebook-->
+                    
+                    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-blue btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-facebook-f text-center"></i></a>
+                    <!--Twitter-->
+                    <a href="#" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-twitter"></i></a>
+                    <!--Google +-->
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-red btn-rounded z-depth-1a"><i class="fab fa-google-plus-g"></i></a>
+                </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer mx-5 pt-3 mb-1">
+                <p class="font-small grey-text d-flex justify-content-end">Not a member? <span data-toggle="modal" data-target="#registerModal" class="blue-text ml-1" style="cursor: pointer;">
+            Sign Up as Customer</span>
+                   
+        </p>
+        <p class="font-small grey-text d-flex justify-content-end"> <span class="blue-text ml-1" style="cursor: pointer;">
+            <a href="{% url 'common:merchant_register' %}" >Sign Up as Retailer</a></span>
+                   
+        </p>
+            </div>
+            
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal -->
+<!--registration page start here-->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content form-elegant">
+            <!-- Modal Header -->
+            <div class="text-center">
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-4 "><strong>Sign up</strong></h3>
+                <div class="w-100">
+                    <img src="{% static 'img/logoebazar1.jpeg' %}" style="width:100px">
+                </div>
+            </div>
+            <!--        model body start-->
+            <div class="modal-body mx-4">
+                <form class="form-login" method="post" action="{% url 'common:register' %}">
+                    {% csrf_token %}
+                    <div class="md-form mb-5">
+                        <i class="fas fa-envelope prefix"></i>
+                        <input type="text" class="form-control  validate" name="username" value="{{ username }}" autofocus>
+                        <label>Username</label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fas fa-phone prefix"></i>
+                        <input type="text"  name="phone"   value="{{ phone }}" class="form-control validate">
+                        <label>Phone</label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fa fa-lock prefix"></i>
+                        <input type="password" name="password1" value="{{ password1 }}" class="form-control validate">
+                        <label>Password</label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fa fa-lock prefix"></i>
+                        <input type="password" name="password2" value="{{ password2 }}" class="form-control validate">
+                        <label>Confirm Password</label>
+                    </div>
+                    <!--<input type="text" class="form-control form-group" placeholder="Username" name="username" value="{{ username }}" autofocus>-->
+                    <!--<input type="text" class="form-control form-group" placeholder="Phone No" name="phone" value="{{ phone }}">-->
+                    <!--<input type="password" class="form-control form-group" name="password1" placeholder="Password" value="{{ password1 }}">-->
+                    <!--<input type="password" class="form-control form-group" name="password2" placeholder="Confirm Password" value="{{ password2 }}">-->
+                    <button class="btn aqua-gradient btn-block btn-rounded" type="submit"> Register</button>
+                    <div class="col-md-12" style="margin-top:10px">
+                        <p class="font-small  d-flex justify-content-end">Have an account? <a href="#" class="green-text ml-1 font-weight-bold">
+                            Log in</a></p>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-12 text-center" style="margin:15px 0 25px">
+                        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger  col-md-3"><i class="fab fa-google"></i></a>
+                        <a class="btn btn-primary  col-md-3" href="{% url 'social:begin' 'facebook' %}"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--registration page end here-->
+
+<!-- user profile Info -->
+ {%if user.is_authenticated%}
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify  modal-success" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">FeedBack</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+           <form method="POST" action="{% url 'common:feedback' pk=request.user.id %}">
+            {% csrf_token %}
+        <textarea name="comments" placeholder="FeedBack" class="form-control"> </textarea>
+        <input type="hidden" name="user" value="{{request.user.id}}">
+        <input type="submit" value="Ok" class="btn btn-success">
+        </form>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+{% endif %}
+<!-- user profile Info-->
 {% block scripts %}
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{% static 'js/md_bootstrap.js' %}"></script>
 <script src="{% static 'js/popper.js' %}"></script>
 <script src="{% static 'js/bootstrap.js' %}"></script>
-<!--<script src="{% static 'js/simply-nav.js' %}"></script>-->
-<!--<script src="{% static 'js/main.js' %}"></script>-->
-
+ <script src="{% static 'js/sweetalert2.min.js' %}"></script>
 {% endblock %}
 </body>
 </html>

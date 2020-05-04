@@ -1,12 +1,6 @@
-{% extends 'mobile_web/mobile_base.html' %}
-{% block title %} Home {% endblock %}
-{% block content %}
-{% load static %}
-
-<h1>update records</h1>
 <h1>Merchant Daily Records</h1>
 <h2>{{ request.user.user_merchant.merchant.name }}</h2>
-<form method="post" action="{% url 'mobile:merchant_update_record' pk=request.user.user_merchant.merchant.id %}"  enctype="multipart/form-data">
+<form method="post" action="{% url 'merchant:update_record' pk=request.user.user_merchant.merchant.id %}"  enctype="multipart/form-data">
     {% csrf_token %}
     <input type="hidden" name="merchant" value="{{  request.user.user_merchant.merchant.id }}">
     <!--{{form.image_1}}<br>-->
@@ -45,4 +39,3 @@
 
     <button type="submit">Submit</button>
 </form>
-{% endblock %}

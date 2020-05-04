@@ -1,62 +1,180 @@
-{% extends 'mobile_web/mobile_base.html' %}
+{% extends 'base.html' %}
 {% block title %} Home {% endblock %}
 {% block content %}
 {% load static %}
+<style>
+    .card_shadow{
+    box-shadow:0px 2px 12px 7px #ddd;
+}
+.step_position{
+    position: absolute;
+    top: 19%;
+    right: 7%;
+    display: inline-block;
+}
+</style>
+<div  style="background:#F5F5F5">
+    <!--         step div start here-->
 
-{% for ass in backends.associated %}
-{% if ass.provider == 'facebook' %}
-<div class="col-md-6 text-center">
-    <img src="{{ass.extra_data.picture.data.url}}" alt="" width="150" height="150" style="border-radius: 50%">
-</div>
-<div class="col-md-6 social-container my-2">
-    <p> Signed in via:  {{ ass.provider }} </p>
-    <p> Name:  {{ ass.extra_data.name }} </p>
-    <p> Provider url: <a href="{{ass.extra_data.profile_url}}">link</a></p>
-</div>
-{% endif %}
-{% endfor %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <hr style="background:#74d06e;height:2px;margin-top:25px">
-            <hr style="background:#74d06e;height:2px;">
+    <!--         step div end here-->
+    <div class="row" style="margin:0px">
+            <marquee><b><span style="font-family: Impact, Charcoal, sans-serif;">eBazar Shop from Home Stay Home Stay Safe</span></b></marquee>
 
-            <!-- Card -->
-            <div class="row" >
-                {% for record in merchant_daily_records %}
-                <div class="col-md-6 col-xs-6" style="margin-top:30px;margin-bottom:40px">
-                    <div class="card ">
-                        <!-- Card image -->
-                        <div class=" overlay flip_img">
-                            <img class="card-img-top " src="{{ record.image_1.url}}"  alt="{{ record.image_1 }}" style="width:100%;height:150px" >
-                            <a href="">
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
-                        </div>
-                        <!-- Card content -->
-                        <div class="card-body text-center">
-                            <!-- Title -->
-                            <h4 class="card-title">MID {{ record.mid }}</h4>
-                            <!-- Text -->
-                            <p class="card-text">Shop Your Grass</p>
-                            <!-- Button -->
-                            <a href="{% url 'mobile:merchant_record_detail' pk=record.id %}" class="btn btn-success">Shop Now</a>
-                        </div>
+        <div class="col-lg-12" style="padding:0px;position:relative">
+            <div class="bg_img">
+                <img src="{% static 'img/Online-Shopping-Website-1.jpg' %}" style="width:100%;height:540px">
+            </div>
+            <div class="container step_position">
+        <div class="row" >
+            <div class="col-lg-3 col-md-6" style="margin-top:30px; margin-bottom:30px">
+                <div class="card bg-success text-white" style="border-radius: 20px;min-height:250px; opacity:0.7; border:1px solid">
+                    <div class="card-body text-center">
+                        <h5>Step 1</h5>
+                        <h6>Pick Brand</h6>
+                        <img src="{% static 'img/ebag.jpg' %}" style="width:30%;border-radius:40%">
+                        <p>Choose From 100+ top Relaiters</p>
                     </div>
                 </div>
-                {% endfor %}
             </div>
-            <!-- Card -->
-            <!-- green border ---->
-            <hr style="background:#74d06e;height:2px;margin-top:25px">
-            <hr style="background:#74d06e;height:2px;">
+            <div class="col-lg-3 col-md-6" style="margin-top:30px; margin-bottom:30px">
+                <div class="card bg-success text-white" style="border-radius: 20px;min-height:250px;opacity:0.7; border:1px solid">
+                    <div class="card-body text-center">
+                        <h5>Step 2</h5>
+                        <h6>Personalize</h6>
+                        <img src="{% static 'img/epc.png' %}" style="width:30%;border-radius:40%">
+                        <p>Add message, photo & video</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" style="margin-top:30px; margin-bottom:30px">
+                <div class="card bg-success text-white" style="border-radius: 20px;min-height:250px; opacity:0.7; border:1px solid">
+                    <div class="card-body text-center">
+                        <h5>Step 3</h5>
+                        <h6>Pay & Delivery</h6>
+                        <img src="{% static 'img/esmile.jpg' %}" style="width:40%;border-radius:50%">
+                        <p>Instant by Email,SMS or print at home</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" style="margin-top:30px; margin-bottom:30px; opacity:0.7; ">
+                <div class="card " style="border-radius: 20px;min-height:250px">
+                    <div class="card-body text-center">
+                        <h5 style="color:#6dad29">eBazarr</h5>
+                        <h6 style="color:#6dad29">For Bussines</h6>
+                        <hr style="width: 29%;background: #000;height: 2px;">
+                        <p style="color:#ADD8E6; font-size:15px;line-height: 16px;">Consumer Promotions <br> Employee Rewards <br> Customer Reward</p>
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+    {% for ass in backends.associated %}
+    {% if ass.provider == 'facebook' %}
+    <div class="col-md-6 text-center">
+        <img src="{{ass.extra_data.picture.data.url}}" alt="" width="150" height="150" style="border-radius: 50%">
+    </div>
+    <div class="col-md-6 social-container my-2">
+        <p> Signed in via:  {{ ass.provider }} </p>
+        <p> Name:  {{ ass.extra_data.name }} </p>
+        <p> Provider url: <a href="{{ass.extra_data.profile_url}}">link</a></p>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <div class="row" style="margin:20px 0 0 0">
+        <div class="col-lg-12">
+            <div class="box-header">
+                <h3 class="box-title">All Stores</h3>
+                <div class="row" style="padding: 5px">
+                    <div class="col-lg-2 div_remove">
+                        <!-- <input type="text" class="form-control shop_name_search" placeholder="Search by Shop Name ..."> -->
+                        <select class="form-control shop_name_search">
+                            <option>Search by Shop Name</option>
+                            {% for merchant in object_list %}
+                            <option value="{{merchant.shop_name}}"> {{merchant.shop_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-2 div_remove">
+                        <input type="text" class="form-control location_search" placeholder="Search by Location Search ...">
+                    </div>
+                    <div class="col-lg-2 div_remove" style="margin:-10px;">
+                        <button class="btn btn-primary search">Search</button>
+                    </div> 
+                </div>
+            </div>
+                <div class="row" >
+                    {% for record in object_list %}
+                    <div class="col-lg-3 col-md-6 col-xs-12" style="margin-top:30px;margin-bottom:40px">
+                        <div class="card ">
+                            <!-- Card image -->
+                            <div class=" overlay flip_img">
+                                <img class="card-img-top " src="{% static 'img/logoebazar.jpeg' %}" style="width:100%;height:150px" >
+                                <a href="{% url 'client:record_detail' pk=record.id %}">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!-- Card content -->
+                            <div class="card-body text-center">
+                                <!-- Title -->
+                                <h4 class="card-title">Shop Name : {{ record.shop_name|title }}</h4>
+                                <!-- Text -->
+                                <p class="card-text">Location : {{record.location|title}}</p>
+                                <p class="card-text">Address : {{record.address|title}}</p>
+                                <!-- Button -->
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'client:list_records_view' pk=record.id %}" class="btn btn-success">View Store</a>
+                                {% endif %}
+                                {% if not user.is_authenticated %}
+                                <div class="btn btn-default" data-toggle="modal" data-target="#signModal" style="color:#fff;">Order Now</div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if paginator.page_range|length > 1 %}
+                                    <div class="text-center col-lg-12">
+                                        <ul class="pagination justify-content-center">
+                                            <li><a  style="background-color: #3070A8; color: white" class="page_previous" href="{% if page_obj.has_previous %}{% url 'home' %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}" title="Previous"><button><<</button></a></li>
+                                            <li><a style="background-color: #3070A8; color: white" class="page_next" href="{% if page_obj.has_next %}{% url 'home' %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}" title="Next"><button>>></button></a></li>
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+                <!-- Card -->
+            </div>
         </div>
     </div>
 </div>
-<div class="row" style="margin:0">
-    <div class="col-md-12 py-5 text-center" style="background:#ddd; padding:20px">
-        <p>We Have Recommendation For You</p>
-        <button type="button" class="btn btn-default" style="border-radius:25px">Sign in to see Personalization Recommendation</button>
-    </div>
-</div>
+{% endblock %}
+{% block scripts %}
+{{ block.super }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+<script src="select2.min.js"></script>
+<script>
+$("#country").select2( {
+ placeholder: "Select Country",
+ allowClear: true
+ } );
+</script>
+<script>
+
+$(function () {
+    $('.search').on('click', function () {
+        var url = '{% url "home" %}';
+        window.location.href  = url + '?' + 'shop_name=' + $('.shop_name_search').val() + '&location=' +  $('.location_search').val();
+    });
+})
+    //     $('.search').on ('click', function (){
+
+    //         $.post("{% url 'home' %}", {
+    //             window.location.href  = url + '?' + 'shop_name=' + $('.name_search').val() + '&location=' +  $('.id_search').val();
+    // });
+    //         });
+
+    </script>
 {% endblock %}

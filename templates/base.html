@@ -87,10 +87,10 @@
 
     </style>
     <!-- bootstrap css file ---->
-    <title>Jathub home page</title>
+    <title>EBAZARR home page</title>
 </head>
 <body>
-<div class="row" style="margin:0px">
+<!-- <div class="row" style="margin:0px">
     <div class="col-lg-4 col-sm-12 text-right">
         <B><h5 style="padding-top:20px; font-family: Impact, Charcoal, sans-serif; color:blue;">eBazarr Stay Home Stay Safe </h5></B>
     </div>
@@ -105,8 +105,8 @@
         <h6 class="col-lg-5 col-md-6 col-xs-6 pull-left phone" style="padding:20px 0 0 0"><i class="fa fa-phone"></i> +92 312 8592826 </h6>
         <h6 class="col-lg-7 col-md-6 col-xs-6 pull-right phone" style="padding:0px;padding-top:20px"><i class="fas fa-envelope"></i> help@ebazarr.com </h6>
     </div>
-</div>
-<nav class="navbar navbar-dark" style="background:#36c53aad;position:relative">
+</div> -->  
+<nav class="navbar navbar-dark" style="background:#fafafa;position:relative">
     <a class="navbar-brand " href="{% url 'home' %}">
         <img src="{% static 'img/logoebazar1.jpeg' %}" width="215px" style="border-radius: 10%;" >
 
@@ -116,7 +116,7 @@
     {% endif %}
     {%if user.is_authenticated%}
     <div class="dropdown pull-right">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background:#42E289">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background:#3C6F8C">
             Hi ! {{ user.username }}
         </button>
         <div class="dropdown-menu">
@@ -135,7 +135,7 @@
 </div>
 <!--    middle body work end here-->
 <!--    footer work start here-->
-<footer class="page-footer font-small pt-4" style="background:#66c376ed;">
+<footer class="page-footer font-small pt-4" style="background:#3C6F8C;">
     <!-- Footer Elements -->
     <div class="container">
         <!--Grid row-->
@@ -279,6 +279,8 @@
             <div class="modal-body mx-4">
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
+                        
+
                     <!--Body-->
                     <div class="md-form mb-5">
                         <i class="fas fa-envelope prefix"></i>

@@ -7,6 +7,7 @@ import random
 
 
 class Merchant(models.Model):
+    shop_image = models.ImageField(upload_to="gallery", null=True, blank=True)
     name = models.CharField(max_length=256, blank=True, null=True)
     phone = models.CharField(max_length=200, blank=True, null=True)
     city=models.ForeignKey(City, on_delete=models.CASCADE, related_name='city',

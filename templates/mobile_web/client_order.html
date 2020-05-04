@@ -1,62 +1,27 @@
-{% extends 'mobile_web/mobile_base.html' %}
-{% block title %} Home {% endblock %}
-{% block content %}
-{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="{% url 'client:client_order_item' pk=request.user.user_profile.id  %}">
+    {% csrf_token %}
+name:{{request.user.username}}<br>
+phone:<input type="text" name="customer_phone" value="{{request.user.user_profile.phone}}"><br><br><br>
+    address: <textarea name="address">{{request.user.user_profile.address}} </textarea><br><br>
+<input type="number" name="item_quantity" placeholder="Item Quantity" id="quantity" onkeyup="sum();"><br>
+<input type="number" name="item_price" placeholder="Item Price" id="price" onkeyup="sum();" readonly><br>
+<input type="hidden" name="merchant_item_price" id="merchant_item_price" value="{{merchant_record.item_price}}" onkeyup="sum();"><br>
+    <input type="hidden" name="merchant_daily_upload" value="{{merchant_record.id}}">
+    <input type="hidden" name="merchant" value="{{merchant_record.merchant.id}}">
+    <input type="hidden" name="user" value="{{request.user.id}}">
+<input type="submit" value="Continue">
+    </form>
+</body>
+</html>
 
-<div class="container">
-    <div class="card" style="margin:20px 0">
-        <div class="card-body">
-            <form method="post" action="{% url 'mobile:client_order_invoice' pk=request.user.user_profile.id %}">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" value="{{request.user.username}}" class="form-control" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="text" name="customer_phone" value="{{request.user.user_profile.phone}}" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Alternate Phone</label>
-                    <input type="text" name="alternate_phone" value="{{request.user.user_profile.alternate_phone}}" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>City</label>
-                    <select name="city" class="form-control">
-                        <option>Select City</option>
-                        {% for city in city %}
-                        <option value="{{city.city_name}}">{{city.city_name}}</option>
-                        {% endfor %}
 
-                    </select>
-                </div>
-                <div class="form-group">
-                    address: <textarea name="address" class="form-control">{{request.user.user_profile.address}} </textarea>
-                </div>
-                <div class="form-group">
-                    <label>Item Quantity</label>
-                    <input type="text" name="item_quantity" placeholder="Item Quantity" class="form-control" id="quantity" onkeyup="sum();">
-                </div>
-                <div class="form-group">
-                    <label>Item Price</label>
-                    <input type="text" name="item_price" placeholder="Item Price" class="form-control" id="price" onkeyup="sum();" >
-                </div>
-                <input type="hidden" name="merchant_item_price" id="merchant_item_price" value="{{merchant.item_price}}" onkeyup="sum();"><br>
-                <input type="hidden" name="merchant_daily_upload" value="{{merchant.id}}">
-                <input type="hidden" name="user" value="{{request.user.id}}">
-
-                <input type="submit" value="Continue" class="btn btn-success">
-                <!--                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>-->
-
-            </form>
-        </div>
-    </div>
-</div>
-
-{% endblock %}
-
-{% block scripts %}
-{{ block.super }}
 <script>
     function sum() {
       var txtFirstNumberValue = document.getElementById('quantity').value;
@@ -67,4 +32,3 @@
       }
 }
 </script>
-{% endblock %}

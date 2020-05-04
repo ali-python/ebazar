@@ -82,9 +82,9 @@ class MerchantRegisterView(FormView):
             raw_password = form.cleaned_data.get('password1')
             auth_user = authenticate(username=username,password=raw_password)
             auth_login(self.request, auth_user)
-
             retialer = Merchant.objects.create(name=user.username, phone=user.user_profile.phone, 
-            shop_name=self.request.POST.get('shop_name'),   address=self.request.POST.get('address'))
+            shop_name=self.request.POST.get('shop_name'),   address=self.request.POST.get('address'),
+            location=self.request.POST.get('location'))
             retialer.save()
             retailer_user = MerchantUser.objects.create(merchant=retialer, user=user)
             retailer_user.save()
@@ -111,7 +111,7 @@ class MerchantRegisterView(FormView):
 
 
 class LoginView (FormView):
-    template_name = 'login.html'
+    template_name = 'index.html'
     form_class = auth_forms.AuthenticationForm
 
     def dispatch(self, request, *args, **kwargs):
