@@ -112,7 +112,7 @@
 
     </a>
     {%if not user.is_authenticated%}
-    <div class="btn btn-default pull-right" data-toggle="modal" data-target="#signModal" style="color:#fff;"><i class="fa fa-user"></i> Login</div>
+    <div class="btn btn-default pull-right" data-toggle="modal" data-target="#signModal" style="color:#3C6F8C;"><i class="fa fa-user"></i> Login</div>
     {% endif %}
     {%if user.is_authenticated%}
     <div class="dropdown pull-right">
@@ -279,7 +279,7 @@
             <div class="modal-body mx-4">
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
-                        
+
 
                     <!--Body-->
                     <div class="md-form mb-5">
