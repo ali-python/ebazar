@@ -18,13 +18,9 @@ class ListMerchantDailyRecordView(ListView):
 
     def get_queryset(self):
         queryset = self.queryset
-
         if not queryset:
-            queryset = MerchantDailyRecord.objects.all().order_by('-id')
-        if self.request.GET.get('item_name'):
             queryset = MerchantDailyRecord.objects.filter(
-                item_name__contains=self.request.GET.get('item_name'))
-
+                merchant__id=self.kwargs.get('pk'))
 
         if self.request.GET.get('category'):
             queryset = MerchantDailyRecord.objects.filter(
@@ -121,6 +117,9 @@ class OrderItemView(FormView):
                         }))
 
     def form_invalid(self, form):
+        print(form.errors)
+        print(self.request.POST.get('merchant_daily_upload'))
+        print(")))))))))))))))))))))))))))))))))))))")
         return super(OrderItemView, self).form_invalid(form)
 
     def get_context_data(self, **kwargs):

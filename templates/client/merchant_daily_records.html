@@ -88,6 +88,7 @@
 	                                    <li class="list-group-item">Product Name : {{record.item_name|title}}</li>
                                         <li class="list-group-item">Product Category : {{record.item_category|title}}</li>
 	                                    <li class="list-group-item" id="item_price" value="{{record.item_price}}">Price: {{record.item_price}}</li>
+                                        <input type="hidden" id="merchant_daily_record_id" value="{{record.id}}">
                                         <li class="list-group-item" id="description" value="{{record.description}}" style="color: blue;">Description: {{record.description}}</li>
 	                                    <li class="list-group-item">Uploded Date: {{record.upload_time.date}}</li>
 	                                </ul>
@@ -152,7 +153,7 @@
                             <textarea name="item_description" placeholder="Tell me about Product You Want e.g: colour of the product, size of the product" class="form-control" ></textarea>
                         </div>
                         <input type="hidden" name="merchant_item_price" id="merchant_item_price" value="{{merchant.item_price}}" onkeyup="sum();"><br>
-                        <input type="hidden" name="merchant_daily_upload" value="{{merchant.id}}">
+                        <input type="hidden" name="merchant_daily_upload" id="merchant_id" onkeyup="merchant_record_id();" readonly>
                         <input type="hidden" name="user" value="{{request.user.id}}">
                         <!-- Modal footer -->
                         <div class="modal-footer">
@@ -176,6 +177,14 @@
       var result = parseInt(txtFirstNumberValue) * parseInt(txtSecondNumberValue);
       if (!isNaN(result)) {
          document.getElementById('price').value = result;
+      }
+}
+</script>
+<script>
+    function merchant_record_id() {
+      var txtSecondNumberValue = document.getElementById('merchant_daily_record_id').value;
+      if (!isNaN(txtSecondNumberValue)) {
+         document.getElementById('merchant_id').value = result;
       }
 }
 </script>
