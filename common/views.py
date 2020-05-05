@@ -35,6 +35,7 @@ class RegisterView(FormView):
             if user.user_profile:
                 user.user_profile.phone = self.request.POST.get(
                     'phone')
+                user.user_profile.type = user.user_profile.USER_TYPE_CLIENT
                 user.user_profile.save()
 
             username = form.cleaned_data.get('username')
