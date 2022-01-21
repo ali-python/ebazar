@@ -6,7 +6,7 @@ decorator==4.4.0
 defusedxml==0.6.0rc1
 Django==2.1.7
 idna==2.8
-ipython==7.4.0
+ipython==7.16.3
 ipython-genutils==0.2.0
 jedi==0.13.3
 mailtrap==0.1.2
